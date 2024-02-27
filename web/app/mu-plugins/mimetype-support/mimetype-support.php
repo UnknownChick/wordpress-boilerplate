@@ -11,7 +11,7 @@
  * Version: 1.0
  * Author: Alexandre Ferreira
  * Author URI: https://alexandre-ferreira.fr
- * Text Domain: alexxandre
+ * Text Domain: alexandre
  * License: MIT License
  */
 

@@ -51,17 +51,6 @@ function get_path() {
 	}
 }
 
-function desactiver_commentaires_articles() {
-	remove_post_type_support('post', 'comments');
-}
-add_action('init', 'desactiver_commentaires_articles');
-
-function desactiver_commentaires_pages() {
-	remove_post_type_support('page', 'comments');
-}
-add_action('init', 'desactiver_commentaires_pages');
-
-
 add_filter('excerpt_length', function($length) {
 	return 40;
 });
