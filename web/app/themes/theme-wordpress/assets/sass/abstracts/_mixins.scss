@@ -1,0 +1,68 @@
+/* Absolute posision */
+@mixin absolute-horizontal-center {
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin absolute-vertical-center {
+	top: 0;
+	bottom: 0;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+@mixin absolute-center {
+	@include ansolute-horizontal-center;
+	@include absolute-vertical-center;
+}
+
+
+/* Flex Alignement */
+@mixin df-vertical-align-center {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+@mixin df-vertical-align-sb {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+@mixin df-vertical-align-end {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+
+/* Animation */
+@mixin transition($duration) {
+	transition: all $duration ease-in-out;
+}
+
+
+/* Background */
+@mixin bg-image($image) {
+	background-image: url($image);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+@mixin bg-image-center {
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+
+/* Padding */
+@mixin padding-tp-mobile {
+	@include max-device(desktop) {
+		padding: 5rem 0;
+	}
+}

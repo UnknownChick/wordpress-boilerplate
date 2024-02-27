@@ -1,0 +1,74 @@
+@for $i from 0 through 5 {
+	.gap-#{$i} {
+		gap: #{$i}rem !important;
+	}
+}
+
+$container-width: 90%;
+$container-max-widths: (
+	sm: 768px,
+	md: 1024px,
+	lg: 1280px,
+	xl: 1440px,
+	xxl:1600px,
+	full: 100%,
+);
+$gap-default: 2rem;
+
+.row {
+	width: $container-width;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	gap: $gap-default;
+
+	&-horiziontal {
+		flex-direction: row;
+	}
+
+	&-vertical {
+		flex-direction: column;
+	}
+
+	@each $size, $width in $container-max-widths {
+		&-#{$size} {
+			@if $size == 'full' {
+				width: 100%;
+			} @else {
+				max-width: $width;
+			}
+			
+		}
+
+		&-align-left-#{$size} {
+			width: calc((100% - ((100% - $width) / 2)));
+			margin-right: auto;
+			margin-left: 0;
+			max-width: $container-width;
+		}
+	
+		&-align-right-#{$size} {
+			width: calc((100% - ((100% - $width) / 2)));
+			margin-right: 0;
+			margin-left: auto;
+			max-width: $container-width;
+		}
+	}
+
+	.column {
+		flex: 1;
+
+		&-max {
+			width: max-content;
+			flex: unset;
+		}
+	}
+
+	@include max-device(desktop) {
+		flex-direction: column;
+
+		.column {
+			width: 100%;
+		}
+	}
+}
