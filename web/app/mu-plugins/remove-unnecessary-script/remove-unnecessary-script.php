@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package Remove Unnecessary Script
+ * @package Disable Unnecessary Script
  * @author Alexandre Ferreira
  * @link https://alexandre-ferreira.fr
  * 
@@ -12,7 +12,7 @@
  * Version: 1.1
  * Author: Alexandre Ferreira
  * Author URI: https://alexandre-ferreira.fr
- * Text Domain: alexxandre
+ * Text Domain: alexandre
  * License: MIT License
  */
 
@@ -22,8 +22,7 @@ defined('ABSPATH') || die();
 /**
  * Removes unnecessary CSS block.
  */
-function remove_block_css()
-{
+function remove_block_css() {
 	if (!is_admin()) {
 		wp_dequeue_style('wp-block-library');
 		wp_dequeue_style('wp-block-library-theme');
@@ -35,8 +34,7 @@ add_action('wp_enqueue_scripts', 'remove_block_css');
 /**
  * Removes emojis from the website.
  */
-function remove_emojis()
-{
+function remove_emojis() {
 	remove_action('admin_print_styles', 'print_emoji_styles');
 	remove_action('wp_head', 'print_emoji_detection_script', 7);
 	remove_action('admin_print_scripts', 'print_emoji_detection_script');
@@ -51,8 +49,7 @@ add_action('init', 'remove_emojis');
 /**
  * Removes the Dashicons script from the WordPress site.
  */
-function remove_dashicons()
-{
+function remove_dashicons() {
 	if (current_user_can('administrator')) {
 		return;
 	}
