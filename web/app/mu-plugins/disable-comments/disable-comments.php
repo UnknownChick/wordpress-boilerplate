@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package Disable comments
  * @author Alexandre Ferreira
@@ -17,13 +18,39 @@
 
 defined('ABSPATH') || die();
 
+
 /**
- * Function to disable comments on articles.
+ * Initializes the disable_comments functionality.
  */
-function desactiver_commentaires_articles() {
+function disable_comments_init()
+{
 	remove_post_type_support('post', 'comments');
 	remove_post_type_support('page', 'comments');
-}
-add_action('init', 'desactiver_commentaires_articles');
 
+	update_option('default_comment_status', 'closed');
+}
+add_action('init', 'disable_comments_init');
+
+
+/**
+ * Disables comments in the admin area.
+ */
+function disable_comments_admin()
+{
+	remove_meta_box('commentstatusdiv', 'post', 'normal');
+	remove_meta_box('commentsdiv', 'post', 'normal');
+
+	remove_meta_box('commentstatusdiv', 'page', 'normal');
+	remove_meta_box('commentsdiv', 'page', 'normal');
+}
+add_action('admin_init', 'disable_comments_admin');
+
+
+/**
+ * Disables the comments admin menu.
+ */
+function disable_comments_admin_menu() {
+	remove_menu_page('edit-comments.php');
+}
+add_action( 'admin_menu', 'disable_comments_admin_menu' );
 ?>
