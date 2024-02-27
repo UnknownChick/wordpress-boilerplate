@@ -1,0 +1,113 @@
+@for $i from 1 through 5 {
+	/* Margin */
+	.mb-#{$i} {
+		margin-bottom: #{$i}rem !important;
+	}
+
+	.mb-mobile-#{$i} {
+		@include max-device(desktop) {
+			margin-bottom: #{$i}rem !important;
+		}
+	}
+
+	.mb-desktop-#{$i} {
+		@include min-device(desktop) {
+			margin-bottom: #{$i}rem !important;
+		}
+	}
+
+	/* Padding */
+	.p-tb-#{$i} {
+		padding: #{$i}rem 0;
+	}
+	
+	.p-#{$i} {
+		padding: #{$i}rem;
+	}
+
+	.mis-#{$i}00 {
+		max-inline-size: #{$i}00px;
+	}
+}
+
+@include max-device(desktop) {
+	@for $i from 1 through 5 {
+		.mobile-order-#{$i} {
+			order: $i;
+		}
+	}
+
+	.d-none-mobile {
+		display: none;
+	}
+}
+
+
+/* Typography */
+.bold-text {
+	font-weight: 700;
+}
+
+.italic-text {
+	font-style: italic;
+}
+
+.uppercase-text {
+	text-transform: uppercase;
+}
+
+.white-color {
+	color: $white-color;
+}
+
+.black-color {
+	color: $black-color;
+}
+
+
+/* Background */
+
+
+/* Flexbox */
+.df-vertical-align-center {
+	@include df-vertical-align-center;
+}
+
+.df-vertical-align-end {
+	@include df-vertical-align-end;
+}
+
+.df-vertical-align-sb {
+	@include df-vertical-align-sb;
+}
+
+.df-sb {
+	justify-content: space-between;
+}
+
+.df-column {
+	display: flex;
+	flex-direction: column;
+}
+
+
+/* Display */
+.d-none {
+	display: none !important;
+}
+
+
+/* Img */
+.img-full {
+	width: 100%;
+}
+
+
+/* Animation */
+.scale-up {
+	display: block;
+	@include transition(250ms);
+	&:hover {
+		transform: scale(1.1);
+	}
+}

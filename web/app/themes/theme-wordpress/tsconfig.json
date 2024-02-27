@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+	  "allowSyntheticDefaultImports": true,
+	  "module": "ESNext",
+	  "moduleResolution": "node",
+	  "noImplicitAny": true,
+	  "preserveConstEnums": true,
+	  "removeComments": true,
+	  "resolveJsonModule": true,
+	  "sourceMap": true,
+	  "target": "es2017",
+	},
+	// "include": ["ts/**/*"],
+	// "exclude": ["js"]
+  }

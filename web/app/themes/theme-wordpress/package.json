@@ -1,0 +1,29 @@
+{
+	"name": "wordpress-theme",
+	"version": "1.0.0",
+	"private": true,
+	"license": "UNLICENSED",
+	"main": "index.js",
+	"scripts": {
+		"start": "vite build && vite dev",
+		"build": "vite build",
+		"prettier": "prettier --check .",
+		"prettier:fix": "prettier --write .",
+		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
+		"lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.22.11",
+		"@babel/preset-env": "^7.22.10",
+		"@rollup/plugin-babel": "^6.0.3",
+		"@types/node": "^20.5.3",
+		"autoprefixer": "^10.4.15",
+		"eslint": "^8.47.0",
+		"eslint-config-prettier": "^9.0.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"postcss": "^8.4.28",
+		"prettier": "^3.0.2",
+		"sass": "^1.66.1",
+		"vite": "^4.0.3"
+	}
+}

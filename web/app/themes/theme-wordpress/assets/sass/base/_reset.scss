@@ -1,0 +1,88 @@
+*, *::before, *::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+} 
+
+body {
+	min-height: 100vh;
+	overflow-x: hidden;
+	text-rendering: optimizeSpeed;
+	-webkit-font-smoothing: antialiased;
+	position: relative;
+	scroll-behavior: smooth;
+}
+
+main {
+	display: block;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+}
+
+ul[role='list'], ol[role='list'] {
+	list-style: none;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+a {
+	text-decoration: none;
+	background-color: transparent;
+}
+
+b, strong {
+	font-weight: bolder;
+}
+
+img, picture, video, canvas, svg {
+	height: auto;
+	max-width: 100%;
+	display: block;
+}
+
+input, button, textarea, select, optgroup, input::placeholder {
+	/* font: inherit; */
+	outline: none;
+}
+
+button, [type='button'], [type='reset'], [type='submit'] {
+	-webkit-appearance: button;
+	appearance: button;
+	cursor: pointer;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+code, kbd, samp {
+	font-family: sans-serif;
+	font-size: 1em;
+}
+
+summary {
+	cursor: pointer;
+}
+
+/* If the user don't want motion */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
