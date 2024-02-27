@@ -1,9 +1,9 @@
 /*!
-Theme Name: TEST 4
-Theme URI: https://alexandre-ferreira.fr
+Theme Name: Custom Theme
+Theme URI: https://github.com/UnknownChick/theme-wordpress
 Author: Alexandre Ferreira
 Author URI: https://alexandre-ferreira.fr
-Description: TEST 4
+Description: Custom Theme
 Requires at least: WordPress 6.0
 Version: 1.0
 */*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html:focus-within{scroll-behavior:smooth}body{min-height:100vh;overflow-x:hidden;text-rendering:optimizeSpeed;line-height:var(--text-line-height);-webkit-font-smoothing:antialiased;position:relative;scroll-behavior:smooth}main{display:block}p,h1,h2,h3,h4,h5,h6{overflow-wrap:break-word;line-height:var(--title-line-height)}ul[role=list],ol[role=list]{list-style:none}a:not([class]){-webkit-text-decoration-skip:ink;text-decoration-skip-ink:auto}a{text-decoration:none;background-color:transparent}b,strong{font-weight:bolder}img,picture,video,canvas,svg{height:auto;max-width:100%;display:block}input::-moz-placeholder{outline:none}input,button,textarea,select,optgroup,input::placeholder{outline:none}button,[type=button],[type=reset],[type=submit]{-webkit-appearance:button;-moz-appearance:button;appearance:button;cursor:pointer}table{border-collapse:collapse;border-spacing:0}code,kbd,samp{font-family:monospace,monospace;font-size:1em}summary{cursor:pointer}@media (prefers-reduced-motion: reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
