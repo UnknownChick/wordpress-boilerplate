@@ -2,6 +2,7 @@
 defined('ABSPATH') || die();
 
 $roots_includes = array(
+	'/inc/cleanup.php',
 	'/inc/hmr.php',
 	'/inc/shortcodes.php',
 );
