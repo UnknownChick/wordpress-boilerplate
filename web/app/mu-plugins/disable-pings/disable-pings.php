@@ -1,17 +1,17 @@
 <?php
 /**
- * @package Remove Pings
+ * @package Disable Pings
  * @author Alexandre Ferreira
  * @link https://alexandre-ferreira.fr
  * 
  * @wordpress-plugin
- * Plugin Name: Remove Pings
+ * Plugin Name: Disable Pings
  * Plugin URI: https://alexandre-ferreira.fr
- * Description: Removes pings and trackbacks
+ * Description: Disable pings and trackbacks
  * Version: 1.0
  * Author: Alexandre Ferreira
  * Author URI: https://alexandre-ferreira.fr
- * Text Domain: alexxandre
+ * Text Domain: alexandre
  * License: MIT License
  */
 
@@ -19,7 +19,7 @@ defined('ABSPATH') || die();
 
 
 /**
- * Disables self trackback for the given links array.
+ * Disable self trackback for the given links array.
  *
  * @param array $links The array of links.
  * @return void
