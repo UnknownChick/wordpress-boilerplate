@@ -3,6 +3,7 @@ import autoprefixer from 'autoprefixer';
 import { babel } from '@rollup/plugin-babel';
 import fs from 'fs';
 import { resolve as resolvePath, dirname } from 'path';
+import FullReload from 'vite-plugin-full-reload';
 
 const CopyFile = ({
 	sourceFileName,
@@ -36,13 +37,10 @@ export default defineConfig({
 	base: '/wp-content/themes/theme-wordpress/dist/',
 	plugins: [
 		CopyFile({
-		  sourceFileName: 'style.css',
-		  absolutePathToDestination: resolvePath(__dirname, './style.css'),
-		}),
-		CopyFile({
 			sourceFileName: 'app.ts',
 			absolutePathToDestination: resolvePath(__dirname, './dist/app.js'),
-		  }),
+		}),
+		FullReload(['**/*.php', '**/*.html'])
 	  ],
 	build: {
 		rollupOptions: {
