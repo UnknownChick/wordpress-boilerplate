@@ -1,7 +1,7 @@
 <?php
 function getViteDevServerAddress()
 {
-	return getenv('VITE_DEV_SERVER_URL');
+	return VITE_DEV_SERVER;
 }
 
 function isViteHMRAvailable()
@@ -17,8 +17,7 @@ function isViteHMRAvailable()
  *
  * @return void
  */
-function loadJSScriptAsESModule($script_handle)
-{
+function loadJSScriptAsESModule($script_handle) {
 	add_filter(
 		'script_loader_tag',
 		function ($tag, $handle, $src) use ($script_handle) {
@@ -62,6 +61,5 @@ if (isViteHMRAvailable()) {
 			}
 		);
 	}
-	
 }
 ?>
