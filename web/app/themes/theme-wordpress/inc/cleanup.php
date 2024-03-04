@@ -42,3 +42,4 @@ function clean_editor() {
 	remove_post_type_support('page', 'author');
 }
 add_action('admin_init', 'clean_editor');
+?>
