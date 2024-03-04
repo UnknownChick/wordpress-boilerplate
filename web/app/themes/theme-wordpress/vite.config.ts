@@ -1,9 +1,8 @@
 import { defineConfig, Plugin } from 'vite';
 import autoprefixer from 'autoprefixer';
 import { babel } from '@rollup/plugin-babel';
-import fs from 'fs';
+import { promises as fsPromises } from 'fs';
 import { resolve as resolvePath, dirname } from 'path';
-import FullReload from 'vite-plugin-full-reload';
 
 const CopyFile = ({
 	sourceFileName,
@@ -22,15 +21,15 @@ const CopyFile = ({
 
 	const sourcePath = resolvePath(options.dir, fileToCopy.fileName);
 
-	await fs.promises.mkdir(dirname(absolutePathToDestination), {
+	await fsPromises.mkdir(dirname(absolutePathToDestination), {
 		recursive: true,
-	});
-
-	await fs.promises.copyFile(sourcePath, absolutePathToDestination);
+	  });
+	  
+	  await fsPromises.copyFile(sourcePath, absolutePathToDestination);
 	},
 });
 
-const path = new URL('.', import.meta.url).pathname;
+const path = dirname(new URL(import.meta.url).pathname);
 const __dirname = process.platform === 'win32' ? path.slice(1) : path;
 
 export default defineConfig({
@@ -40,12 +39,18 @@ export default defineConfig({
 			sourceFileName: 'app.ts',
 			absolutePathToDestination: resolvePath(__dirname, './dist/app.js'),
 		}),
-		FullReload(['**/*.php', '**/*.html'])
+		{
+			name: 'php',
+			handleHotUpdate({ file, server }) {
+			  if (file.endsWith('.php')) {
+				server.ws.send({ type: 'full-reload', path: '*'});
+			  }
+			},
+		  },
 	  ],
 	build: {
 		rollupOptions: {
 			input: {
-				main: './assets/sass/style.ts',
 				style: './assets/sass/style.scss',
 				app: './assets/ts/app.ts'
 			},

@@ -1,15 +1,15 @@
 {
 	"compilerOptions": {
-	  "allowSyntheticDefaultImports": true,
-	  "module": "ESNext",
-	  "moduleResolution": "node",
-	  "noImplicitAny": true,
-	  "preserveConstEnums": true,
-	  "removeComments": true,
-	  "resolveJsonModule": true,
-	  "sourceMap": true,
-	  "target": "es2017",
+		"allowSyntheticDefaultImports": true,
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"preserveConstEnums": true,
+		"removeComments": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"target": "es2017"
 	},
-	// "include": ["ts/**/*"],
-	// "exclude": ["js"]
-  }
+	"include": ["ts/**/*", "path/to/file.ts"], // Add the file or directory path here
+	"exclude": ["js"]
+}

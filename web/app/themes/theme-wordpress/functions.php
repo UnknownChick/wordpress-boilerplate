@@ -21,7 +21,6 @@ add_theme_support('menus');
 
 function register_assets() {
 	wp_enqueue_style('style', get_stylesheet_uri(), array(), '1.0');
-	// wp_enqueue_style('style-dist', get_stylesheet_directory_uri().'/dist/style.css', array(), '1.0');
 	wp_enqueue_script('js-dist', get_stylesheet_directory_uri().'/dist/app.js', array(), '1.0', true);
 }
 add_action( 'wp_enqueue_scripts', 'register_assets' );
