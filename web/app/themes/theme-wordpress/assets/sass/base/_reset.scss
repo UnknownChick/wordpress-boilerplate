@@ -1,6 +1,4 @@
 *, *::before, *::after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
@@ -12,15 +10,12 @@ html:focus-within {
 
 body {
 	min-height: 100vh;
-	overflow-x: hidden;
+	overflow-x: clip;
 	text-rendering: optimizeSpeed;
 	-webkit-font-smoothing: antialiased;
 	position: relative;
 	scroll-behavior: smooth;
-}
-
-main {
-	display: block;
+	line-height: calc(1em + 0.5rem);
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -45,18 +40,17 @@ b, strong {
 }
 
 img, picture, video, canvas, svg {
+	display: block;
 	height: auto;
 	max-width: 100%;
-	display: block;
 }
 
 input, button, textarea, select, optgroup, input::placeholder {
-	/* font: inherit; */
+	font: inherit;
 	outline: none;
 }
 
 button, [type='button'], [type='reset'], [type='submit'] {
-	-webkit-appearance: button;
 	appearance: button;
 	cursor: pointer;
 }
@@ -77,9 +71,7 @@ summary {
 
 /* If the user don't want motion */
 @media (prefers-reduced-motion: reduce) {
-	*,
-	*::before,
-	*::after {
+	*, *::before, *::after {
 		animation-duration: 0.01ms !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.01ms !important;

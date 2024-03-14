@@ -13,19 +13,19 @@ const CopyFile = ({
 }): Plugin => ({
 	name: 'copy-file-plugin',
 	writeBundle: async (options, bundle) => {
-	const fileToCopy = Object.values(bundle).find(({ name }) => name === sourceFileName);
+		const fileToCopy = Object.values(bundle).find(({ name }) => name === sourceFileName);
 
-	if (!fileToCopy) {
-		return;
-	}
+		if (!fileToCopy) {
+			return;
+		}
 
-	const sourcePath = resolvePath(options.dir, fileToCopy.fileName);
+		const sourcePath = resolvePath(options.dir, fileToCopy.fileName);
 
-	await fsPromises.mkdir(dirname(absolutePathToDestination), {
-		recursive: true,
-	  });
-	  
-	  await fsPromises.copyFile(sourcePath, absolutePathToDestination);
+		await fsPromises.mkdir(dirname(absolutePathToDestination), {
+			recursive: true,
+		});
+		  
+		await fsPromises.copyFile(sourcePath, absolutePathToDestination);
 	},
 });
 
@@ -42,12 +42,12 @@ export default defineConfig({
 		{
 			name: 'php',
 			handleHotUpdate({ file, server }) {
-			  if (file.endsWith('.php')) {
-				server.ws.send({ type: 'full-reload', path: '*'});
-			  }
+				if (file.endsWith('.php')) {
+					server.ws.send({ type: 'full-reload', path: '*'});
+				}
 			},
-		  },
-	  ],
+		},
+	],
 	build: {
 		rollupOptions: {
 			input: {
