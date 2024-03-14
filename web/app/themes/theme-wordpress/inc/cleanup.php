@@ -4,7 +4,8 @@ defined('ABSPATH') || die();
 /**
  * Cleans up the WordPress dashboard.
  */
-function clean_dashboard() {
+function clean_dashboard()
+{
 	remove_meta_box('dashboard_primary', 'dashboard', 'side');
 	remove_meta_box('dashboard_secondary', 'dashboard', 'side');
 	remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
@@ -29,17 +30,17 @@ add_action('wp_dashboard_setup', 'clean_dashboard', 20);
 /**
  * Cleans the editor by removing unnecessary elements.
  */
-function clean_editor() {
+function clean_editor()
+{
 	remove_meta_box('postcustom', 'post', 'normal');
-	remove_meta_box('slugdiv','post','normal');
+	remove_meta_box('slugdiv', 'post', 'normal');
 
 	remove_meta_box('postcustom', 'page', 'normal');
-	remove_meta_box('slugdiv','page','normal');
+	remove_meta_box('slugdiv', 'page', 'normal');
 
 	remove_post_type_support('post', 'trackbacks');
-	
+
 	remove_post_type_support('page', 'trackbacks');
 	remove_post_type_support('page', 'author');
 }
 add_action('admin_init', 'clean_editor');
-?>

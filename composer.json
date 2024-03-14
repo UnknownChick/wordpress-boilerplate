@@ -41,8 +41,7 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.1.0",
     "wpackagist-theme/twentytwentyfour": "^1.0",
-    "wpackagist-plugin/classic-editor": "^1.6",
-    "htmlburger/carbon-fields-plugin": "^3.6"
+    "htmlburger/carbon-fields": "^3.6"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",

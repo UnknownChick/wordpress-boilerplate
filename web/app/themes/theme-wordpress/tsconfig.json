@@ -10,6 +10,6 @@
 		"sourceMap": true,
 		"target": "es2017"
 	},
-	"include": ["ts/**/*", "path/to/file.ts"], // Add the file or directory path here
+	"include": ["ts/**/*"],
 	"exclude": ["js"]
 }
