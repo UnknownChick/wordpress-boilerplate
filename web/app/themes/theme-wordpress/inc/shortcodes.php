@@ -3,7 +3,7 @@ defined('ABSPATH') || die();
 /**
  * Initializes the shortcodes.
  */
-function shortcodes_init() {
+add_action('init', function() {
 	/**
 	 * Generates a site map.
 	 *
@@ -16,7 +16,7 @@ function shortcodes_init() {
 		$authors = get_users();
 		$categories = get_categories();
 		
-		$site_map = '<ul class="'.$atts['class'].'">';
+		$site_map = '<ul class="sitemap_'.$atts['class'].'">';
 		
 		if (isset($atts['type'])) {
 			switch ($atts['type']) {
@@ -42,7 +42,7 @@ function shortcodes_init() {
 					break;
 				default:
 
-					break;
+				break;
 			}
 		}
 		$site_map .= '</ul>';
@@ -50,6 +50,5 @@ function shortcodes_init() {
 		echo $site_map;
 	}
 	add_shortcode('site_map', 'site_map');
-}
-add_action('init', 'shortcodes_init');
+});
 ?>
