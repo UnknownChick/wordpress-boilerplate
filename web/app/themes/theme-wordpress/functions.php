@@ -4,7 +4,8 @@ defined('ABSPATH') || die();
 $roots_includes = array(
 	'/inc/cleanup.php',
 	'/inc/hmr.php',
-	'/inc/shortcodes.php',
+	'/inc/custom-shortcodes/index.php',
+	'/inc/custom-post-types/index.php',
 );
 
 foreach ($roots_includes as $file) {
@@ -37,12 +38,11 @@ add_action('wp_enqueue_scripts', function () {
 		loadJSScriptAsESModule($vite_handle);
 		loadJSScriptAsESModule($ts_handle);
 	} else {
-		wp_enqueue_style('style', get_stylesheet_uri(), $dependencies, '1.0');
+		wp_enqueue_style('style-theme', get_stylesheet_uri(), $dependencies, $version);
 		wp_enqueue_style('style-dist', get_stylesheet_directory_uri().'/dist/style.css', $dependencies, $version);
 		wp_enqueue_script('js-dist', get_stylesheet_directory_uri().'/dist/app.js', $dependencies, $version, true);
 	}
 });
-
 
 add_filter('excerpt_length', function ($length) {
 	return 40;
