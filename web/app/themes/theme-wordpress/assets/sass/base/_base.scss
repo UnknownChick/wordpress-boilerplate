@@ -4,29 +4,29 @@
 		margin-bottom: #{$i}rem !important;
 	}
 
-	.mb-mobile-#{$i} {
-		@include max-device(desktop) {
-			margin-bottom: #{$i}rem !important;
-		}
-	}
-
-	.mb-desktop-#{$i} {
-		@include min-device(desktop) {
-			margin-bottom: #{$i}rem !important;
-		}
-	}
-
 	/* Padding */
-	.p-tb-#{$i} {
-		padding: #{$i}rem 0;
-	}
-	
 	.p-#{$i} {
 		padding: #{$i}rem;
 	}
 
 	.mis-#{$i}00 {
 		max-inline-size: #{$i}00px;
+	}
+}
+
+@include max-device(desktop) {
+	@for $i from 1 through 5 {
+		.mb-mobile-#{$i} {
+			margin-bottom: #{$i}rem !important;
+		}
+	}
+}
+
+@include min-device(desktop) {
+	@for $i from 1 through 5 {
+		.mb-desktop-#{$i} {
+			margin-bottom: #{$i}rem !important;
+		}
 	}
 }
 

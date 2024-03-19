@@ -1,38 +1,38 @@
 module.exports = {
 	env: {
-	  node: true,
-	  browser: true,
-	  es2021: true,
+		node: true,
+		browser: true,
+		es2021: true,
 	},
 	parserOptions: {
-	  sourceType: 'module',
+		sourceType: 'module',
 	},
 	extends: ['plugin:prettier/recommended'],
 	rules: {
-	  'prettier/prettier': 'warn',
+		'prettier/prettier': 'warn',
 	},
 	overrides: [
-	  {
+	{
 		files: '*.ts',
 		parser: '@typescript-eslint/parser',
 		plugins: ['@typescript-eslint'],
 		parserOptions: {
-		  project: 'tsconfig.json',
+			project: 'tsconfig.json',
 		},
 		extends: [
-		  'airbnb-typescript/base',
-		  'eslint:recommended',
-		  'plugin:@typescript-eslint/recommended',
-		  'plugin:@typescript-eslint/eslint-recommended',
-		  'plugin:@typescript-eslint/recommended-requiring-type-checking',
-		  'plugin:prettier/recommended',
+			'airbnb-typescript/base',
+			'eslint:recommended',
+			'plugin:@typescript-eslint/recommended',
+			'plugin:@typescript-eslint/eslint-recommended',
+			'plugin:@typescript-eslint/recommended-requiring-type-checking',
+			'plugin:prettier/recommended',
 		],
 		rules: {
-		  'no-plusplus': 'off',
-		  'no-underscore-dangle': 'off',
-		  'import/prefer-default-export': 'off',
-		  'prettier/prettier': 'warn',
+			'no-plusplus': 'off',
+			'no-underscore-dangle': 'off',
+			'import/prefer-default-export': 'off',
+			'prettier/prettier': 'warn',
 		},
-	  },
+	},
 	],
-  };
+};

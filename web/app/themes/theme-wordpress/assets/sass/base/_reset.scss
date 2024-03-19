@@ -18,6 +18,14 @@ body {
 	line-height: calc(1em + 0.5rem);
 }
 
+h1, h2, h3, h4, h5, h6 {
+	text-wrap: balance;
+}
+
+p {
+	text-wrap: pretty;
+}
+
 p, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 }
@@ -67,6 +75,10 @@ code, kbd, samp {
 
 summary {
 	cursor: pointer;
+}
+
+[id] {
+	scroll-margin-top: 2rem;
 }
 
 /* If the user don't want motion */

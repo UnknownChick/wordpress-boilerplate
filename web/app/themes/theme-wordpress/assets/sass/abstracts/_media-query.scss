@@ -1,55 +1,54 @@
-$devices: (
+$breakpoints: (
 	mobile: 480px,
 	tablet: 768px,
 	desktop: 1024px,
 	large-desktop: 1280px,
 );
 
-@mixin min-device($device: map-get($devices, 'mobile')) {
-	@if map-has-key($devices, $device) {
-		@media screen and (min-width: map-get($devices, $device)) {
+@mixin min-device($breakpoint: map-get($breakpoints)) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		@media screen and (min-width: map-get($breakpoints, $breakpoint)) {
 			@content;
 		}
 	}
 }
 
-@mixin max-device($device: map-get($devices, 'mobile')) {
-	@if map-has-key($devices, $device) {
-		@media screen and (max-width: (map-get($devices, $device) - 1)) {
+@mixin max-device($breakpoint: map-get($breakpoints)) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		@media screen and (max-width: (map-get($breakpoints, $breakpoint) - 1)) {
 			@content;
 		}
 	}
 }
 
-@mixin only-device($device: map-get($devices, 'mobile')) {
-	@if map-has-key($devices, $device) {
-		$devices-length: length($devices);
-		$map-list: map-keys($devices);
+@mixin only-device($breakpoint: map-get($breakpoints)) {
+	@if map-has-key($breakpoints, $breakpoint) {
+		$breakpoints-length: length($breakpoints);
+		$map-list: map-keys($breakpoints);
 
-		@if index($map-list, $device) == $devices-length {
-			@include min-device($device) {
+		@if index($map-list, $breakpoint) == $breakpoints-length {
+			@include min-device($breakpoint) {
 				@content;
 			}
 		} @else {
-			$next-device-index: index($map-list, $device) + 1;
+			$next-device-index: index($map-list, $breakpoint) + 1;
 			$next-device-key: nth($map-list, $next-device-index);
 
-			@media screen and (min-width: map-get($devices, $device)) and (max-width: (map-get($devices, $next-device-key) - 1)) {
-				@content;
+			@include min-device($breakpoint) {
+				@include max-device($next-device-key) {
+					@content;
+				}
 			}
 		}
 	}
 }
 
-@mixin between-devices(
-	$min-device: map-get($devices, 'mobile'),
-	$max-device: map-get($devices, 'tablet')
-) {
-	@if map-has-key($devices, $min-device) and
-		map-has-key($devices, $max-device)
-	{
-		@media screen and (min-width: map-get($devices, $min-device)) and (max-width: (map-get($devices, $max-device) - 1)) {
-			@content;
+@mixin between-devices($min-device: map-get($breakpoints), $max-device: map-get($breakpoints)) {
+	@if map-has-key($breakpoints, $min-device) and map-has-key($breakpoints, $max-device) {
+		@include min-device($min-device) {
+			@include max-device($max-device) {
+				@content;
+			}
 		}
 	}
 }
