@@ -9,8 +9,8 @@
 		"build": "vite build",
 		"prettier": "prettier --check .",
 		"prettier:fix": "prettier --write .",
-		"lint": "eslint 'src/**/*.{js,ts,tsx}'",
-		"lint:fix": "eslint 'src/**/*.{js,ts,tsx}' --fix"
+		"lint": "eslint 'assets/ts/*.ts'",
+		"lint:fix": "eslint 'assets/ts/*.ts' --fix"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.22.11",

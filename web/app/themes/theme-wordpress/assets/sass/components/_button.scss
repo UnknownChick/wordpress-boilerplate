@@ -1,12 +1,13 @@
 $btn-border-radius: 0;
 $btn-border: none;
+$btn-padding: 1rem 3rem;
 
 .btn {
 	display: block;
-	width: max-content;
+	width: fit-content;
 	color: $white-color;
-	padding: 1rem 3rem;
-	border-radius: 0;
+	padding: $btn-padding;
+	border-radius: $btn-border-radius;
 	border: $btn-border;
 	font-size: 1.25rem;
 	font-weight: 500;
