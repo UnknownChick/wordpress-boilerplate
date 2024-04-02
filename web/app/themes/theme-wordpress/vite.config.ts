@@ -3,7 +3,7 @@ import autoprefixer from 'autoprefixer';
 import { babel } from '@rollup/plugin-babel';
 
 export default defineConfig({
-	base: '/wp-content/themes/theme-wordpress/dist/',
+	base: '/app/themes/' + process.env.THEME_FOLDER_NAME + '/dist/',
 	plugins: [
 		{
 			name: 'php',
