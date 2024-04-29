@@ -1,5 +1,4 @@
-<?php
-defined('ABSPATH') || die();
+<?php defined('ABSPATH') || die();
 
 /**
  * Generates a site map.

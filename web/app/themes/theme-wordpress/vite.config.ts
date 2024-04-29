@@ -1,20 +1,42 @@
 import { defineConfig } from 'vite';
 import autoprefixer from 'autoprefixer';
-import { babel } from '@rollup/plugin-babel';
+import { browserslistToTargets } from 'lightningcss';
+import browserslist from 'browserslist';
+
+const phpRefreshPlugin = {
+	name: 'php',
+	handleHotUpdate({ file, server }) {
+		if (file.endsWith('.php')) {
+			server.hot.send({
+				type: 'full-reload'
+			});
+		}
+	},
+}
 
 export default defineConfig({
 	base: '/app/themes/' + process.env.THEME_FOLDER_NAME + '/dist/',
-	plugins: [
-		{
-			name: 'php',
-			handleHotUpdate({ file, server }) {
-				if (file.endsWith('.php')) {
-					server.ws.send({ type: 'full-reload', path: '*' });
-				}
-			},
+	plugins: [phpRefreshPlugin],
+	css: {
+		transformer: 'postcss',
+		lightningcss: {
+			targets: browserslistToTargets(browserslist('>= 0.25%'))
 		},
-	],
+		postcss: {
+			plugins: [
+				autoprefixer({}),
+			],
+		},
+	},
+	server: {
+		port: 1337,
+		host: '0.0.0.0',
+		watch: {
+			disableGlobbing: false,
+		}
+	},
 	build: {
+		cssMinify: 'lightningcss',
 		rollupOptions: {
 			input: {
 				style: './assets/sass/style.scss',
@@ -27,23 +49,6 @@ export default defineConfig({
 				chunkFileNames: `[name].js`,
 				assetFileNames: `[name].[ext]`,
 			},
-			plugins: [
-				babel({
-					babelHelpers: 'bundled',
-					extensions: ['.js', '.ts'],
-				}),
-			],
 		},
-	},
-	css: {
-		postcss: {
-			plugins: [
-				autoprefixer({}),
-			],
-		},
-	},
-	server: {
-		port: 1337,
-		host: '0.0.0.0',
 	},
 });
