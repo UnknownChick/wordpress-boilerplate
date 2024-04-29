@@ -15,7 +15,7 @@ const phpRefreshPlugin = {
 }
 
 export default defineConfig({
-	base: '/app/themes/' + process.env.THEME_FOLDER_NAME + '/dist/',
+	base: `/app/themes/${process.env.THEME_FOLDER_NAME}/dist/`,
 	plugins: [phpRefreshPlugin],
 	css: {
 		transformer: 'postcss',
