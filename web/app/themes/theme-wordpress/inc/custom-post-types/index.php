@@ -1,5 +1,4 @@
-<?php
-defined('ABSPATH') || die();
+<?php defined('ABSPATH') || die();
 
 add_action('init', function() {
 	

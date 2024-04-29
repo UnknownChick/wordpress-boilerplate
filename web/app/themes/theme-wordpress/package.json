@@ -4,6 +4,7 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"main": "index.js",
+	"type": "module",
 	"scripts": {
 		"start": "vite build && vite dev",
 		"build": "vite build",
@@ -12,19 +13,20 @@
 		"lint": "eslint 'assets/ts/*.ts'",
 		"lint:fix": "eslint 'assets/ts/*.ts' --fix"
 	},
+	"author": {
+		"name": "Alexandre Ferreira"
+	},
 	"devDependencies": {
-		"@babel/core": "^7.22.11",
-		"@babel/preset-env": "^7.22.10",
-		"@babel/preset-typescript": "^7.23.3",
-		"@rollup/plugin-babel": "^6.0.3",
-		"@types/node": "^20.12.3",
-		"autoprefixer": "^10.4.15",
+		"@types/node": "^20.12.7",
+		"autoprefixer": "^10.4.19",
 		"eslint": "^8.47.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-prettier": "^5.0.0",
-		"postcss": "^8.4.28",
+		"lightningcss": "^1.24.1",
+		"postcss": "^8.4.38",
 		"prettier": "^3.0.2",
-		"sass": "^1.66.1",
-		"vite": "^4.5.2"
+		"sass": "^1.75.0",
+		"typescript": "^5.4.5",
+		"vite": "^5.2.10"
 	}
 }
