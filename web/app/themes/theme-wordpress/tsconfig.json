@@ -1,24 +1,27 @@
 {
 	"compilerOptions": {
-		"target": "es2017",
-		"module": "esnext",
-		"lib": ["es2017"],
-		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
-		"moduleResolution": "node",
+		"skipLibCheck": true,
+		"target": "es2022",
+		"allowJs": true,
 		"resolveJsonModule": true,
-		"sourceMap": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
-		"strictPropertyInitialization": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"module": "preserve",
+		"noEmit": true,
+		"lib": [
+			"es2022"
+		]
 	},
-	"include": ["./assets/ts/**/*"],
-	"exclude": ["js"]
+	"include": [
+		"**/*.ts"
+	],
+	"exclude": [
+		"node_modules",
+		"vite.config.ts"
+	]
 }

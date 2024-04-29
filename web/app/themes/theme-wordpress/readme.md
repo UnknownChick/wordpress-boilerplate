@@ -5,5 +5,4 @@
 - PostCSS
 - Autoprefixer
 - Prettier
-- Babel
 - ESLint
