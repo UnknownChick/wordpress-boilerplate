@@ -30,9 +30,9 @@ add_action('wp_enqueue_scripts', function () {
         $sass_handle = 'sass';
         $vite_handle = 'vite-client';
 
-        wp_enqueue_script($ts_handle, getViteDevServerAddress().'/assets/ts/app.ts', $dependencies, $version);
+        wp_enqueue_script($ts_handle, getViteDevServerAddress().'/assets/js/app.js', $dependencies, $version);
         wp_enqueue_script($vite_handle, getViteDevServerAddress().'/@vite/client', $dependencies, $version);
-        wp_enqueue_style($sass_handle, getViteDevServerAddress().'/assets/sass/style.scss', $dependencies, $version);
+        wp_enqueue_style($sass_handle, getViteDevServerAddress().'/assets/scss/style.scss', $dependencies, $version);
 
         loadJSScriptAsESModule($vite_handle);
         loadJSScriptAsESModule($ts_handle);

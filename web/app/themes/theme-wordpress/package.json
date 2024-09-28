@@ -1,29 +1,33 @@
 {
 	"name": "wordpress-theme",
 	"version": "1.0.0",
+	"description": "Wordpress boilderplate using Bedrock and a clean installation",
 	"private": true,
 	"license": "UNLICENSED",
 	"main": "index.js",
 	"type": "module",
 	"scripts": {
-		"dev": "vite build && vite dev",
-		"build": "vite build",
-		"prettier": "prettier --check .",
-		"prettier:fix": "prettier --write .",
-		"lint": "eslint 'assets/ts/*.ts'",
-		"lint:fix": "eslint 'assets/ts/*.ts' --fix"
+		"dev": "vite dev",
+		"build": "vite build"
 	},
 	"author": {
 		"name": "Alexandre Ferreira"
 	},
+	"keywords": [
+		"wordpress",
+		"bedrock",
+		"vite",
+		"scss",
+		"autoprefixer",
+		"postcss",
+		"lightningcss"
+	],
 	"devDependencies": {
-		"@types/node": "^20.12.7",
 		"autoprefixer": "^10.4.19",
 		"browserslist": "^4.23.0",
 		"lightningcss": "^1.24.1",
 		"postcss": "^8.4.38",
 		"sass": "^1.75.0",
-		"typescript": "^5.4.5",
 		"vite": "^5.2.10"
 	}
 }
