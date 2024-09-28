@@ -2,7 +2,11 @@ import { defineConfig } from 'vite';
 import autoprefixer from 'autoprefixer';
 import { browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
+import purgecss from '@fullhuman/postcss-purgecss';
+import dotenv from 'dotenv';
 import path from 'path';
+
+dotenv.config({ path: '../../../../.env.local' });
 
 const phpRefreshPlugin = {
     name: 'php',
@@ -16,7 +20,7 @@ const phpRefreshPlugin = {
 }
 
 export default defineConfig({
-    // base: `/app/themes/${process.env.THEME_FOLDER_NAME}/dist/`,
+    base: process.env.WP_ENV === 'prod' ? `/app/themes/pepiniere/dist/` : '/',
     publicDir: '',
     plugins: [phpRefreshPlugin],
     css: {
@@ -27,6 +31,16 @@ export default defineConfig({
         postcss: {
             plugins: [
                 autoprefixer({}),
+                ...process.env.WP_ENV === 'prod' ? [
+                    purgecss({
+                        content: [
+                            './**/*.php',
+                        ],
+                        safelist: [
+
+                        ],
+                    })
+                ] : [],
             ],
         },
     },
