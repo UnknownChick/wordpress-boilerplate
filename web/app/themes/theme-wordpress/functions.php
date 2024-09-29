@@ -17,9 +17,11 @@ $roots_includes = array(
 );
 
 foreach ($roots_includes as $file) {
-    if (!$filepath = locate_template($file)) {
+    $filepath = locate_template($file);
+    if ($filepath && file_exists($filepath)) {
+        require_once $filepath;
+    } else {
         trigger_error("Error locating `$file` for inclusion!", E_USER_ERROR);
     }
-    require_once $filepath;
 }
 unset($file, $filepath);
