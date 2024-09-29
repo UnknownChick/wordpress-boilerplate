@@ -43,3 +43,14 @@ add_action('admin_init', function () {
     remove_post_type_support('page', 'trackbacks');
     remove_post_type_support('page', 'author');
 }, 20);
+
+
+/**
+ * Remove help tab
+ *
+ * @return void
+ */
+add_action('admin_head', function () {
+    $screen = get_current_screen();
+    $screen->remove_help_tabs();
+});
