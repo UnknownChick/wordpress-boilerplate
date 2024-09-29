@@ -1,5 +1,11 @@
 <?php defined('ABSPATH') || die();
 
+use Carbon_Fields\Carbon_Fields;
+
+add_action('after_setup_theme', function () {
+    Carbon_Fields::boot();
+});
+
 $roots_includes = array(
     '/inc/custom-shortcodes/index.php',
     '/inc/custom-post-types/index.php',
