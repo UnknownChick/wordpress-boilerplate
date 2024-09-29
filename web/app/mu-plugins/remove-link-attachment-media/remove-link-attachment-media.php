@@ -1,4 +1,4 @@
-<?php
+<?php defined('ABSPATH') || die();
 /**
  * @package MymeType Support
  * @author Alexandre Ferreira
@@ -15,8 +15,6 @@
  * License: MIT License
  */
 
-defined('ABSPATH') || die();
-
 
 /**
  * Disables attachment URLs.
@@ -27,12 +25,9 @@ defined('ABSPATH') || die();
  * @param array $data The attachment data.
  * @return array The modified attachment data.
  */
-function disable_attachment_urls($data) {
-	if (isset( $data['post_type']) && $data['post_type'] == 'attachment') {
-		$data['guid'] = '';
-	}
-	return $data;
-}
-
-add_filter('wp_insert_attachment_data', 'disable_attachment_urls', 10, 1)
-?>
+add_filter('wp_insert_attachment_data', function (array $data) {
+    if (isset( $data['post_type']) && $data['post_type'] == 'attachment') {
+        $data['guid'] = '';
+    }
+    return $data;
+}, 10, 1);

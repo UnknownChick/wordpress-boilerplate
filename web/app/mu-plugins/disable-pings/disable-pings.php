@@ -1,9 +1,9 @@
-<?php
+<?php defined('ABSPATH') || die();
 /**
  * @package Disable Pings
  * @author Alexandre Ferreira
  * @link https://alexandre-ferreira.fr
- * 
+ *
  * @wordpress-plugin
  * Plugin Name: Disable Pings
  * Plugin URI: https://alexandre-ferreira.fr
@@ -15,8 +15,6 @@
  * License: MIT License
  */
 
-defined('ABSPATH') || die();
-
 
 /**
  * Disable self trackback for the given links array.
@@ -24,10 +22,10 @@ defined('ABSPATH') || die();
  * @param array $links The array of links.
  * @return void
  */
-function disable_self_trackback(&$links) {
-	foreach ($links as $l => $link)
-		if (0 === strpos( $link, get_option('home')))
-			unset($links[$l]);
-}
-add_action('pre_ping', 'disable_self_trackback');
-?>
+add_action('pre_ping', function (array &$links) {
+    foreach ($links as $l => $link) {
+        if (str_starts_with($link, get_option('home'))) {
+            unset($links[$l]);
+        }
+    }
+});
