@@ -7,9 +7,9 @@ add_action('after_setup_theme', function () {
 });
 
 $roots_includes = array(
+    '/inc/admin/cleanup.php',
     '/inc/custom-shortcodes/index.php',
     '/inc/custom-post-types/index.php',
-    '/inc/cleanup.php',
     '/inc/core.php',
     '/inc/hmr.php',
     '/inc/scripts.php',
