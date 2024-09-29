@@ -7,6 +7,7 @@ $roots_includes = array(
     '/inc/core.php',
     '/inc/hmr.php',
     '/inc/scripts.php',
+    '/inc/smtp.php',
 );
 
 foreach ($roots_includes as $file) {
