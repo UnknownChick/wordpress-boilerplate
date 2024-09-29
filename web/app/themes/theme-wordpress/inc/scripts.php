@@ -4,7 +4,7 @@ add_action('wp_enqueue_scripts', function () {
     $dependencies = array();
     $version = null;
 
-    if (isViteHMRAvailable()) {
+    if (!function_exists('isViteHMRAvailable') && isViteHMRAvailable()) {
         $ts_handle = 'app';
         $sass_handle = 'scss';
         $vite_handle = 'vite-client';
