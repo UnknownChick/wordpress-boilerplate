@@ -5,8 +5,7 @@
  *
  * @return void
  */
-function clean_dashboard(): void
-{
+add_action('wp_dashboard_setup', function () {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
@@ -24,8 +23,7 @@ function clean_dashboard(): void
     remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
 
     remove_action('welcome_panel', 'wp_welcome_panel');
-}
-add_action('wp_dashboard_setup', 'clean_dashboard', 20);
+}, 20);
 
 
 /**
@@ -33,8 +31,7 @@ add_action('wp_dashboard_setup', 'clean_dashboard', 20);
  *
  * @return void
  */
-function clean_editor(): void
-{
+add_action('admin_init', function () {
     remove_meta_box('postcustom', 'post', 'normal');
     remove_meta_box('slugdiv', 'post', 'normal');
 
@@ -45,5 +42,4 @@ function clean_editor(): void
 
     remove_post_type_support('page', 'trackbacks');
     remove_post_type_support('page', 'author');
-}
-add_action('admin_init', 'clean_editor');
+}, 20);
