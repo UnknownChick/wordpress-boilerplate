@@ -1,4 +1,4 @@
-<?php
+<?php defined('ABSPATH') || die();
 
 /**
  * @package Disable comments
@@ -16,39 +16,37 @@
  * License: MIT License
  */
 
-defined('ABSPATH') || die();
-
-
 /**
  * Initializes the disable_comments functionality.
  */
-function disable_comments_init() {
-	remove_post_type_support('post', 'comments');
-	remove_post_type_support('page', 'comments');
+add_action('init', function () {
+    remove_post_type_support('post', 'comments');
+    remove_post_type_support('page', 'comments');
 
-	update_option('default_comment_status', 'closed');
-}
-add_action('init', 'disable_comments_init');
+    update_option('default_comment_status', 'closed');
+});
 
 
 /**
  * Disables comments in the admin area.
  */
-function disable_comments_admin() {
-	remove_meta_box('commentstatusdiv', 'post', 'normal');
-	remove_meta_box('commentsdiv', 'post', 'normal');
+add_action('admin_init', function () {
+    remove_meta_box('commentstatusdiv', 'post', 'normal');
+    remove_meta_box('commentsdiv', 'post', 'normal');
 
-	remove_meta_box('commentstatusdiv', 'page', 'normal');
-	remove_meta_box('commentsdiv', 'page', 'normal');
-}
-add_action('admin_init', 'disable_comments_admin');
+    remove_meta_box('commentstatusdiv', 'page', 'normal');
+    remove_meta_box('commentsdiv', 'page', 'normal');
+});
 
 
 /**
- * Disables the comments admin menu.
+ * Removes the comments menu item from the admin menu.
  */
-function disable_comments_admin_menu() {
-	remove_menu_page('edit-comments.php');
-}
-add_action('admin_menu', 'disable_comments_admin_menu');
-?>
+add_action('admin_menu', function () {
+    remove_menu_page('edit-comments.php');
+});
+
+add_action('wp_before_admin_bar_render', function () {
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('comments');
+});
