@@ -16,6 +16,7 @@
  * License: MIT License
  */
 
+
 /**
  * Initializes the disable_comments functionality.
  */
