@@ -51,3 +51,14 @@ add_action('wp_before_admin_bar_render', function () {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu('comments');
 });
+
+/**
+ * Redirects users away from the edit-comments.php page in the admin.
+ */
+add_action('admin_init', function () {
+    global $pagenow;
+    if ($pagenow === 'edit-comments.php') {
+        wp_safe_redirect(admin_url());
+        exit;
+    }
+});
