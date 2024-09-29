@@ -1,4 +1,4 @@
-<?php
+<?php defined('ABSPATH') || die();
 /**
  * @package MymeType Support
  * @author Alexandre Ferreira
@@ -15,19 +15,15 @@
  * License: MIT License
  */
 
-defined('ABSPATH') || die();
-
 
 /**
  * Function to support MIME types.
  *
  * @param array $mime_types An array of MIME types.
- * @return void
+ * @return array
  */
-function mimeType_support($mime_types){
-	$mime_types['svg'] = 'image/svg+xml';
-	$mime_types['pdf'] = 'application/pdf';
-	return $mime_types;
-}
-add_filter('upload_mimes', 'mimeType_support', 15, 1);
-?>
+add_filter('upload_mimes', function (array $mime_types) {
+    $mime_types['svg'] = 'image/svg+xml';
+    $mime_types['pdf'] = 'application/pdf';
+    return $mime_types;
+}, 15, 1);
