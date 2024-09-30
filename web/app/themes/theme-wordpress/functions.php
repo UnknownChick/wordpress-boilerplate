@@ -13,6 +13,7 @@ $roots_includes = array(
     '/inc/custom-post-types/index.php',
     '/inc/core.php',
     '/inc/hmr.php',
+    '/inc/optimizations.php',
     '/inc/scripts.php',
     '/inc/smtp.php',
 );
