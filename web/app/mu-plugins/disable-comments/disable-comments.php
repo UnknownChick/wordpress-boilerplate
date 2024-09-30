@@ -17,7 +17,7 @@
  */
 
 // Disable comments support and close comments by default
-add_action('init', function(): void {
+add_action('init', function (): void {
     // Remove support for comments and trackbacks from all post types
     foreach (get_post_types() as $post_type) {
         remove_post_type_support($post_type, 'comments');
@@ -32,19 +32,19 @@ add_action('init', function(): void {
     add_filter('comments_array', '__return_empty_array', 10, 2);
 
     // Remove comments page in admin menu
-    add_action('admin_menu', function(): void {
+    add_action('admin_menu', function (): void {
         remove_menu_page('edit-comments.php');
     });
 
     // Remove comments links from admin bar
-    add_action('wp_before_admin_bar_render', function(): void {
+    add_action('wp_before_admin_bar_render', function (): void {
         global $wp_admin_bar;
         $wp_admin_bar->remove_menu('comments');
     });
 });
 
 // Disable comment-related admin pages
-add_action('admin_init', function(): void {
+add_action('admin_init', function (): void {
     // Redirect any user trying to access comments page
     global $pagenow;
 
@@ -66,17 +66,16 @@ add_action('admin_init', function(): void {
 });
 
 // Remove comments-related fields from user profile
-add_action('admin_init', function(): void {
-    remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
+add_action('admin_init', function (): void {
     remove_action('personal_options', 'comment_shortcuts');
 });
 
 // Remove comments column from posts and pages
-add_filter('manage_posts_columns', function($columns) {
+add_filter('manage_posts_columns', function ($columns) {
     unset($columns['comments']);
     return $columns;
 });
-add_filter('manage_pages_columns', function($columns) {
+add_filter('manage_pages_columns', function ($columns) {
     unset($columns['comments']);
     return $columns;
 });
@@ -85,13 +84,13 @@ add_filter('manage_pages_columns', function($columns) {
 add_filter('feed_links_show_comments_feed', '__return_false');
 
 // Remove X-Pingback HTTP header
-add_filter('wp_headers', function($headers) {
+add_filter('wp_headers', function ($headers) {
     unset($headers['X-Pingback']);
     return $headers;
 });
 
 // Disable the REST API for comments
-add_filter('rest_endpoints', function($endpoints) {
+add_filter('rest_endpoints', function ($endpoints) {
     if (isset($endpoints['/wp/v2/comments'])) {
         unset($endpoints['/wp/v2/comments']);
     }
@@ -102,23 +101,23 @@ add_filter('rest_endpoints', function($endpoints) {
 });
 
 // Remove comment-related scripts and styles
-add_action('wp_enqueue_scripts', function(): void {
+add_action('wp_enqueue_scripts', function (): void {
     wp_dequeue_script('comment-reply');
 }, 100);
 
 // Remove comment count from admin bar
-add_action('admin_bar_menu', function($wp_admin_bar): void {
+add_action('admin_bar_menu', function ($wp_admin_bar): void {
     $wp_admin_bar->remove_node('comments');
 }, 999);
 
 // Remove comment-related widgets
-add_action('widgets_init', function(): void {
+add_action('widgets_init', function (): void {
     unregister_widget('WP_Widget_Recent_Comments');
     unregister_widget('WP_Widget_Comments');
 }, 11);
 
 // Remove comments from sitemap
-add_filter('wp_sitemaps_add_provider', function($provider, $name) {
+add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
     if ('users' === $name || 'comments' === $name) {
         return false;
     }
