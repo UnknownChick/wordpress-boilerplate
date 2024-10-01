@@ -9,6 +9,7 @@ add_action('after_setup_theme', function () {
 $roots_includes = array(
     '/inc/admin/pages/page-options.php',
     '/inc/admin/cleanup.php',
+    '/inc/admin/footer.php',
     '/inc/shortcodes/site-map.php',
     '/inc/core.php',
     '/inc/hmr.php',
