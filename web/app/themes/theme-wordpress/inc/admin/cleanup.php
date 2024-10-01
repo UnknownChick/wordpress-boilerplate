@@ -5,7 +5,7 @@
  *
  * @return void
  */
-add_action('wp_dashboard_setup', function () {
+add_action('wp_dashboard_setup', function (): void {
     remove_meta_box('dashboard_primary', 'dashboard', 'side');
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
@@ -31,7 +31,7 @@ add_action('wp_dashboard_setup', function () {
  *
  * @return void
  */
-add_action('admin_init', function () {
+add_action('admin_init', function (): void {
     remove_meta_box('postcustom', 'post', 'normal');
     remove_meta_box('slugdiv', 'post', 'normal');
 
@@ -50,7 +50,17 @@ add_action('admin_init', function () {
  *
  * @return void
  */
-add_action('admin_head', function () {
+add_action('admin_head', function (): void {
     $screen = get_current_screen();
     $screen->remove_help_tabs();
 });
+
+
+/**
+ * Remove the WordPress logo from the admin bar
+ *
+ * @return void
+ */
+add_action('admin_bar_menu', function ($wp_admin_bar): void {
+    $wp_admin_bar->remove_node('wp-logo');
+}, 999);
