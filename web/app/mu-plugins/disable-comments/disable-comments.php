@@ -55,6 +55,10 @@ add_action('admin_init', function (): void {
 
     // Remove comments metabox from dashboard
     remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+    remove_meta_box('commentsdiv', 'post', 'normal');
+    remove_meta_box('commentstatusdiv', 'post', 'normal');
+    remove_meta_box('commentsdiv', 'page', 'normal');
+    remove_meta_box('commentstatusdiv', 'page', 'normal');
 
     // Disable support for comments and trackbacks in post types
     foreach (get_post_types() as $post_type) {
