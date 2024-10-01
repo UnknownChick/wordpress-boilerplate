@@ -8,7 +8,8 @@
  * @param array $atts An array of attributes for the site map.
  * @return string The generated site map HTML.
  */
-function site_map($atts) {
+function site_map(array $atts): string
+{
 	$pages = get_pages();
 	$posts = get_posts();
 	$authors = get_users();
@@ -32,8 +33,8 @@ function site_map($atts) {
 				foreach ($authors as $author) {
 					$output .= '<li><a href="'.get_permalink($author->ID).'">'.$author->data->user_login.'</a></li>';
 				}
-				break;
-			case 'categories':
+                break;
+            case 'categories':
 				foreach ($categories as $categorie) {
 					$output .= '<li><a href="'.get_permalink($categorie->ID).'">'.$categorie->cat_name.'</a></li>';
 				}
@@ -45,7 +46,6 @@ function site_map($atts) {
 	}
 	$output .= '</ul>';
 	
-	echo $output;
+	return $output;
 }
 add_shortcode('site_map', 'site_map');
-?>
