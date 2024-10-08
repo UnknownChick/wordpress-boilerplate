@@ -3,6 +3,8 @@ namespace ThemeWordpress\Inc;
 
 defined('ABSPATH') || die();
 
+use function Env\env;
+
 /**
  * Class HMR
  * 
@@ -15,7 +17,7 @@ class HMR {
      * HMR constructor.
      */
     public function __construct() {
-        $this->viteDevServer = VITE_DEV_SERVER;
+        $this->viteDevServer = env('VITE_DEV_SERVER') ?? '';
     }
 
     /**
