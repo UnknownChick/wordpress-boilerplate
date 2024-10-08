@@ -63,4 +63,5 @@ add_action('admin_head', function (): void {
  */
 add_action('admin_bar_menu', function ($wp_admin_bar): void {
     $wp_admin_bar->remove_node('wp-logo');
+    $wp_admin_bar->remove_node('search');
 }, 999);
