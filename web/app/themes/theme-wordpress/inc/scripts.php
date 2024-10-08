@@ -12,8 +12,8 @@ add_action('wp_enqueue_scripts', function () {
         $sass_handle = 'scss';
         $vite_handle = 'vite-client';
 
-        wp_enqueue_script($ts_handle, $hmr->getViteDevServerAddress().'/assets/js/app.js', $dependencies, $version);
-        wp_enqueue_script($vite_handle, $hmr->getViteDevServerAddress().'/@vite/client', $dependencies, $version);
+        wp_enqueue_script_module($ts_handle, $hmr->getViteDevServerAddress().'/assets/js/app.js', $dependencies, $version);
+        wp_enqueue_script_module($vite_handle, $hmr->getViteDevServerAddress().'/@vite/client', $dependencies, $version);
         wp_enqueue_style($sass_handle, $hmr->getViteDevServerAddress().'/assets/scss/style.scss', $dependencies, $version);
     } else {
         wp_enqueue_style('style-theme', get_stylesheet_uri(), $dependencies, $version);
