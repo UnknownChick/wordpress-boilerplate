@@ -20,7 +20,7 @@ const phpRefreshPlugin = {
 }
 
 export default defineConfig({
-    base: process.env.WP_ENV === 'prod' ? `/app/themes/pepiniere/dist/` : '/',
+    base: process.env.WP_ENV === 'production' ? `/app/themes/pepiniere/dist/` : '/',
     publicDir: '',
     plugins: [phpRefreshPlugin],
     css: {
