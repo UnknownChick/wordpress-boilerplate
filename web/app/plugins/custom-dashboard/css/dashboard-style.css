@@ -2,6 +2,8 @@
     --menu-left-width: 200px;
     --menu-left-width-folded: 64px;
     --admin-bar-top: 40px;
+    --global-boder-radius: 4px;
+    --button-padding: 0.75rem 1rem;
 }
 
 /* Reset default style */
@@ -126,9 +128,9 @@ body, #wpcontent, #wpbody, #wpbody-content {
 /*    transition: background-color 0.2s ease;*/
 /*}*/
 
-/*#adminmenu .wp-submenu {*/
-/*    border-radius: 0 6px 6px 0;*/
-/*}*/
+#adminmenu .wp-submenu {
+    border-radius: 0 var(--global-boder-radius) var(--global-boder-radius) 0;
+}
 
 #adminmenu .wp-not-current-submenu .wp-submenu, .folded #adminmenu .wp-has-current-submenu .wp-submenu {
     min-width: var(--menu-left-width);
@@ -145,10 +147,15 @@ body, #wpcontent, #wpbody, #wpbody-content {
 .notice {
     padding: 0.75rem;
     box-shadow: none;
+    border-radius: var(--global-boder-radius);
+}
+
+.notice p {
+    margin: 0;
 }
 
 
-/* Contenu principal */
+/* Main content */
 #wpcontent {
     margin-left: var(--menu-left-width);
     /*padding: 20px 40px;*/
@@ -158,29 +165,64 @@ body, #wpcontent, #wpbody, #wpbody-content {
     margin-left: var(--menu-left-width-folded);
 }
 
+.wp-header-end {
+    display: none;
+}
+
+.subsubsub {
+    margin: 0;
+}
 
 
 
 /* Boutons */
-.wp-core-ui .button, .wp-core-ui .button-secondary {
-    border-radius: 6px;
-    padding: 5px 16px;
-    transition: all 0.2s ease;
-    background: #fff;
-    border: 1px solid #d1d5da;
-    color: #24292e;
-}
-
-/* Formulaires */
-input[type="text"], input[type="password"], input[type="number"], 
-input[type="search"], input[type="email"], input[type="url"], 
-select, textarea {
-    border-radius: 6px;
-    padding: 8px 12px;
+.wp-core-ui .button, .wp-core-ui .button-secondary, .wp-core-ui select, input[type="text"], input[type="password"], input[type="number"],
+input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .page-title-action {
+    min-height: unset;
+    max-height: unset;
+    margin: 0 !important;
+    border-radius: var(--global-boder-radius);
+    padding: var(--button-padding);
+    line-height: 1.25;
     transition: all 0.2s ease;
     border: 1px solid #d1d5da;
 }
 
+.wp-core-ui select:focus {
+    border-color: unset;
+    collapse: unset;
+    box-shadow: unset;
+}
+
+
+
+/* Tables */
+.tablenav .actions select {
+    float: unset;
+    margin-right: 0;
+    max-width: unset;
+}
+
+.check-column {
+    padding: 0 !important;
+    vertical-align: unset !important;
+}
+
+/* Forms */
+
+.alignleft {
+    float: unset;
+}
+
+.tablenav {
+    display: flex;
+    height: auto;
+}
+
+.tablenav .tablenav-pages {
+    float: unset;
+    margin: 0 0 0 auto;
+}
 
 
 /* Effets de survol subtils */
