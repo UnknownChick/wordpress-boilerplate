@@ -1,6 +1,7 @@
 # Application
 web/app/plugins/*
 !web/app/plugins/.gitkeep
+!web/app/plugins/custom-dashboard/
 web/app/mu-plugins/bedrock-disallow-indexing/
 web/app/themes/twentytwentyfour/
 web/app/upgrade
