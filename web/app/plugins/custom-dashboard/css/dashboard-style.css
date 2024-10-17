@@ -185,7 +185,6 @@ input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .p
     padding: var(--button-padding);
     line-height: 1.25;
     transition: all 0.2s ease;
-    border: 1px solid #d1d5da;
 }
 
 .wp-core-ui select:focus {
@@ -225,7 +224,7 @@ input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .p
 }
 
 
-/* Effets de survol subtils */
+/* Hover */
 .postbox:hover .hndle {
     background-color: rgba(0, 0, 0, 0.02);
 }
