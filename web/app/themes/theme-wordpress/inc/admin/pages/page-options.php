@@ -27,3 +27,5 @@ add_action('carbon_fields_register_fields', function () {
                 ->set_attribute('type', 'email'),
         ]);
 });
+
+add_filter('carbon_fields_theme_options_container_admin_only_access', '__return_false');
