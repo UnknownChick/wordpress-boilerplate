@@ -8,6 +8,7 @@ add_action('after_setup_theme', function () {
 
 $roots_includes = array(
     '/inc/admin/pages/page-options.php',
+    '/inc/admin/capabilities.php',
     '/inc/admin/cleanup.php',
     '/inc/admin/duplicate-post.php',
     '/inc/admin/footer.php',
