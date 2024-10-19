@@ -5,13 +5,10 @@ web/app/plugins/*
 web/app/mu-plugins/bedrock-disallow-indexing/
 web/app/themes/twentytwentyfour/
 web/app/upgrade
-web/app/uploads/*
-!web/app/uploads/.gitkeep
 web/app/cache/*
 
 # WordPress
 web/wp
-web/.htaccess
 
 # Logs
 *.log
