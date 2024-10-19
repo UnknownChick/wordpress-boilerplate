@@ -10,7 +10,7 @@ add_filter('wp_nav_menu', function ($nav_menu, $args) {
     return preg_replace('/<a(?![^>]*href)([^>]*)>(.*?)<\/a>/', '<span$1>$2</span>', $nav_menu);
 }, 10, 2);
 
-// Remove <p> tags from cotent and excerpt
+// Remove <p> tags from content and excerpt
 add_filter('the_content', function ($content) {
     remove_filter('the_content', 'wpautop');
     remove_filter('the_excerpt', 'wpautop');
