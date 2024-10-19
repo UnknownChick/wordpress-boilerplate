@@ -1,19 +1,4 @@
-<?php
-/**
- * @package Duplicate post
- * @author Alexandre Ferreira
- * @link https://alexandre-ferreira.fr
- *
- * @wordpress-plugin
- * Plugin Name: Duplicate post
- * Plugin URI: https://alexandre-ferreira.fr
- * Description: Adds a "Duplicate" link to the post row actions to quickly duplicate a post.
- * Version: 1.0
- * Author: Alexandre Ferreira
- * Author URI: https://alexandre-ferreira.fr
- * Text Domain: alexandre
- * License: MIT License
- */
+<?php defined('ABSPATH') || die();
 
 define('DUPLICATE_NONCE', basename(__FILE__));
 const RD_DUPLICATE_ACTION = 'duplicate_post_as_draft';
