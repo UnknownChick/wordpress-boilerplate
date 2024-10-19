@@ -17,6 +17,7 @@ $roots_includes = array(
     '/inc/hmr.php',
     '/inc/optimizations.php',
     '/inc/scripts.php',
+    '/inc/security.php',
     '/inc/smtp.php',
 );
 
