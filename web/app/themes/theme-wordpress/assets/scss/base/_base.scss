@@ -1,36 +1,145 @@
-@for $i from 1 through 5 {
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
+@for $i from 0 through 10 {
 	/* Margin */
-	.mb-#{$i} {
-		margin-bottom: #{$i}rem !important;
+	.m-#{$i} {
+		margin: #{$i}rem;
 	}
+
+	.mt-#{$i} {
+		margin-top: #{$i}rem;
+	}
+
+	.mr-#{$i} {
+		margin-right: #{$i}rem;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: #{$i}rem;
+	}
+
+	.ml-#{$i} {
+		margin-left: #{$i}rem;
+	}
+
+	.mx-#{$i} {
+		margin-left: #{$i}rem;
+		margin-right: #{$i}rem;
+	}
+
+	.my-#{$i} {
+		margin-top: #{$i}rem;
+		margin-bottom: #{$i}rem;
+	}
+
 
 	/* Padding */
 	.p-#{$i} {
 		padding: #{$i}rem;
 	}
 
+	.pt-#{$i} {
+		padding-top: #{$i}rem;
+	}
+
+	.pr-#{$i} {
+		padding-right: #{$i}rem;
+	}
+
+	.pb-#{$i} {
+		padding-bottom: #{$i}rem;
+	}
+
+	.pl-#{$i} {
+		padding-left: #{$i}rem;
+	}
+
+	.px-#{$i} {
+		padding-left: #{$i}rem;
+		padding-right: #{$i}rem;
+	}
+
+	.py-#{$i} {
+		padding-top: #{$i}rem;
+		padding-bottom: #{$i}rem;
+	}
+
+	@include mq.min-device(desktop) {
+		.pl-desktop-#{$i} {
+			padding-left: #{$i}rem;
+		}
+
+		.pr-desktop-#{$i} {
+			padding-right: #{$i}rem;
+		}
+	}
+
+
+	/* Width */
 	.mis-#{$i}00 {
 		max-inline-size: #{$i}00px;
 	}
-}
 
-@include max-device(desktop) {
-	@for $i from 1 through 5 {
-		.mb-mobile-#{$i} {
-			margin-bottom: #{$i}rem !important;
-		}
+	/* Font Weight */
+	.fw-#{$i}00 {
+		font-weight: #{$i}00;
 	}
 }
 
-@include min-device(desktop) {
-	@for $i from 1 through 5 {
-		.mb-desktop-#{$i} {
-			margin-bottom: #{$i}rem !important;
-		}
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.my-auto {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+$directions: (
+	top: 't',
+	right: 'r',
+	bottom: 'b',
+	left: 'l',
+);
+
+@each $direction, $letter in $directions {
+	.m#{$letter}-auto {
+		margin-#{$direction}: auto;
+	}
+
+	.p#{$letter}-auto {
+		padding-#{$direction}: auto;
 	}
 }
 
-@include max-device(desktop) {
+.w-full {
+	width: 100%;
+}
+
+.h-full {
+	height: 100%;
+}
+
+$fs: (
+	fs-1: clamp(1rem, 0.6875rem + 1vw, 1.25rem),
+	fs-2: clamp(1.25rem, 0.9375rem + 1vw, 1.5rem),
+	fs-3: clamp(1.5rem, 0.875rem + 2vw, 2rem),
+	fs-4: clamp(2rem, 1.375rem + 2vw, 2.5rem),
+	fs-5: clamp(2rem, 0.75rem + 4vw, 3rem),
+	fs-6: clamp(2rem, -0.5rem + 8vw, 4rem),
+);
+
+@each $fs-class, $font-size in $fs {
+	.#{$fs-class} {
+		font-size: #{$font-size};
+	}
+}
+
+@include mq.max-device(desktop) {
 	@for $i from 1 through 5 {
 		.mobile-order-#{$i} {
 			order: $i;
@@ -56,29 +165,74 @@
 	text-transform: uppercase;
 }
 
+.ff-primary {
+	font-family: v.$primary-font;
+}
+
+.ff-secondary {
+	font-family: v.$secondary-font;
+}
+
+.center-text {
+	text-align: center;
+}
+
 .white-color {
-	color: $white-color;
+	color: c.$white-color;
 }
 
 .black-color {
-	color: $black-color;
+	color: c.$black-color;
 }
 
+.primary-color {
+	color: c.$primary-color;
+}
+
+.secondary-color {
+	color: c.$secondary-color;
+}
+
+.accent-color {
+	color: c.$accent-color;
+}
+
+.list-inside {
+	list-style-position: inside;
+}
 
 /* Background */
+.bg-primary {
+	background-color: c.$primary-color;
+}
 
+.bg-secondary {
+	background-color: c.$secondary-color;
+}
+
+.bg-accent {
+	background-color: c.$accent-color;
+}
+
+.bg-off {
+	background-color: c.$off-color;
+}
 
 /* Flexbox */
+.d-flex {
+	display: flex;
+}
+
 .df-vertical-align-center {
-	@include df-vertical-align-center;
+	@include m.df-vertical-align-center;
 }
 
 .df-vertical-align-end {
-	@include df-vertical-align-end;
+	@include m.df-vertical-align-end;
 }
 
 .df-vertical-align-sb {
-	@include df-vertical-align-sb;
+	@include m.df-vertical-align-sb;
 }
 
 .df-sb {
@@ -90,23 +244,16 @@
 	flex-direction: column;
 }
 
-
-/* Display */
-.d-none {
-	display: none !important;
-}
-
-
-/* Img */
-.img-full {
-	width: 100%;
+.hidden {
+	display: none;
 }
 
 
 /* Animation */
 .scale-up {
 	display: block;
-	@include transition(250ms);
+	@include m.transition(250ms);
+
 	&:hover {
 		transform: scale(1.1);
 	}

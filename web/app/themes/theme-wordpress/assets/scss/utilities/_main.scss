@@ -1,17 +1,19 @@
+@use '../abstracts/variables' as v;
+
 body {
 	font-family: sans-serif;
 }
 
 h1, h2, h3 ,h4 ,h5, h6, a {
-	font-family: $secondary-font;
+	font-family: v.$secondary-font;
 }
 
 h1, h2, h3 ,h4 ,h5, h6 {
-	line-height: $title-line-height;
+	line-height: v.$title-line-height;
 }
 
 p, ul, a {
-	font-family: $primary-font;
+	font-family: v.$primary-font;
 }
 
 $title-font-size: (
