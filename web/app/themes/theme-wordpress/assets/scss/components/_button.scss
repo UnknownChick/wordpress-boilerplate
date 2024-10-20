@@ -1,27 +1,37 @@
-$btn-border-radius: 0;
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as m;
+
 $btn-border: none;
-$btn-padding: 1rem 3rem;
+$btn-border-radius: 0.5rem;
+$btn-font-size: inherit;
+$btn-padding: 0.75rem 1.5rem;
 
 .btn {
 	display: block;
 	width: fit-content;
-	color: $white-color;
+	color: c.$white-color;
 	padding: $btn-padding;
 	border-radius: $btn-border-radius;
 	border: $btn-border;
-	font-size: 1.25rem;
-	font-weight: 500;
-	text-transform: uppercase;
+	font-size: $btn-font-size;
+	font-weight: 700;
 	line-height: 1;
 	cursor: pointer;
 	outline: none;
 	box-shadow: none;
-	@include transition(250ms);
+	@include m.transition(250ms);
+
+	background-color: c.$accent-color;
+
+	&:hover {
+		background-color: c.$secondary-color;
+		color: c.$accent-color;
+	}
 
 	&.btn-full {
 		width: 100%;
 	}
-	
+
 	&.btn-center {
 		margin: auto;
 	}

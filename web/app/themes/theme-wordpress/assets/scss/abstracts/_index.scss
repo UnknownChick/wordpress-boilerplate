@@ -1,4 +1,4 @@
-@import 'colors';
-@import 'media-query';
-@import 'mixins';
-@import 'variables';
+@forward 'colors';
+@forward 'media-queries';
+@forward 'mixins';
+@forward 'variables';

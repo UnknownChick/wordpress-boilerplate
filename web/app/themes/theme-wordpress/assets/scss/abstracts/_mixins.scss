@@ -1,3 +1,5 @@
+@use 'media-queries' as mq;
+
 /* Absolute posision */
 @mixin absolute-horizontal-center {
 	left: 0;
@@ -14,7 +16,7 @@
 }
 
 @mixin absolute-center {
-	@include ansolute-horizontal-center;
+	@include absolute-horizontal-center;
 	@include absolute-vertical-center;
 }
 
@@ -62,7 +64,7 @@
 
 /* Padding */
 @mixin padding-tp-mobile {
-	@include max-device(desktop) {
+	@include mq.max-device(desktop) {
 		padding: 5rem 0;
 	}
 }
