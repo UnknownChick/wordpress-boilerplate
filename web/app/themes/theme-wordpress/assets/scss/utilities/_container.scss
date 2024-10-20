@@ -1,35 +1,36 @@
+@use "../abstracts/media-queries" as *;
+
 $gap-default: 2rem;
 $container-width: 90%;
 $container-max-widths: (
+	xxs: 375px,
+	xs: 576px,
 	sm: 768px,
 	md: 1024px,
 	lg: 1280px,
 	xl: 1440px,
-	xxl:1600px,
-	full: 100%,
+	xxl: 1600px,
+	full: 100%
 );
 
-@for $i from 0 through 5 {
-	.gap-#{$i} {
-		gap: #{$i}rem !important;
+$col-widths: (25, 33, 40, 50, 60, 66, 75);
+
+@mixin create-gap-classes {
+	@for $i from 0 through 5 {
+		.gap-#{$i} {
+			gap: #{$i}rem !important;
+
+			@each $width in $col-widths {
+				& > .col-#{$width} {
+					$divisor: if($width == 33, 3, 2);
+					flex: 0 1 calc(#{$width}#{"%"} - #{$i}rem / #{$divisor}) !important;
+				}
+			}
+		}
 	}
 }
 
-.row {
-	width: $container-width;
-	margin: auto;
-	display: flex;
-	flex-wrap: wrap;
-	gap: $gap-default;
-
-	&-horiziontal {
-		flex-direction: row;
-	}
-
-	&-vertical {
-		flex-direction: column;
-	}
-
+@mixin create-row-classes {
 	@each $size, $width in $container-max-widths {
 		&-#{$size} {
 			@if $size == 'full' {
@@ -39,23 +40,58 @@ $container-max-widths: (
 			}
 		}
 
-		&-align-left-#{$size} {
-			width: calc((100% - ((100% - $width) / 2)));
-			margin-right: auto;
-			margin-left: 0;
-			max-width: $container-width;
-		}
-	
-		&-align-right-#{$size} {
-			width: calc((100% - ((100% - $width) / 2)));
-			margin-right: 0;
-			margin-left: auto;
-			max-width: $container-width;
+		&-align {
+			&-left-#{$size},
+			&-right-#{$size} {
+				width: calc((100% - ((100% - #{$width}) / 2)));
+				max-width: $container-width;
+			}
+			&-left-#{$size} {
+				margin-right: auto;
+				margin-left: 0;
+			}
+			&-right-#{$size} {
+				margin-right: 0;
+				margin-left: auto;
+			}
 		}
 	}
+}
 
-	.column {
+@include create-gap-classes;
+
+.row {
+	position: relative;
+	width: $container-width;
+	margin-inline: auto;
+	display: flex;
+	gap: $gap-default;
+	z-index: 2;
+
+	&-horiziontal {
+		flex-direction: row;
+	}
+
+	&-vertical {
+		flex-direction: column;
+	}
+
+	&-max {
+		width: max-content;
+	}
+
+	&-reverse {
+		flex-direction: row-reverse;
+	}
+
+	& > .col {
 		flex: 1;
+
+		@each $width in $col-widths {
+			&-#{$width} {
+				flex: 0 1 calc(#{$width}#{"%"} - $gap-default / 2);
+			}
+		}
 
 		&-max {
 			width: max-content;
@@ -63,11 +99,32 @@ $container-max-widths: (
 		}
 	}
 
-	@include max-device(desktop) {
-		flex-direction: column;
+	@include create-row-classes;
 
-		.column {
-			width: 100%;
+	@include max-device(desktop) {
+		&:not(.is-mobile) {
+			flex-direction: column;
+			flex-wrap: wrap;
+			.col {
+				width: 100%;
+			}
 		}
+	}
+}
+
+.jc {
+	&-center {
+		justify-content: center;
+	}
+
+	&-end {
+		justify-content: flex-end;
+	}
+
+	&-space-between {
+		justify-content: space-between;
+	}
+	&-space-around {
+		justify-content: space-around;
 	}
 }
