@@ -1,9 +1,9 @@
 <?php defined('ABSPATH') || die();
 
-use ThemeWordpress\Inc\HMR;
+use Lrgp\Helpers\HmrHelper;
 
 add_action('wp_enqueue_scripts', function () {
-	$hmr = new HMR();
+	$hmr = new HmrHelper();
     $dependencies = array();
     $version = null;
 
@@ -21,4 +21,3 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('js-dist', get_stylesheet_directory_uri().'/dist/app.js', $dependencies, $version, true);
     }
 });
- 
