@@ -1,5 +1,5 @@
 <?php
-namespace ThemeWordpress\Inc;
+namespace Lrgp\Helpers;
 
 defined('ABSPATH') || die();
 
@@ -10,7 +10,7 @@ use function Env\env;
  * 
  * Handles Hot Module Replacement (HMR) functionality for Vite integration.
  */
-class HMR {
+class HmrHelper {
     private string $viteDevServer;
 
     /**

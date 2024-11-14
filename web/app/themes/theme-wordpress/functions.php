@@ -12,13 +12,16 @@ $roots_includes = array(
     '/inc/admin/cleanup.php',
     '/inc/admin/duplicate-post.php',
     '/inc/admin/footer.php',
+
+    '/inc/Helpers/HmrHelper.php',
+    '/inc/Helpers/SmtpHelper.php',
+
     '/inc/shortcodes/site-map.php',
+
     '/inc/core.php',
-    '/inc/hmr.php',
     '/inc/optimizations.php',
     '/inc/scripts.php',
     '/inc/security.php',
-    '/inc/smtp.php',
 );
 
 foreach ($roots_includes as $file) {
