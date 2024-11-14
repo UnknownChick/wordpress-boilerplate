@@ -130,6 +130,21 @@ Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 
 /**
+ * Smtp
+ */
+define('SMTP_FROM', env('SMTP_FROM'));
+define('SMTP_FROM_NAME', env('SMTP_FROM_NAME'));
+define('SMTP_HOST', env('SMTP_HOST'));
+define('SMTP_PASSWORD', env('SMTP_PASSWORD'));
+define('SMTP_PORT', env('SMTP_PORT') ?: 25);
+define('SMTP_USERNAME', env('SMTP_USERNAME'));
+define('SMTP_DEBUG', env('SMTP_DEBUG') ?: 0);
+
+/**
+ * HMR
+ */
+
+/**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
  * See https://codex.wordpress.org/Function_Reference/is_ssl#Notes
  */
