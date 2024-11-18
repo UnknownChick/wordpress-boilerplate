@@ -1,3 +1,5 @@
 <?php get_header(); ?>
-	<?php get_template_part('templates/single', 'post'); ?>
+	<main>
+
+	</main>
 <?php get_footer(); ?>
