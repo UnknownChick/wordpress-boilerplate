@@ -1,0 +1,12 @@
+input, select, textarea, button {
+    font-family: unset;
+}
+
+p.search-box {
+    margin: 0;
+}
+
+.search-box input[name="s"], .tablenav .search-plugins input[name="s"], .tagsdiv .newtag {
+    float: unset;
+    margin: 0;
+}
