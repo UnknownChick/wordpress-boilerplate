@@ -46,7 +46,7 @@ add_action('admin_init', function (): void {
 
 
 /**
- * Remove help tab
+ * Cleans up the help tabs.
  *
  * @return void
  */
@@ -57,7 +57,7 @@ add_action('admin_head', function (): void {
 
 
 /**
- * Remove the WordPress logo from the admin bar
+ * Cleans up the admin bar.
  *
  * @return void
  */
@@ -65,3 +65,40 @@ add_action('admin_bar_menu', function ($wp_admin_bar): void {
     $wp_admin_bar->remove_node('wp-logo');
     $wp_admin_bar->remove_node('search');
 }, 999);
+
+add_filter('mce_buttons', function ($buttons) {
+    $remove_buttons = array(
+        'strikethrough',
+        'hr',
+        'unlink',
+        'wp_more',
+        'spellchecker',
+        'dfw',
+        'wp_adv',
+    );
+    foreach ($buttons as $button_key => $button_value) {
+        if (in_array( $button_value, $remove_buttons)) {
+            unset($buttons[$button_key]);
+        }
+    }
+    return $buttons;
+});
+
+add_filter('mce_buttons_2', function ($buttons) {
+    $remove_buttons = array(
+        'formatselect',
+        'forecolor',
+        'pastetext',
+        'removeformat',
+        'charmap',
+        'outdent',
+        'indent',
+        'wp_help',
+    );
+    foreach ($buttons as $button_key => $button_value) {
+        if (in_array($button_value, $remove_buttons)) {
+            unset($buttons[$button_key]);
+        }
+    }
+    return $buttons;
+});
