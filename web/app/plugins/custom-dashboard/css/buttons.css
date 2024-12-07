@@ -1,0 +1,25 @@
+:root {
+    --button-padding: 0.5rem 0.75rem;
+}
+
+.wp-core-ui .button, .wp-core-ui .button-secondary, .wp-core-ui select, input[type="text"], input[type="password"], input[type="number"],
+input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .page-title-action {
+    min-height: unset;
+    max-height: unset;
+    margin: 0 !important;
+    border-radius: var(--global-boder-radius);
+    padding: var(--button-padding);
+    line-height: 1;
+    transition: all 0.2s ease;
+    font-size: 0.75rem;
+}
+
+.wp-core-ui select:focus {
+    border-color: unset;
+    collapse: unset;
+    box-shadow: unset;
+}
+
+.wp-core-ui p .button {
+    vertical-align: unset;
+}

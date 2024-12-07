@@ -1,0 +1,33 @@
+/* Tables */
+table.widefat {
+    box-shadow: none;
+    border-collapse: collapse;
+    margin-block: 1rem;
+}
+
+.tablenav .actions select {
+    float: unset;
+    margin-right: 0;
+    max-width: unset;
+    padding-right: 2rem;
+}
+
+.check-column {
+    padding: 0 !important;
+    vertical-align: unset !important;
+    position: relative;
+}
+
+.check-column input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+
+.widefat th input, .updates-table td input, .widefat thead td input, .widefat tfoot td input {
+    margin: 0;
+    vertical-align: unset;
+}

@@ -3,13 +3,18 @@
     --menu-left-width-folded: 64px;
     --admin-bar-top: 40px;
     --global-boder-radius: 4px;
-    --button-padding: 0.75rem 1rem;
 }
 
 /* Reset default style */
+* {
+    box-sizing: border-box;
+    clear: none !important;
+}
+
 body, #wpcontent, #wpbody, #wpbody-content {
     line-height: 1.5;
     font-size: 16px;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 /* Admin bar */
@@ -173,40 +178,6 @@ body, #wpcontent, #wpbody, #wpbody-content {
     margin: 0;
 }
 
-
-
-/* Boutons */
-.wp-core-ui .button, .wp-core-ui .button-secondary, .wp-core-ui select, input[type="text"], input[type="password"], input[type="number"],
-input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .page-title-action {
-    min-height: unset;
-    max-height: unset;
-    margin: 0 !important;
-    border-radius: var(--global-boder-radius);
-    padding: var(--button-padding);
-    line-height: 1.25;
-    transition: all 0.2s ease;
-}
-
-.wp-core-ui select:focus {
-    border-color: unset;
-    collapse: unset;
-    box-shadow: unset;
-}
-
-
-
-/* Tables */
-.tablenav .actions select {
-    float: unset;
-    margin-right: 0;
-    max-width: unset;
-}
-
-.check-column {
-    padding: 0 !important;
-    vertical-align: unset !important;
-}
-
 /* Forms */
 
 .alignleft {
@@ -216,6 +187,8 @@ input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .p
 .tablenav {
     display: flex;
     height: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .tablenav .tablenav-pages {
@@ -251,7 +224,11 @@ input[type="search"], input[type="email"], input[type="url"], textarea, .wrap .p
 }
 
 
-table.widefat {
-    box-shadow: none;
-    border-collapse: collapse;
+
+
+
+
+.subsubsub {
+    float: none;
+    margin-bottom: 1rem;
 }
