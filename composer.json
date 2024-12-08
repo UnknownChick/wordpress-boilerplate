@@ -57,6 +57,11 @@
       "mnsami/composer-custom-directory-installer": true
     }
   },
+  "autoload": {
+    "psr-4": {
+      "Theme\\": "web/app/themes/theme-wordpress/inc"
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "extra": {
