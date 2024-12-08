@@ -1,9 +1,11 @@
 <?php defined('ABSPATH') || die();
 
 use Carbon_Fields\Carbon_Fields;
+use Theme\Helpers\SmtpHelper;
 
 add_action('after_setup_theme', function () {
     Carbon_Fields::boot();
+    SmtpHelper::init();
 });
 
 $roots_includes = array(
@@ -12,9 +14,6 @@ $roots_includes = array(
     '/inc/admin/cleanup.php',
     '/inc/admin/duplicate-post.php',
     '/inc/admin/footer.php',
-
-    '/inc/Helpers/HmrHelper.php',
-    '/inc/Helpers/SmtpHelper.php',
 
     '/inc/shortcodes/site-map.php',
 

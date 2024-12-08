@@ -1,6 +1,6 @@
 <?php defined('ABSPATH') || die();
 
-use Lrgp\Helpers\HmrHelper;
+use Theme\Helpers\HmrHelper;
 
 add_action('wp_enqueue_scripts', function () {
 	$hmr = new HmrHelper();

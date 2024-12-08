@@ -1,5 +1,5 @@
 <?php
-namespace Lrgp\Helpers;
+namespace Theme\Helpers;
 
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -56,6 +56,3 @@ class SmtpHelper {
         }
     }
 }
-
-// Initialize the SMTP configuration
-SmtpHelper::init();
