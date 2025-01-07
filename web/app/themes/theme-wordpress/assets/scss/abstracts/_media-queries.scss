@@ -1,28 +1,33 @@
+@use 'sass:map';
+
 $breakpoints: (
-	mobile: 480px,
-	tablet: 768px,
-	desktop: 1024px,
-	large-desktop: 1280px,
+	xxs: 375px,
+	xs: 576px,
+	sm: 768px,
+	md: 1024px,
+	lg: 1280px,
+	xl: 1440px,
+	xxl: 1600px,
 );
 
-@mixin min-device($breakpoint: map-get($breakpoints)) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		@media screen and (min-width: map-get($breakpoints, $breakpoint)) {
+@mixin min-device($breakpoint: map.get($breakpoints)) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		@media screen and (min-width: map.get($breakpoints, $breakpoint)) {
 			@content;
 		}
 	}
 }
 
-@mixin max-device($breakpoint: map-get($breakpoints)) {
-	@if map-has-key($breakpoints, $breakpoint) {
-		@media screen and (max-width: (map-get($breakpoints, $breakpoint) - 1)) {
+@mixin max-device($breakpoint: map.get($breakpoints)) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		@media screen and (max-width: (map.get($breakpoints, $breakpoint) - 1)) {
 			@content;
 		}
 	}
 }
 
-@mixin only-device($breakpoint: map-get($breakpoints)) {
-	@if map-has-key($breakpoints, $breakpoint) {
+@mixin only-device($breakpoint: map.get($breakpoints)) {
+	@if map.has-key($breakpoints, $breakpoint) {
 		$breakpoints-length: length($breakpoints);
 		$map-list: map-keys($breakpoints);
 
@@ -43,8 +48,8 @@ $breakpoints: (
 	}
 }
 
-@mixin between-devices($min-device: map-get($breakpoints), $max-device: map-get($breakpoints)) {
-	@if map-has-key($breakpoints, $min-device) and map-has-key($breakpoints, $max-device) {
+@mixin between-devices($min-device: map.get($breakpoints), $max-device: map.get($breakpoints)) {
+	@if map.has-key($breakpoints, $min-device) and map.has-key($breakpoints, $max-device) {
 		@include min-device($min-device) {
 			@include max-device($max-device) {
 				@content;
