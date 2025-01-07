@@ -20,9 +20,14 @@ const phpRefreshPlugin = {
 }
 
 export default defineConfig({
-    base: process.env.WP_ENV === 'production' ? `/app/themes/pepiniere/dist/` : '/',
+    base: mode === 'production' ? `/wp-content/themes/lrgp/dist/` : '/',
     publicDir: '',
     plugins: [phpRefreshPlugin],
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, 'node_modules'),
+        }
+    },
     css: {
         transformer: 'postcss',
         lightningcss: {
@@ -31,16 +36,16 @@ export default defineConfig({
         postcss: {
             plugins: [
                 autoprefixer({}),
-                ...process.env.WP_ENV === 'prod' ? [
-                    purgecss({
-                        content: [
-                            './**/*.php',
-                        ],
-                        safelist: [
+                purgecss({
+                    content: [
+                        './**/*.php',
+                    ],
+                    safelist: {
+                        standard: [
 
-                        ],
-                    })
-                ] : [],
+                        ]
+                    },
+                })
             ],
         },
     },
