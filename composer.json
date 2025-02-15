@@ -59,7 +59,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Theme\\": "web/app/themes/theme-wordpress/inc"
+      "App\\": "web/app/themes/default/inc"
     }
   },
   "minimum-stability": "dev",

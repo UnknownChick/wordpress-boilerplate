@@ -2,16 +2,13 @@ import { defineConfig } from 'vite';
 import autoprefixer from 'autoprefixer';
 import { browserslistToTargets } from 'lightningcss';
 import browserslist from 'browserslist';
-import purgecss from '@fullhuman/postcss-purgecss';
-import dotenv from 'dotenv';
+import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import path from 'path';
-
-dotenv.config({ path: '../../../../.env.local' });
 
 const phpRefreshPlugin = {
     name: 'php',
     handleHotUpdate({ file, server }) {
-        if (file.endsWith('.php')) {
+        if (file.endsWith('.php') || file.endsWith('.twig')) {
             server.hot.send({
                 type: 'full-reload'
             });
@@ -19,8 +16,8 @@ const phpRefreshPlugin = {
     },
 }
 
-export default defineConfig({
-    base: mode === 'production' ? `/wp-content/themes/lrgp/dist/` : '/',
+export default defineConfig(({ mode }) => ({
+    base: mode === 'production' ? `/app/themes/default/dist/` : '/',
     publicDir: '',
     plugins: [phpRefreshPlugin],
     resolve: {
@@ -36,24 +33,43 @@ export default defineConfig({
         postcss: {
             plugins: [
                 autoprefixer({}),
-                purgecss({
-                    content: [
-                        './**/*.php',
-                    ],
-                    safelist: {
-                        standard: [
-
-                        ]
-                    },
-                })
+                // purgeCSSPlugin({
+                //     content: [
+                //         './**/*.php',
+                //         './**/*.twig',
+                //     ],
+                //     safelist: {
+                //         standard: [
+                //             ':is',
+                //             ':has',
+                //             ':where',
+                //             /^btn/,
+                //             /^list/,
+                //             'active',
+                //             'hidden'
+                //         ]
+                //     },
+                // })
             ],
         },
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler'
+            }
+        }
     },
     server: {
         port: 1337,
         host: '0.0.0.0',
         watch: {
             disableGlobbing: false,
+            usePolling: true
+        },
+        allowedHosts: true,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With, Accept, Origin, Referer, User-Agent',
         }
     },
     build: {
@@ -73,4 +89,4 @@ export default defineConfig({
             },
         },
     },
-});
+}));
