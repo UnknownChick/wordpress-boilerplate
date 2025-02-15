@@ -1,7 +1,11 @@
-<?php defined('ABSPATH') || die();
+<?php
+
+namespace App;
+
+defined('ABSPATH') || die();
 
 use Carbon_Fields\Carbon_Fields;
-use Theme\Helpers\SmtpHelper;
+use App\Helpers\SmtpHelper;
 
 add_action('after_setup_theme', function () {
     Carbon_Fields::boot();
