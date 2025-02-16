@@ -1,11 +1,7 @@
-<?php get_header(); ?>
-<main>
-    <h1>Hello world !</h1>
-    
-    <img src="<?= get_stylesheet_directory_uri() ?>/assets/imgs/test.jpg" alt="">
+<?php
 
-    <?= do_shortcode('[site_map type="pages"]'); ?>
+use Timber\Timber;
 
-    <?php get_template_part('partials/components/list', 'blog'); ?>
-</main>
-<?php get_footer(); ?>
+$context = Timber::context();
+
+Timber::render('pages/home.twig', $context);
