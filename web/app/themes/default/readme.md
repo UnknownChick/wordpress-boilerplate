@@ -4,5 +4,4 @@
 - Vite.js
 - PostCSS
 - Autoprefixer
-- Prettier
-- ESLint
+- Timber

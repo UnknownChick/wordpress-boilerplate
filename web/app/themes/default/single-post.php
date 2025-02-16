@@ -1,5 +1,7 @@
-<?php get_header(); ?>
-	<main>
+<?php
 
-	</main>
-<?php get_footer(); ?>
+use Timber\Timber;
+
+$context = Timber::context();
+
+Timber::render('base/post.twig', $context);
