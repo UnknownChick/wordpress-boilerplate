@@ -5,7 +5,7 @@ import browserslist from 'browserslist';
 import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import path from 'path';
 
-const phpRefreshPlugin = {
+const refreshPlugin = {
     name: 'php',
     handleHotUpdate({ file, server }) {
         if (file.endsWith('.php') || file.endsWith('.twig')) {
@@ -19,7 +19,7 @@ const phpRefreshPlugin = {
 export default defineConfig(({ mode }) => ({
     base: mode === 'production' ? `/app/themes/default/dist/` : '/',
     publicDir: '',
-    plugins: [phpRefreshPlugin],
+    plugins: [refreshPlugin],
     resolve: {
         alias: {
             '~': path.resolve(__dirname, 'node_modules'),
