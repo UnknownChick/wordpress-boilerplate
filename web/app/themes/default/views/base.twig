@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html {{ site.language_attributes }}>
+    <head>
+        <meta charset="{{ site.charset }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        {{ function('wp_head') }}
+    </head>
+
+    <body class="{{ body_class }}">
+         {{ wp_body_open }}
+
+         {{ function('get_header') }}
+
+        <main {{ main_class ? 'class="' ~ main_class ~ '"' }}>
+            {% block content %}{% endblock %}
+        </main>
+
+        {{ function('get_footer') }}
+    </body>
+    {{ function('wp_footer') }}
+</html>
