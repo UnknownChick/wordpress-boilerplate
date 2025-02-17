@@ -10,7 +10,6 @@ add_action('wp_dashboard_setup', function (): void {
     remove_meta_box('dashboard_secondary', 'dashboard', 'side');
     remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
     remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side');
-
     remove_meta_box('dashboard_php_nag', 'dashboard', 'normal');
     remove_meta_box('dashboard_browser_nag', 'dashboard', 'normal');
     remove_meta_box('health_check_status', 'dashboard', 'normal');
@@ -34,12 +33,10 @@ add_action('wp_dashboard_setup', function (): void {
 add_action('admin_init', function (): void {
     remove_meta_box('postcustom', 'post', 'normal');
     remove_meta_box('slugdiv', 'post', 'normal');
-
     remove_meta_box('postcustom', 'page', 'normal');
     remove_meta_box('slugdiv', 'page', 'normal');
 
     remove_post_type_support('post', 'trackbacks');
-
     remove_post_type_support('page', 'trackbacks');
     remove_post_type_support('page', 'author');
 }, 20);
