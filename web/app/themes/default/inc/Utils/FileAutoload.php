@@ -2,8 +2,6 @@
 
 namespace App\Utils;
 
-use Exception;
-
 /**
  * Class FileAutoload
  * @package App\Utils
@@ -50,7 +48,6 @@ class FileAutoload
 
     /**
      * @return void
-     * @throws Exception
      */
     public function load(): void
     {
