@@ -31,3 +31,6 @@ add_theme_support('title-tag');
 // Disable the block editor
 add_filter('use_block_editor_for_post', '__return_false', 10);
 add_filter('use_block_editor_for_post_type', '__return_false', 10);
+
+// Show admin page create with carbon fields for all users
+add_filter('carbon_fields_theme_options_container_admin_only_access', '__return_false');
