@@ -7,10 +7,10 @@ use WP_Post_Type;
 defined('ABSPATH') || die();
 
 /**
- * Class SiteMapShortcode
+ * Class SiteMap
  * @package App\Shortcodes
  */
-class SiteMapShortcode
+class SiteMap
 {
     public function __construct()
     {
