@@ -41,7 +41,8 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.2",
     "mnsami/composer-custom-directory-installer": "^2.0",
-    "htmlburger/carbon-fields": "^3.6"
+    "htmlburger/carbon-fields": "^3.6",
+    "timber/timber": "^2.3"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
