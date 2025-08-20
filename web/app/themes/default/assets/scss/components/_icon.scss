@@ -1,0 +1,27 @@
+@use 'sass:map';
+
+$_cn: icon;
+
+$icon: (
+  xxs: 1rem,
+  xs: 2rem,
+  sm: 3rem,
+  md: 4rem,
+  lg: 5rem,
+  xl: 6rem,
+  xxl: 7rem,
+  fluid: 100%
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+	
+		@each $size, $value in $icon {
+			&--#{$size} {
+				height: $value;
+				width: $value;
+			}
+		}
+	}
+}

@@ -1,0 +1,315 @@
+@use 'sass:color';
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$form: (
+  background-color: map.get(c.$semantic, 'white'),
+  border: 1px solid c.$secondary-500,
+  border-radius: map.get(var.$global, border-radius),
+  default-gap: 1rem,
+  padding: 0.375rem 0.75rem,
+  transition-duration: 150ms,
+) !default;
+
+@mixin input-core-styles {
+  background-color: map.get($form, background-color);
+  border: map.get($form, border);
+  border-radius: map.get($form, border-radius);
+  padding: map.get($form, padding);
+}
+
+@mixin input-font-styles {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: c.$black;
+
+  // &:not(:is([type="color"])) {
+  //   padding: map.get($form, padding);
+  // }
+}
+
+@mixin input-focus-styles {
+  &:is(:focus, :focus-within, :active) {
+    border: 1px solid map.get(c.$palette, primary) !important;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem c.$primary-100;
+    z-index: 5;
+  }
+}
+
+@mixin input-transition {
+  transition:
+    border-color map.get($form, transition-duration) ease-in-out,
+    box-shadow map.get($form, transition-duration) ease-in-out;
+}
+
+@layer components {
+  // form {
+  //   & *:is(.row, .input-container, .check-container):not(:last-child) {
+  //     margin-bottom: map.get($form, default-gap);
+  //   }
+  // }
+
+  // input, textarea, select {
+  input:not(:is(
+    [type="hidden"],
+    .select2-search__field
+  )),
+  textarea:not(.select2-search__field),
+  select:not(.select2-hidden-accessible),
+  .select2-selection,
+  .select2-dropdown {
+    @include input-transition;
+    @include input-focus-styles;
+  }
+
+  // input:not(:is([type="button"], [type="checkbox"], [type="image"], [type="radio"], [type="range"], [type="reset"] ,[type="submit"])), textarea, select {
+  input:not(:is(
+    [type="button"],
+    [type="checkbox"],
+    [type="hidden"],
+    [type="image"],
+    [type="radio"],
+    [type="range"],
+    [type="reset"],
+    [type="submit"],
+    .select2-search__field
+  )),
+  textarea:not(.select2-search__field),
+  select:not(.select2-hidden-accessible) {
+    position: relative;
+    appearance: none;
+    display: block;
+    width: 100%;
+    @include input-core-styles;
+    @include input-font-styles;
+
+    &::placeholder {
+      color: c.$grayscale-600;
+    }
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    position: relative;
+    display: block;
+    background-color: map.get(c.$semantic, 'white');
+    width: 1rem;
+    height: 1rem;
+    border-radius: calc(map.get($form, border-radius) / 2);
+    border: map.get($form, border);
+    cursor: pointer;
+
+    &:checked {
+      background-color: map.get(c.$palette, primary);
+      border: 1px solid map.get(c.$palette, primary);
+      @include input-transition;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.15rem;
+        left: 0.3rem;
+        display: block;
+        width: 0.3rem;
+        height:  0.5rem;
+        border-bottom: 2px solid map.get(c.$semantic, 'white');
+        border-right: 2px solid map.get(c.$semantic, 'white');
+        transform: rotate(45deg);
+        z-index: 10;
+      }
+    }
+  }
+
+  input[type="radio"] {
+    appearance: none;
+    position: relative;
+    display: block;
+    background-color: map.get(c.$semantic, 'white');
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: map.get($form, border);
+    cursor: pointer;
+
+    &:checked {
+      background-color: map.get(c.$palette, primary);
+      border: 1px solid map.get(c.$palette, primary);
+
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: map.get(c.$semantic, 'white');
+        border-radius: 50%;
+        z-index: 10;
+        @include mix.absolute-center;
+      }
+    }
+  }
+
+  input[type="range"] {
+    appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    background: #e9ecef;
+    border-radius: map.get($form, border-radius);
+    cursor: pointer;
+    padding: 0;
+
+    // Chrome/Safari
+    &::-webkit-slider-thumb {
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      background: map.get(c.$palette, primary);
+      border-radius: 50%;
+      border: none;
+
+      &:hover {
+        background-color: color.adjust(map.get(c.$palette, primary), $lightness: -5%);
+      }
+
+      &:active {
+        background-color: color.adjust(map.get(c.$palette, primary), $lightness: -10%);
+      }
+    }
+
+    // Firefox
+    &::-moz-range-thumb {
+      width: 1.25rem;
+      height: 1.25rem;
+      background: map.get(c.$palette, primary);
+      border-radius: 50%;
+      border: none;
+
+      &:hover {
+        background-color: color.adjust(map.get(c.$palette, primary), $lightness: -5%);
+      }
+
+      &:active {
+        background-color: color.adjust(map.get(c.$palette, primary), $lightness: -10%);
+      }
+    }
+
+    // Firefox
+    &::-moz-range-track {
+      width: 100%;
+      height: 0.5rem;
+      background: #e9ecef;
+      border-radius: map.get($form, border-radius);
+      border: none;
+    }
+
+    // IE/EDGE
+    &::-ms-track {
+      width: 100%;
+      height: 0.5rem;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+      cursor: pointer;
+    }
+
+    &::-ms-fill-lower {
+      background: map.get(c.$palette, primary);
+      border-radius: map.get($form, border-radius);
+    }
+
+    &::-ms-fill-upper {
+      background: #e9ecef;
+      border-radius: map.get($form, border-radius);
+    }
+
+    &::-ms-thumb {
+      width: 1.25rem;
+      height: 1.25rem;
+      background: map.get(c.$palette, primary);
+      border-radius: 50%;
+      border: none;
+    }
+  }
+
+  textarea:not(.select2-search__field) {
+    resize: vertical;
+    min-width: 100px;
+  }
+
+  label {
+    display: block;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .form-hint {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: c.$grayscale-600;
+    cursor: help;
+  }
+
+  .input-container {
+    position: relative;
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .check-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .input-group {
+    display: flex;
+
+    & > * {
+      &:first-child {
+        border-top-left-radius: map.get($form, border-radius);
+        border-bottom-left-radius: map.get($form, border-radius);
+        border-left: map.get($form, border);
+      }
+
+      &:last-child {
+        border-top-right-radius: map.get($form, border-radius);
+        border-bottom-right-radius: map.get($form, border-radius);
+        border-right: map.get($form, border);
+      }
+    }
+
+    &__block {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      background-color: c.$grayscale-100;
+      color: c.$grayscale-600;
+      border-top: map.get($form, border);
+      border-bottom: map.get($form, border);
+      padding: map.get($form, padding);
+      @include input-font-styles;
+    }
+
+    input {
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      &:not(:is(:first-child, :last-child)) {
+        border-radius: 0;
+      }
+    }
+  }
+}

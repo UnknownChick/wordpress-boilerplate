@@ -1,0 +1,206 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_cn: comparison;
+
+$comparison: (
+  cursor-background: transparent,
+  cursor-border: 0.25rem solid map.get(c.$semantic, 'white'),
+  cursor-border-radius: 50%,
+  cursor-line: true,
+  cursor-line-width: 0.25rem,
+  cursor-size: 3rem,
+  label-bg-color: c.$primary-500,
+  label-color: map.get(c.$semantic, 'white'),
+  label-padding: 1rem 4rem,
+) !default;
+
+@layer components {
+  .#{$_cn} {
+    position: relative;
+    height: 800px;
+    overflow: hidden;
+
+    &__image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+
+      &--before {
+        z-index: 2;
+
+        .#{$_cn}__image__label {
+          left: 0;
+
+          @include mq.max-device(sm) {
+            top: 0;
+          }
+        }
+      }
+
+      &--after {
+        z-index: 1;
+
+        .#{$_cn}__image__label {
+          @include mq.min-device(sm){
+            right: 0;
+          }
+
+          @include mq.max-device(sm) {
+            left: 0;
+            bottom: 0;
+          }
+        }
+      }
+
+      img {
+        user-select: none;
+        pointer-events: none;
+        @include mix.image-cover-center;
+      }
+
+      &__label {
+        position: absolute;
+        color: map.get($comparison, label-color);
+        background-color: map.get($comparison, label-bg-color);
+        line-height: 1;
+        display: block;
+        padding: map.get($comparison, label-padding);
+        font-weight: 700;
+        font-size: clamp(1.25rem, 0.9375rem + 1vw, 1.5rem);
+        z-index: 3;
+
+        @include mq.min-device(sm) {
+          bottom: 0;
+        }
+      }
+    }
+
+    &__cursor {
+      position: absolute;
+      z-index: 10;
+
+      // Desktop: vertical slider
+      @include mq.min-device(sm) {
+        top: 0;
+        left: 50%;
+        height: 100%;
+
+        @if map.get($comparison, cursor-line) {
+          &::before, &::after {
+            content: '';
+            position: absolute;
+            width: map.get($comparison, cursor-line-width);
+            height: calc(50% - (map.get($comparison, cursor-size) / 2));
+            background-color: map.get(c.$semantic, 'white');
+            display: block;
+            user-select: none;
+            margin-left: calc(-1 * map.get($comparison, cursor-line-width) / 2);
+          }
+
+          &::before {
+            top: 0;
+          }
+
+          &::after {
+            bottom: 0;
+          }
+        }
+      }
+
+      // Mobile: horizontal slider
+      @include mq.max-device(sm) {
+        left: 0;
+        top: 50%;
+        width: 100%;
+
+        @if map.get($comparison, cursor-line) {
+          &::before, &::after {
+            content: '';
+            position: absolute;
+            height: map.get($comparison, cursor-line-width);
+            width: calc(50% - (map.get($comparison, cursor-size) / 2));
+            background-color: map.get(c.$semantic, 'white');
+            display: block;
+            user-select: none;
+            margin-top: calc(-1 * map.get($comparison, cursor-line-width) / 2);
+          }
+
+          &::before {
+            left: 0;
+          }
+
+          &::after {
+            right: 0;
+          }
+        }
+      }
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      &__handle {
+        width: map.get($comparison, cursor-size);
+        height: map.get($comparison, cursor-size);
+        background-color: map.get($comparison, cursor-background);
+        border-radius: map.get($comparison, cursor-border-radius);
+        border: map.get($comparison, cursor-border);
+        transition: scale map.get(var.$global, animation-duration) ease-in-out;
+        @include mix.absolute-center;
+
+        // Desktop: vertical slider
+        @include mq.min-device(sm) {
+          margin-left: calc(-1 * map.get($comparison, cursor-size) / 2) !important;
+          @include mix.flex-row-center-center;
+        }
+
+        // Mobile: horizontal slider
+        @include mq.max-device(sm) {
+          margin-top: calc(-1 * map.get($comparison, cursor-size) / 2) !important;
+          @include mix.flex-column-center-center;
+        }
+
+        &:hover {
+          scale: 1.1;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+          color: map.get(c.$semantic, 'white');
+
+          // Desktop: horizontal arrows
+          @include mq.min-device(sm) {
+            &:first-child {
+              margin-right: -2px;
+            }
+
+            &:last-child {
+              margin-left: -2px;
+            }
+          }
+
+          // Mobile: vertical arrows (rotate the arrows)
+          @include mq.max-device(sm) {
+            transform: rotate(90deg);
+
+            &:first-child {
+              margin-bottom: -2px;
+            }
+
+            &:last-child {
+              margin-top: -2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

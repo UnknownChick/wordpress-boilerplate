@@ -1,0 +1,129 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+@use '../utilities/row' as row;
+
+$_pn: slider-hero;
+
+@layer partials {
+  .#{$_pn} {
+    height: 100dvh;
+
+    .swiper-wrapper {
+      @include mix.backdrop(50, map.get(c.$semantic, 'black'));
+
+      .swiper-slide {
+        @include mix.bg-image-center;
+      }
+    }
+
+    &__body {
+      position: absolute;
+      bottom: 2.5rem;
+      z-index: 100;
+      width: 100%;
+    }
+
+    &__content {
+      max-width: map.get(var.$breakpoints, xl);
+      width: row.$wrapper-width;
+      margin-inline: auto;
+      margin-bottom: 3rem;
+      color: map.get(c.$semantic, 'white');
+
+      & > hgroup {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    &__pagination {
+      border-top: 1px solid map.get(c.$semantic, 'white');
+      color: map.get(c.$semantic, 'white');
+      padding-top: 1.25rem;
+
+      &__active {
+        width: 200px;
+        height: 0.25rem;
+        background-color: c.$primary-500;
+        position: absolute;
+        top: -1.4rem;
+        left: 0;
+      }
+
+      &__wrapper {
+        display: flex;
+        gap: 2.5rem;
+        max-width: map.get(var.$breakpoints, xl);
+        margin-inline: auto;
+        position: relative;
+
+        @include mq.min-device(md) {
+          width: row.$wrapper-width;
+        }
+
+        @include mq.max-device(md) {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+
+      &__item {
+        position: relative;
+        cursor: pointer;
+        flex: 1;
+
+        @include mq.max-device(md) {
+          transition: background-color map.get(var.$global, animation-duration) ease-in-out;
+          padding: 1rem 5%;
+        }
+
+        &:has([class$="open"]) {
+          background-color: c.$primary-500;
+        }
+
+        &__title {
+          font-weight: 700;
+          font-size: clamp(1.25rem, 0.3125rem + 3vw, 2rem);
+        }
+
+        &__content {
+          transition: opacity map.get(var.$global, animation-duration) ease-in-out;
+          margin-top: 0.5rem;
+
+
+          & > div {
+            overflow: hidden;
+          }
+
+          @include mq.max-device(md) {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.5s ease-out;
+
+            &--open {
+              grid-template-rows: 1fr;
+            }
+          }
+        }
+
+        &__text {
+          margin-bottom: 0.5rem;
+        }
+
+        &__link {
+          text-transform: uppercase;
+          font-weight: 700;
+          color: map.get(c.$semantic, 'white');
+          letter-spacing: 1.5px;
+          transition: letter-spacing map.get(var.$global, animation-duration) ease-in-out;
+
+          &:hover {
+            letter-spacing: 2px;
+          }
+        }
+      }
+    }
+  }
+}

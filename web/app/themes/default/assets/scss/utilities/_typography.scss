@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+@layer utilities {
+  @each $fs-class, $font-size in v.$fs {
+    .fs-#{$fs-class} {
+      font-size: #{$font-size};
+    }
+  }
+
+  @each $title, $font-size in v.$fs-title {
+    #{$title} {
+      font-size: #{$font-size};
+    }
+  }
+
+  @each $colot-text, $color in c.$semantic {
+    .#{$colot-text}-text {
+      color: map.get(c.$semantic, $colot-text);
+    }
+  }
+
+  @each $font-name, $font-family in v.$font {
+    .#{$font-name}-font {
+      font-family: #{$font-family};
+    }
+  }
+
+  @for $i from 1 through 9 {
+    .fw-#{$i}00 {
+      font-weight: #{$i}00;
+    }
+  }
+
+  .bold-text {
+    font-weight: 700;
+  }
+
+  .italic-text {
+    font-style: italic;
+  }
+
+  .uppercase-text {
+    text-transform: uppercase;
+  }
+
+  .lowercase-text {
+    text-transform: lowercase;
+  }
+
+  .capitalize-text {
+    text-transform: capitalize;
+  }
+}

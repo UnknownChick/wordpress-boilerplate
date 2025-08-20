@@ -1,0 +1,59 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+.philosophy {
+  padding-block: 7rem;
+
+  .row {
+    align-items: center;
+  }
+
+  &__content {
+    width: 50%;
+    padding: 4rem;
+    box-shadow: map.get(var.$global, box-shadow);
+    text-align: center;
+    background-color: map.get(c.$semantic, 'white');
+    position: absolute;
+    right: 0;
+    z-index: 10;
+
+    @include mq.max-device(md) {
+      padding: 2rem;
+    }
+  }
+
+  @include mq.max-device(md) {
+    &__content {
+      width: 100%;
+      position: relative;
+    }
+
+    &__img {
+      img {
+        @include mix.image-cover-center;
+      }
+    }
+  }
+
+  @include mq.between-devices(sm, md) {
+    &__img {
+      height: 400px;
+      flex: 1;
+    }
+  }
+
+  @include mq.max-device(sm) {
+    .row > .row {
+      flex-direction: column;
+    }
+
+    &__img {
+      height: 300px;
+      width: 100%;
+    }
+  }
+}

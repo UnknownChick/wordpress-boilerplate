@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acc8359961f44998ee6cb4cdc37354e9",
+    "content-hash": "1daf6bbece3004d1f5144a589a11010d",
     "packages": [
         {
             "name": "composer/installers",
@@ -539,6 +539,46 @@
                 }
             ],
             "time": "2024-07-20T21:41:07+00:00"
+        },
+        {
+            "name": "roots/allow-svg",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/allow-svg.git",
+                "reference": "036f724c7dd5493f9a63a71d87d90757b5cbb55b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/allow-svg/zipball/036f724c7dd5493f9a63a71d87d90757b5cbb55b",
+                "reference": "036f724c7dd5493f9a63a71d87d90757b5cbb55b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.24",
+                "phpunit/phpunit": "^11.0",
+                "yoast/phpunit-polyfills": "^4.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "WordPress plugin to enable SVG uploads",
+            "support": {
+                "issues": "https://github.com/roots/allow-svg/issues",
+                "source": "https://github.com/roots/allow-svg/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/roots",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-12T23:22:00+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -1400,6 +1440,48 @@
                 }
             ],
             "time": "2025-05-03T07:21:55+00:00"
+        },
+        {
+            "name": "vinkla/headache",
+            "version": "3.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vinkla/headache.git",
+                "reference": "510df5a96f927b555e4acb3a2af95ebb973069d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vinkla/headache/zipball/510df5a96f927b555e4acb3a2af95ebb973069d5",
+                "reference": "510df5a96f927b555e4acb3a2af95ebb973069d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Klaiber",
+                    "homepage": "https://github.com/vinkla"
+                }
+            ],
+            "description": "An easy-to-swallow painkiller plugin for WordPress",
+            "keywords": [
+                "head",
+                "headache",
+                "plugin",
+                "wordplate",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/vinkla/headache/issues",
+                "source": "https://github.com/vinkla/headache/tree/3.5.3"
+            },
+            "time": "2025-07-03T09:30:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

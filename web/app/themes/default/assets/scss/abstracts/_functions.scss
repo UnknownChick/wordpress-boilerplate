@@ -1,0 +1,16 @@
+@use 'sass:color';
+@use 'sass:map';
+
+@function generate-color-map($base-color) {
+  @return (
+    100: color.scale($base-color, $lightness: 80%),
+    200: color.scale($base-color, $lightness: 60%),
+    300: color.scale($base-color, $lightness: 40%),
+    400: color.scale($base-color, $lightness: 20%),
+    500: $base-color,
+    600: color.scale($base-color, $lightness: -20%),
+    700: color.scale($base-color, $lightness: -40%),
+    800: color.scale($base-color, $lightness: -60%),
+    900: color.scale($base-color, $lightness: -80%)
+  );
+}

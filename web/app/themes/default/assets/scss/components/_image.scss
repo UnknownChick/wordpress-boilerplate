@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as v;
+
+$_cn: img;
+
+$img: (
+  border-radius: map.get(v.$global, border-radius),
+) !default;
+
+@layer components {
+  img.#{$_cn} {
+    &--fluid {
+      width: 100%;
+    }
+
+    &--rounded {
+      border-radius: map.get($img, border-radius);
+    }
+
+    &--circle {
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+    }
+  }
+
+  .#{$_cn}--cover {
+    display: block;
+    overflow: hidden;
+
+    img {
+      @include mix.image-cover-center;
+    }
+  }
+}

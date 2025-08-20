@@ -1,0 +1,73 @@
+@use 'sass:map';
+@use '../abstracts/variables' as v;
+
+$percentages: 25, 50, 75;
+$window-percentages: 25, 50, 75, 100;
+
+@layer utilities {
+	@each $name, $width in v.$breakpoints {
+		.w-#{$name} {
+			width: $width;
+		}
+
+		.max-w-#{$name} {
+			max-width: $width;
+		}
+
+		.min-w-#{$name} {
+			min-width: $width;
+		}
+	}
+
+	@each $p in $percentages {
+		.w-#{$p} {
+			width: #{$p}#{"%"};
+		}
+
+		.h-#{$p} {
+			height: #{$p}#{"%"};
+		}
+	}
+	
+	@each $wp in $window-percentages {
+		.vw-#{$wp} {
+			width: #{$wp}vw;
+		}
+
+		.min-vw-#{$wp} {
+			min-width: #{$wp}vw;
+		}
+
+		.max-vw-#{$wp} {
+			max-width: #{$wp}vw;
+		}
+
+		.vh-#{$wp} {
+			height: #{$wp}vh;
+		}
+
+		.min-vh-#{$wp} {
+			min-height: #{$wp}vh;
+		}
+
+		.max-vh-#{$wp} {
+			max-height: #{$wp}vh;
+		}
+	}
+
+	.w-fluid {
+		width: 100%;
+	}
+
+	.h-fluid {
+		height: 100%;
+	}
+
+	.w-auto {
+		width: auto;
+	}
+
+	.h-auto {
+		height: auto;
+	}
+}

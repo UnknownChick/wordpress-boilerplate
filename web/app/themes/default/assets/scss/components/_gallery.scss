@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+
+$_pn: gallery;
+
+$gallery: (
+  columns: 4,
+  gap: 0.5rem,
+  rows: 2
+);
+
+@function gallery-item-height($height) {
+  @return calc($height - (map.get($gallery, gap) / map.get($gallery, rows)));
+}
+
+@function gallery-item-width($columns) {
+  @return calc((100% - (map.get($gallery, gap) * ($columns - 1))) / $columns);
+}
+
+@layer partials {
+  .#{$_pn} {
+    width: 100%;
+    display: flex;
+    overflow-x: hidden;
+    gap: map.get($gallery, gap);
+    cursor: grab;
+    height: 1000px;
+
+    @include mq.max-device(md) {
+      height: 500px;
+    }
+
+    &--masonry {
+      flex-flow: column wrap;
+
+      .#{$_pn}__item {
+        flex-grow: 0;
+        width: gallery-item-width(map.get($gallery, columns));
+        user-select: none;
+        pointer-events: none;
+
+        @include mq.between-devices(sm, md) {
+          width: gallery-item-width(3);
+        }
+
+        @include mq.max-device(sm) {
+          width: gallery-item-width(2);
+        }
+
+        &:nth-child(6n-5) {
+          height: gallery-item-height(25%);
+        }
+
+        &:nth-child(6n-4) {
+          height: gallery-item-height(75%);
+        }
+
+        &:nth-child(6n-3) {
+          height: gallery-item-height(50%);
+        }
+
+        &:nth-child(6n-2) {
+          height: gallery-item-height(50%);
+        }
+
+        &:nth-child(6n-1) {
+          height: gallery-item-height(66.666%);
+        }
+
+        &:nth-child(6n) {
+          height: gallery-item-height(33.333%);
+        }
+
+        img {
+          @include mix.image-cover-center;
+        }
+      }
+    }
+  }
+}

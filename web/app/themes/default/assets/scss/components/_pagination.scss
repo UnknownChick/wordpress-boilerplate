@@ -1,0 +1,90 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as v;
+
+$_cn: pagination;
+
+$pagination: (
+	animation-duration: 0.15s,
+	border-colors-iddle: #dee2e6,
+	border-radius: map.get(v.$global, border-radius),
+	border-size: 1px,
+	color-active: map.get(c.$palette, primary),
+	color-default: map.get(c.$semantic, greyscale),
+	color-hover: map.get(c.$palette, primary),
+	color-iddle: #6c757d,
+	color-iddle-hover: #e9ecef,
+	font-size: 1rem,
+	gap: 0.25rem,
+	padding: 0 0.5rem,
+	size: 2.5rem,
+	size-icon: 1rem
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		font-size: map.get($pagination, font-size);
+
+		&__list {
+			display: flex;
+			list-style: none;
+			gap: map.get($pagination, gap);
+		}
+
+		&__link,
+		&__ellipsis {
+			min-width: map.get($pagination, size);
+			height: map.get($pagination, size);
+			padding: map.get($pagination, padding);
+			text-decoration: none;
+			color: map.get($pagination, color-active);
+			background-color: map.get(c.$semantic, 'white');
+			border: map.get($pagination, border-size) solid map.get($pagination, border-colors-iddle);
+			border-radius: map.get($pagination, border-radius);
+			line-height: 1;
+			transition: background-color map.get($pagination, animation-duration) ease-in-out, color map.get($pagination, animation-duration) ease-in-out, border-color 0.15s ease-in-out;
+			@include mix.flex-column-center;
+
+			&:hover {
+				background-color: map.get($pagination, color-iddle-hover);
+				border-color: map.get($pagination, border-colors-iddle);
+				color: map.get($pagination, color-hover);
+			}
+		}
+
+		&__ellipsis {
+			border: none;
+			background-color: transparent;
+			color: map.get($pagination, color-iddle);
+			padding: map.get($pagination, padding);
+		}
+
+		&__item {
+			&--active {
+				.pagination__link {
+					color: map.get(c.$semantic, 'white');
+					background-color: map.get($pagination, color-active);
+					border-color: map.get($pagination, color-active);
+					pointer-events: none;
+				}
+			}
+
+			&--disabled {
+				.pagination__link {
+					color: map.get($pagination, color-iddle);
+					pointer-events: none;
+					cursor: default;
+					background-color: map.get(c.$semantic, 'white');
+					border-color: map.get($pagination, border-colors-iddle);
+				}
+			}
+		}
+
+		&__icon {
+			width: map.get($pagination, size-icon);
+			height: map.get($pagination, size-icon);
+			stroke-width: 2;
+		}
+	}
+}

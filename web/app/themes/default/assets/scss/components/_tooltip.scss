@@ -1,0 +1,76 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
+
+$_cn: tooltip;
+
+$tooltip: (
+	background-color: map.get(c.$palette, primary),
+	border-radius: 0.25rem,
+	box-shadow: map.get(v.$global, box-shadow),
+	color: map.get(c.$semantic, 'white'),
+	cursor: help,
+	max-width: 200px,
+	padding: 0.5rem,
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		background-color: map.get($tooltip, background-color);
+		position: absolute;
+		padding: map.get($tooltip, padding);
+		border-radius: map.get($tooltip, border-radius);
+		width: max-content;
+		color: map.get($tooltip, color);
+		z-index: 1050;
+		box-shadow: map.get($tooltip, box-shadow);
+		transform: none;
+		max-width: map.get($tooltip, max-width);
+		transition: opacity map.get(v.$global, animation-duration) ease-in-out, visibility map.get(v.$global, animation-duration) ease-in-out;
+		pointer-events: none;
+
+		&::before {
+			content: '';
+			position: absolute;
+			border-width: 0.5rem;
+			border-style: solid;
+		}
+
+		&--top {
+			&::before {
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				border-color: map.get($tooltip, background-color) transparent transparent transparent;
+			}
+		}
+
+		&--bottom {
+			&::before {
+				bottom: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				border-color: transparent transparent map.get($tooltip, background-color) transparent;
+			}
+		}
+
+		&--left {
+			&::before {
+				top: 50%;
+				left: 100%;
+				transform: translateY(-50%);
+				border-color: transparent transparent transparent map.get($tooltip, background-color);
+			}
+		}
+
+		&--right {
+			&::before {
+				top: 50%;
+				right: 100%;
+				transform: translateY(-50%);
+				border-color: transparent map.get($tooltip, background-color) transparent transparent;
+			}
+		}
+	}
+}

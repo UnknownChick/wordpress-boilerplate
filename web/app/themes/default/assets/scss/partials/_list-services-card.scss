@@ -1,0 +1,77 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_pn: list-services-card;
+
+@layer partials {
+  $list-services-card-gap: 6rem;
+
+  .#{$_pn} {
+    column-gap: $list-services-card-gap;
+    row-gap: 2rem;
+    @include mix.grid(3);
+
+    &__item {
+      position: relative;
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      gap: 0;
+
+      @include mq.min-device(md) {
+        &:nth-child(2) {
+          &::before, &::after {
+            content: '';
+            display: block;
+            height: 40%;
+            width: 1px;
+            background-color: map.get(c.$semantic, 'black');
+            position: absolute;
+            bottom: 5%;
+          }
+
+          &::before {
+            left: calc(-1 * $list-services-card-gap / 2);
+          }
+
+          &::after {
+            right: calc(-1 * $list-services-card-gap / 2);
+          }
+        }
+      }
+
+      &__image {
+        height: 250px;
+
+        img {
+          @include mix.image-cover-center;
+        }
+      }
+
+      &__title {
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-block: 2rem;
+      }
+
+      &__text {
+        margin-bottom: 1rem;
+        font-weight: 300;
+      }
+
+      &__link {
+        color: map.get(c.$semantic, 'black');
+        letter-spacing: 1.5px;
+        transition: letter-spacing map.get(var.$global, animation-duration) ease-in-out;
+        font-weight: 600;
+
+        &:hover {
+          letter-spacing: 2px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use '../abstracts/colors'as c;
+
+$_cn: tabs;
+
+$tabs: (
+	button-active-border-color: map.get(c.$palette, primary),
+	button-active-color: map.get(c.$palette, primary),
+	button-border-bottom-width: 2px,
+	button-border-color: transparent,
+	button-hover-color: map.get(c.$semantic, 'secondary'),
+	button-padding: 0.75rem 1rem,
+	nav-border-bottom: 1px solid map.get(c.$semantic, 'grey', 'light'),
+	padding: 1rem
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		&__nav {
+			display: flex;
+			border-bottom: map.get($tabs, nav-border-bottom);
+
+			&__button {
+				padding: map.get($tabs, button-padding);
+				cursor: pointer;
+				border: none;
+				background-color: transparent;
+				border-bottom: map.get($tabs, button-border-bottom-width) solid map.get($tabs, button-border-color);
+				margin-bottom: -1px;
+				font-weight: 600;
+	
+				&:hover {
+					color: map.get($tabs, button-hover-color);
+				}
+	
+				&[aria-selected="true"] {
+					border-bottom-color: map.get($tabs, button-active-border-color);
+					color: map.get($tabs, button-active-color);
+					font-weight: 600;
+				}
+			}
+		}
+
+		&__panel {
+			padding: map.get($tabs, padding);
+		}
+	}
+}

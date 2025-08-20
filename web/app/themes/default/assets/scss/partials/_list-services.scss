@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+@use '../utilities/prose';
+
+$_pn: list-services;
+
+@layer partials {
+  .#{$_pn} {
+
+    &__item {
+      display: flex;
+
+      & > * {
+        width: 50%;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 5rem;
+      }
+
+      &:nth-child(odd) {
+        .#{$_pn}__content {
+          padding: 3rem 4rem 3rem 0rem;
+        }
+
+        .#{$_pn}__image {
+          &::before {
+            top: -1.25rem;
+            right: -1.25rem;
+          }
+        }
+      }
+
+      &:nth-child(even) {
+        flex-direction: row-reverse;
+
+        .#{$_pn}__content {
+          padding: 3rem 0rem 3rem 4rem;
+        }
+
+        .#{$_pn}__image {
+          &::before {
+            bottom: -1.25rem;
+            left: -1.25rem;
+          }
+        }
+      }
+    }
+
+    &__title {
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    &__text {
+      @extend .prose;
+    }
+
+    &__image {
+      position: relative;
+      height: auto;
+      z-index: 10;
+
+      &::before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 50%;
+        height: 75%;
+        background-color: c.$primary-500;
+        z-index: 5;
+      }
+
+      img {
+        position: relative;
+        z-index: 10;
+        @include mix.image-cover-center;
+      }
+    }
+  }
+}

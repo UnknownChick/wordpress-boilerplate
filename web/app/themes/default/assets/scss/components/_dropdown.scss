@@ -1,0 +1,122 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: dropdown;
+
+$dropdown: (
+  border: 1px solid c.$grayscale-100,
+  border-radius: map.get(v.$global, border-radius),
+  box-shadow: map.get(v.$global, box-shadow),
+  margin: 0.5rem,
+  transition-duration: 150ms,
+  width: 300px,
+) !default;
+
+@layer components {
+  .#{$_cn} {
+    position:relative;
+
+    &--open {
+      .#{$_cn}__content {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+        transition: opacity map.get($dropdown, transition-duration) ease-out, transform map.get($dropdown, transition-duration) ease-out, visibility 0s linear 0s;
+        user-select: auto;
+      }
+
+      .#{$_cn}__toggle__icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &__toggle {
+      cursor: pointer;
+
+      &__icon {
+        transition: transform map.get($dropdown, transition-duration) ease-in-out;
+      }
+    }
+
+    &__content {
+      position: absolute;
+      border: map.get($dropdown, border);
+      border-radius: map.get($dropdown, border-radius);
+      overflow: hidden;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.95);
+      transform-origin: top center;
+      transition: opacity map.get($dropdown, transition-duration) ease-out, transform map.get($dropdown, transition-duration) ease-out, visibility 0s linear map.get($dropdown, transition-duration);
+      max-width: map.get($dropdown, width);
+      width: max-content;
+      background-color: white;
+      box-shadow: map.get($dropdown, box-shadow);
+      user-select: none;
+
+      & > *:not(.#{$_cn}__divider) {
+        display: block;
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        color: map.get(c.$semantic, text);
+
+        &:is(a) {
+          transition: background-color map.get(v.$global, animation-duration) ease-in-out;
+
+          &:hover {
+            background-color: c.$grayscale-200;
+          }
+        }
+      }
+    }
+
+    &__divider {
+      height: 2px;
+      width: 100%;
+      margin-block: 0.25rem;
+      background-color: c.$grayscale-100;
+    }
+
+    // Position top-left
+    &--tl {
+      .#{$_cn}__content {
+        bottom: 100%;
+        left: 0;
+        margin-bottom: map.get($dropdown, margin);
+        transform-origin: bottom left;
+      }
+    }
+
+    // Position top-right
+    &--tr {
+      .#{$_cn}__content {
+        bottom: 100%;
+        right: 0;
+        margin-bottom: map.get($dropdown, margin);
+        transform-origin: bottom right;
+      }
+    }
+
+    // Position Bottom-Left
+    &--bl {
+      .#{$_cn}__content {
+        top: 100%;
+        left: 0;
+        margin-top: map.get($dropdown, margin);
+        transform-origin: top left;
+      }
+    }
+
+    // Position Bottom-Right
+    &--br {
+      .#{$_cn}__content {
+        top: 100%;
+        right: 0;
+        margin-top: map.get($dropdown, margin);
+        transform-origin: top right;
+      }
+    }
+  }
+}

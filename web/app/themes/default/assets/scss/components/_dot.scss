@@ -1,0 +1,101 @@
+@use 'sass:map';
+@use '../abstracts/colors'as c;
+@use '../abstracts/variables'as v;
+
+$_cn: dot;
+
+$dot: (
+	config: (
+		bg-color: map.get(c.$palette, primary),
+		border-radius: 100%,
+		color: map.get(c.$semantic, 'white'),
+	),
+	sizes: (
+		xs: (
+			width: 0.5rem,
+			height: 0.5rem,
+		),
+		sm: (
+			width: 0.75rem,
+			height: 0.75rem,
+		),
+		md: (
+			width: 1rem,
+			height: 1rem,
+		),
+		lg: (
+			width: 1.25rem,
+			height: 1.25rem,
+		),
+		xl: (
+			width: 1.5rem,
+			height: 1.5rem,
+		),
+		xxl: (
+			width: 2rem,
+			height: 2rem,
+		)
+	)
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+		width: map.get($dot, sizes, sm, width);
+		height: map.get($dot, sizes, sm, height);
+		border-radius: map.get($dot, config, border-radius);
+		background-color: map.get($dot, config, bg-color);
+		line-height: 1;
+		position: absolute;
+		z-index: 10;
+
+		&--tl {
+			top: 0;
+			left: 0;
+		}
+
+		&--tr {
+			top: 0;
+			right: 0;
+		}
+
+		&--bl {
+			bottom: 0;
+			left: 0;
+		}
+
+		&--br {
+			bottom: 0;
+			right: 0;
+		}
+
+		@each $size, $size-values in map.get($dot, sizes) {
+			&--#{$size} {
+				width: map.get($size-values, width);
+				height: map.get($size-values, height);
+			}
+		}
+
+		@each $color-name, $color-values in c.$semantic {
+			&--#{$color-name} {
+				background-color: $color-values;
+			}
+		}
+
+		@each $color-name, $color-values in c.$palette {
+			&--#{$color-name} {
+				background-color: $color-values;
+			}
+		}
+
+		@each $color-name, $color-values in c.$accents {
+			&--soft-#{$color-name} {
+				background-color: map.get($color-values, soft);
+			}
+
+			&--high-#{$color-name} {
+				background-color: map.get($color-values, high);
+			}
+		}
+	}
+}

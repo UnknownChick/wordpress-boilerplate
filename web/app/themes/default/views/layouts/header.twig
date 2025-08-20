@@ -1,3 +1,49 @@
-<header>
-    <p>header</p>
+{% set menuLinks = [
+{
+	label: 'Accueil',
+	route: 'home'
+},
+{
+	label: 'La menuiserie',
+	route: 'site_about'
+},
+{
+	label: 'Services',
+	route: 'site_services'
+},
+{
+	label: 'Réalisations',
+	route: 'site_achievements'
+},
+{
+	label: 'Contact',
+	route: 'site_contact'
+}
+] %}
+
+<header class="header">
+	<div class="header__container">
+        <p>LOGO</p>
+
+		<nav class="header__menu">
+			<menu class="header__menu__wrapper">
+				{% for link in menuLinks %}
+				<li>
+					<a href="#" class="header__menu__links">{{ link.label }}</a>
+				</li>
+				{% endfor %}
+				<div class="header__menu__active"></div>
+			</menu>
+
+			<nav class="header__socials">
+				
+			</nav>
+		</nav>
+
+		<div class="header__toggle" aria-label="Ouvrir le menu" tabindex="0">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
 </header>

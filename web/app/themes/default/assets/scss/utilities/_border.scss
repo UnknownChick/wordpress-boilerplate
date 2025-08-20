@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+
+$border: (
+  range: 8,
+);
+
+@layer utilities {
+  @for $i from 1 through map.get($border, range) {
+    @each $color-name, $color-value in c.$palette {
+      .border-#{$color-name}-#{$i} {
+        border: #{$i}px solid $color-value;
+      }
+
+      .border-top-#{$color-name}-#{$i} {
+        border-top: #{$i}px solid $color-value;
+      }
+
+      .border-right-#{$color-name}-#{$i} {
+        border-right: #{$i}px solid $color-value;
+      }
+
+      .border-bottom-#{$color-name}-#{$i} {
+        border-bottom: #{$i}px solid $color-value;
+      }
+
+      .border-left-#{$color-name}-#{$i} {
+        border-left: #{$i}px solid $color-value;
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
+@charset "utf-8";
 @use 'abstracts';
 @use 'base';
 @use 'components';
 @use 'layouts';
-@use 'pages';
+@use 'partials';
+@use 'templates';
 @use 'themes';
 @use 'utilities';
-@use 'vendors';
+//@use 'vendor';
+
+@layer base, layouts, partials, components, macros, utilities;

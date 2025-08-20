@@ -41,7 +41,9 @@
     "roots/wp-config": "1.0.0",
     "mnsami/composer-custom-directory-installer": "^2.0",
     "htmlburger/carbon-fields": "^3.6",
-    "timber/timber": "^2.3"
+    "timber/timber": "^2.3",
+    "vinkla/headache": "^3.5",
+    "roots/allow-svg": "^1.0"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",

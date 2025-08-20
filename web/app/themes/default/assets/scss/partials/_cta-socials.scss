@@ -1,0 +1,46 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_pn: cta-socials;
+
+@layer partials {
+  .#{$_pn} {
+    position: relative;
+    padding-block: 10rem;
+    text-align: center;
+    color: map.get(c.$semantic, 'white');
+    @include mix.bg-image('../imgs/cta-socials.jpg');
+    @include mix.backdrop(
+      1,
+      map.get(c.$semantic, 'black'),
+      0.5
+    );
+
+    @include mq.max-device(lg) {
+      padding-block: 5rem;
+    }
+
+    &__title {
+      font-size: map.get(var.$fs, xxl);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .menu-socials {
+      menu {
+        justify-content: center;
+
+        li {
+          a {
+            svg {
+              width: 2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

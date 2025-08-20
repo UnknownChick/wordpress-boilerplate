@@ -1,260 +1,31 @@
-@use '../abstracts/colors' as c;
-@use '../abstracts/media-queries' as mq;
-@use '../abstracts/mixins' as m;
+@use 'sass:map';
+@use '../abstracts/mixins' as mix;
 @use '../abstracts/variables' as v;
 
-@for $i from 0 through 10 {
-	/* Margin */
-	.m-#{$i} {
-		margin: #{$i}rem;
-	}
+@layer base {
+  body {
+    font-family: sans-serif;
+    @include mix.flex-column;
 
-	.mt-#{$i} {
-		margin-top: #{$i}rem;
-	}
+    main {
+      flex: 1;
+    }
+  }
 
-	.mr-#{$i} {
-		margin-right: #{$i}rem;
-	}
+  h1 {
+    line-height: map.get(v.$line-height, title);
+  }
 
-	.mb-#{$i} {
-		margin-bottom: #{$i}rem;
-	}
+  h1, h2, h3 ,h4 ,h5, h6 {
+    font-family: map.get(v.$font, primary);
+  }
 
-	.ml-#{$i} {
-		margin-left: #{$i}rem;
-	}
+  p, ul, a, input, button, label, table, select, ::placeholder {
+    font-family: map.get(v.$font, primary);
+    font-weight: 400;
+  }
 
-	.mx-#{$i} {
-		margin-left: #{$i}rem;
-		margin-right: #{$i}rem;
-	}
-
-	.my-#{$i} {
-		margin-top: #{$i}rem;
-		margin-bottom: #{$i}rem;
-	}
-
-
-	/* Padding */
-	.p-#{$i} {
-		padding: #{$i}rem;
-	}
-
-	.pt-#{$i} {
-		padding-top: #{$i}rem;
-	}
-
-	.pr-#{$i} {
-		padding-right: #{$i}rem;
-	}
-
-	.pb-#{$i} {
-		padding-bottom: #{$i}rem;
-	}
-
-	.pl-#{$i} {
-		padding-left: #{$i}rem;
-	}
-
-	.px-#{$i} {
-		padding-left: #{$i}rem;
-		padding-right: #{$i}rem;
-	}
-
-	.py-#{$i} {
-		padding-top: #{$i}rem;
-		padding-bottom: #{$i}rem;
-	}
-
-	@include mq.min-device(desktop) {
-		.pl-desktop-#{$i} {
-			padding-left: #{$i}rem;
-		}
-
-		.pr-desktop-#{$i} {
-			padding-right: #{$i}rem;
-		}
-	}
-
-
-	/* Width */
-	.mis-#{$i}00 {
-		max-inline-size: #{$i}00px;
-	}
-
-	/* Font Weight */
-	.fw-#{$i}00 {
-		font-weight: #{$i}00;
-	}
-}
-
-.mx-auto {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.my-auto {
-	margin-top: auto;
-	margin-bottom: auto;
-}
-
-$directions: (
-	top: 't',
-	right: 'r',
-	bottom: 'b',
-	left: 'l',
-);
-
-@each $direction, $letter in $directions {
-	.m#{$letter}-auto {
-		margin-#{$direction}: auto;
-	}
-
-	.p#{$letter}-auto {
-		padding-#{$direction}: auto;
-	}
-}
-
-.w-full {
-	width: 100%;
-}
-
-.h-full {
-	height: 100%;
-}
-
-$fs: (
-	fs-1: clamp(1rem, 0.6875rem + 1vw, 1.25rem),
-	fs-2: clamp(1.25rem, 0.9375rem + 1vw, 1.5rem),
-	fs-3: clamp(1.5rem, 0.875rem + 2vw, 2rem),
-	fs-4: clamp(2rem, 1.375rem + 2vw, 2.5rem),
-	fs-5: clamp(2rem, 0.75rem + 4vw, 3rem),
-	fs-6: clamp(2rem, -0.5rem + 8vw, 4rem),
-);
-
-@each $fs-class, $font-size in $fs {
-	.#{$fs-class} {
-		font-size: #{$font-size};
-	}
-}
-
-@include mq.max-device(desktop) {
-	@for $i from 1 through 5 {
-		.mobile-order-#{$i} {
-			order: $i;
-		}
-	}
-
-	.d-none-mobile {
-		display: none;
-	}
-}
-
-
-/* Typography */
-.bold-text {
-	font-weight: 700;
-}
-
-.italic-text {
-	font-style: italic;
-}
-
-.uppercase-text {
-	text-transform: uppercase;
-}
-
-.ff-primary {
-	font-family: v.$primary-font;
-}
-
-.ff-secondary {
-	font-family: v.$secondary-font;
-}
-
-.center-text {
-	text-align: center;
-}
-
-.white-color {
-	color: c.$white-color;
-}
-
-.black-color {
-	color: c.$black-color;
-}
-
-.primary-color {
-	color: c.$primary-color;
-}
-
-.secondary-color {
-	color: c.$secondary-color;
-}
-
-.accent-color {
-	color: c.$accent-color;
-}
-
-.list-inside {
-	list-style-position: inside;
-}
-
-/* Background */
-.bg-primary {
-	background-color: c.$primary-color;
-}
-
-.bg-secondary {
-	background-color: c.$secondary-color;
-}
-
-.bg-accent {
-	background-color: c.$accent-color;
-}
-
-.bg-off {
-	background-color: c.$off-color;
-}
-
-/* Flexbox */
-.d-flex {
-	display: flex;
-}
-
-.df-vertical-align-center {
-	@include m.df-vertical-align-center;
-}
-
-.df-vertical-align-end {
-	@include m.df-vertical-align-end;
-}
-
-.df-vertical-align-sb {
-	@include m.df-vertical-align-sb;
-}
-
-.df-sb {
-	justify-content: space-between;
-}
-
-.df-column {
-	display: flex;
-	flex-direction: column;
-}
-
-.hidden {
-	display: none;
-}
-
-
-/* Animation */
-.scale-up {
-	display: block;
-	@include m.transition(250ms);
-
-	&:hover {
-		transform: scale(1.1);
-	}
+  section {
+    position: relative;
+  }
 }

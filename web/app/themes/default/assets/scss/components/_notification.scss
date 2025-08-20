@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: notification;
+
+$notification: (
+  config: (
+		border-radius: map.get(v.$global, border-radius),
+		border-size: 0.25rem,
+		padding: 0.75rem 1rem,	
+  ),
+	sizes: (
+    xs: (
+      padding: 0.5rem 0.75rem,
+      font-size: 0.75rem
+    ),
+    sm: (
+      padding: 0.75rem 1rem,
+      font-size: 0.875rem
+    ),
+    md: (
+      padding: 0.825rem 1.25rem,
+      font-size: 1rem
+    ),
+    lg: (
+      padding: 1.25rem 1.5rem,
+      font-size: 1.25rem
+    ),
+    xl: (
+      padding: 1.5rem 1.75rem,
+      font-size: 1.5rem
+    )
+  )
+) !default;
+
+@mixin notification-variant($background, $border, $color) {
+	background-color: $background;
+	border-left: map.get($notification, config, border-size) solid $border;
+	color: $color;
+	font-size: map.get($notification, sizes, md, font-size);
+}
+
+@layer components {
+  .#{$_cn} {
+    display: block;
+    padding: map.get($notification, config, padding);
+    border-radius: map.get($notification, config, border-radius);
+
+    @each $size, $values in map.get($notification, 'sizes') {
+      &--#{$size} {
+        padding: map.get($values, 'padding');
+        font-size: map.get($values, 'font-size');
+      }
+    }
+
+    @each $color-name, $color-values in c.$accents {
+      &--soft-#{$color-name} {
+        @include notification-variant(
+          map.get($color-values, 'soft'),
+          map.get($color-values, 'high'),
+          map.get($color-values, 'high')
+        );
+      }
+
+      &--high-#{$color-name} {
+        @include notification-variant(
+          map.get($color-values, 'high'),
+          map.get($color-values, 'soft'),
+          map.get($color-values, 'soft')
+        );
+      }
+    }
+  }
+}

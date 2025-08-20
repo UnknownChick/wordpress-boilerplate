@@ -1,8 +1,215 @@
-$white-color: #FFFFFF;
-$black-color: #000000;
+@use 'sass:map';
+@use 'mixins' as mix;
+@use 'functions' as func;
 
-$primary-color: #FF0000;
-$secondary-color: #00FF00;
-$accent-color: #0000FF;
+/* --- Accents colors start --- */
+$accents: (
+  'red': (
+    soft: #FFD9D9,
+    high: #EE6767,
+  ),
+  'orange': (
+    soft: #FFF0D6,
+    high: #FFA200,
+  ),
+  'blue': (
+    soft: #EBF0FF,
+    high: #4E7AFF,
+  ),
+  'green': (
+    soft: #DCFFEB,
+    high: #00CB58,
+  ),
+  'purple': (
+    soft: #E6DCFF,
+    high: #8454FF,
+  ),
+  'grey': (
+    soft: #F0F3F5,
+    high: #809FB8,
+  ),
+  'brown': (
+    soft: #FFF3D0,
+    high: #C56C4A,
+  ),
+  'cyan': (
+    soft: #F2FFFF,
+    high: #51E5E6,
+  ),
+  'black': (
+    soft: #F1F1F1,
+    high: #202020,
+  ),
+) !default;
 
-$off-color: #F5F5F5;
+$accent-red-soft: map.get($accents, soft, 'red') !default;
+$accent-red-high: map.get($accents, high, 'red') !default;
+$accent-orange-soft: map.get($accents, soft, 'orange') !default;
+$accent-orange-high: map.get($accents, high, 'orange') !default;
+$accent-blue-soft: map.get($accents, soft, 'blue') !default;
+$accent-blue-high: map.get($accents, high, 'blue') !default;
+$accent-green-soft: map.get($accents, soft, 'green') !default;
+$accent-green-high: map.get($accents, high, 'green') !default;
+$accent-purple-soft: map.get($accents, soft, 'purple') !default;
+$accent-purple-high: map.get($accents, high, 'purple') !default;
+$accent-grey-soft: map.get($accents, soft, 'grey') !default;
+$accent-grey-high: map.get($accents, high, 'grey') !default;
+$accent-brown-soft: map.get($accents, soft, 'brown') !default;
+$accent-brown-high: map.get($accents, high, 'brown') !default;
+$accent-cyan-soft: map.get($accents, soft, 'cyan') !default;
+$accent-cyan-high: map.get($accents, high, 'cyan') !default;
+$accent-black-soft: map.get($accents, soft, 'black') !default;
+$accent-black-high: map.get($accents, high, 'black') !default;
+/* --- Accents colors end --- */
+
+/* --- Palette colors start --- */
+$palette: (
+	primary: #a2c617,
+	secondary: #343333,
+) !default;
+
+$primary: map.get($palette, primary) !default;
+$secondary: map.get($palette, secondary) !default;
+/* --- Palette colors end --- */
+
+/* --- Semantic colors start --- */
+$semantic: (
+  success:  #22b934,
+  danger: #ba2123,
+  warning: #f0ad4e,
+  info: #5abfdd,
+  link: #3347EF,
+  grayscale: #adadad,
+  text: #191919,
+  'white': #FFFFFF,
+  'black': #000000,
+) !default;
+
+$success: map.get($semantic, success) !default;
+$danger: map.get($semantic, danger) !default;
+$warning: map.get($semantic, warning) !default;
+$info: map.get($semantic, info) !default;
+$grayscale: map.get($semantic, grayscale) !default;
+$text: map.get($semantic, text) !default;
+$white: map.get($semantic, 'white') !default;
+$black: map.get($semantic, 'black') !default;
+/* --- Semantic colors end --- */
+
+/* --- Status colors start --- */
+$status: (
+  online: map.get($semantic, success),
+  absent: map.get($semantic, warning),
+  offline: map.get($semantic, danger),
+) !default;
+
+$online: map.get($status, online) !default;
+$absent: map.get($status, absent) !default;
+$offline: map.get($status, offline) !default;
+/* --- Status colors end --- */
+
+/* --- Primary colors start --- */
+$primary-map: func.generate-color-map(map.get($palette, primary)) !default;
+$primary-100: map.get($primary-map, 100) !default;
+$primary-200: map.get($primary-map, 200) !default;
+$primary-300: map.get($primary-map, 300) !default;
+$primary-400: map.get($primary-map, 400) !default;
+$primary-500: map.get($primary-map, 500) !default;
+$primary-600: map.get($primary-map, 600) !default;
+$primary-700: map.get($primary-map, 700) !default;
+$primary-800: map.get($primary-map, 800) !default;
+$primary-900: map.get($primary-map, 900) !default;
+/* --- Primary colors end --- */
+
+/* --- Secondary colors start --- */
+$secondary-map: func.generate-color-map(map.get($palette, secondary)) !default;
+$secondary-100: map.get($secondary-map, 100) !default;
+$secondary-200: map.get($secondary-map, 200) !default;
+$secondary-300: map.get($secondary-map, 300) !default;
+$secondary-400: map.get($secondary-map, 400) !default;
+$secondary-500: map.get($secondary-map, 500) !default;
+$secondary-600: map.get($secondary-map, 600) !default;
+$secondary-700: map.get($secondary-map, 700) !default;
+$secondary-800: map.get($secondary-map, 800) !default;
+$secondary-900: map.get($secondary-map, 900) !default;
+/* --- Secondary colors end --- */
+
+/* --- Success colors start --- */
+$success-map: func.generate-color-map(map.get($semantic, success)) !default;
+$success-100: map.get($success-map, 100) !default;
+$success-200: map.get($success-map, 200) !default;
+$success-300: map.get($success-map, 300) !default;
+$success-400: map.get($success-map, 400) !default;
+$success-500: map.get($success-map, 500) !default;
+$success-600: map.get($success-map, 600) !default;
+$success-700: map.get($success-map, 700) !default;
+$success-800: map.get($success-map, 800) !default;
+$success-900: map.get($success-map, 900) !default;
+/* --- Success colors end --- */
+
+/* --- Danger colors start --- */
+$danger-map: func.generate-color-map(map.get($semantic, danger)) !default;
+$danger-100: map.get($danger-map, 100) !default;
+$danger-200: map.get($danger-map, 200) !default;
+$danger-300: map.get($danger-map, 300) !default;
+$danger-400: map.get($danger-map, 400) !default;
+$danger-500: map.get($danger-map, 500) !default;
+$danger-600: map.get($danger-map, 600) !default;
+$danger-700: map.get($danger-map, 700) !default;
+$danger-800: map.get($danger-map, 800) !default;
+$danger-900: map.get($danger-map, 900) !default;
+/* --- Danger colors end --- */
+
+/* --- Warning colors start --- */
+$warning-map: func.generate-color-map(map.get($semantic, warning)) !default;
+$warning-100: map.get($warning-map, 100) !default;
+$warning-200: map.get($warning-map, 200) !default;
+$warning-300: map.get($warning-map, 300) !default;
+$warning-400: map.get($warning-map, 400) !default;
+$warning-500: map.get($warning-map, 500) !default;
+$warning-600: map.get($warning-map, 600) !default;
+$warning-700: map.get($warning-map, 700) !default;
+$warning-800: map.get($warning-map, 800) !default;
+$warning-900: map.get($warning-map, 900) !default;
+/* --- Warning colors end --- */
+
+/* --- Info colors start --- */
+$info-map: func.generate-color-map(map.get($semantic, info)) !default;
+$info-100: map.get($info-map, 100) !default;
+$info-200: map.get($info-map, 200) !default;
+$info-300: map.get($info-map, 300) !default;
+$info-400: map.get($info-map, 400) !default;
+$info-500: map.get($info-map, 500) !default;
+$info-600: map.get($info-map, 600) !default;
+$info-700: map.get($info-map, 700) !default;
+$info-800: map.get($info-map, 800) !default;
+$info-900: map.get($info-map, 900) !default;
+/* --- Info colors end --- */
+
+/* --- Grayscale colors start --- */
+$grayscale-map: func.generate-color-map(map.get($semantic, grayscale)) !default;
+$grayscale-100: map.get($grayscale-map, 100) !default;
+$grayscale-200: map.get($grayscale-map, 200) !default;
+$grayscale-300: map.get($grayscale-map, 300) !default;
+$grayscale-400: map.get($grayscale-map, 400) !default;
+$grayscale-500: map.get($grayscale-map, 500) !default;
+$grayscale-600: map.get($grayscale-map, 600) !default;
+$grayscale-700: map.get($grayscale-map, 700) !default;
+$grayscale-800: map.get($grayscale-map, 800) !default;
+$grayscale-900: map.get($grayscale-map, 900) !default;
+/* --- Grayscale colors end --- */
+
+/* --- Text colors start --- */
+$text-map: func.generate-color-map(map.get($semantic, text)) !default;
+$text-100: map.get($text-map, 100) !default;
+$text-200: map.get($text-map, 200) !default;
+$text-300: map.get($text-map, 300) !default;
+$text-400: map.get($text-map, 400) !default;
+$text-500: map.get($text-map, 500) !default;
+$text-600: map.get($text-map, 600) !default;
+$text-700: map.get($text-map, 700) !default;
+$text-800: map.get($text-map, 800) !default;
+$text-900: map.get($text-map, 900) !default;
+/* --- Text colors end --- */
+
+$white-map: func.generate-color-map(map.get($semantic, 'white')) !default;
+$black-map: func.generate-color-map(map.get($semantic, 'black')) !default;

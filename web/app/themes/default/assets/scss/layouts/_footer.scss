@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_ln: footer;
+
+@layer layouts {
+  .#{$_ln} {
+
+    &--front {
+      background-color: c.$secondary-500;
+      border-bottom: 0.75rem solid c.$primary-500;
+      color: map.get(c.$semantic, 'white');
+
+      .#{$_ln}__container {
+        max-width: map.get(var.$breakpoints, xl);
+        width: 90%;
+        margin-inline: auto;
+
+        &:first-child {
+          padding-block: 5rem;;
+          gap: 2rem;
+          @include mix.grid;
+        }
+
+        &:last-child {
+          padding-block: 2rem;
+          gap: 1rem;
+          @include mix.flex-row-space-between;
+
+          p > a {
+            transition: color map.get(var.$global, animation-duration) ease-in-out;
+            color: map.get(c.$semantic, 'white');
+
+            &:hover {
+              color: c.$primary-500;
+            }
+          }
+
+          @include mq.max-device(md) {
+            @include mix.flex-column-center-center;
+          }
+        }
+      }
+
+      .#{$_ln}__menu {
+        &__title {
+          font-size: map.get(var.$fs, md);
+          font-weight: 500;
+          text-transform: uppercase;
+          margin-bottom: 1rem;
+        }
+
+        menu {
+          list-style: none;
+
+          li {
+            a {
+              display: block;
+              padding-block: 0.25rem;
+              transition: color map.get(var.$global, animation-duration) ease-in-out;
+              color: map.get(c.$semantic, 'white');
+
+              &:hover {
+                color: c.$primary-500;
+              }
+            }
+          }
+        }
+      }
+
+      .#{$_ln}__logo {
+        @include mix.flex-column-center;
+
+        @include mq.max-device(md) {
+          width: 300px;
+        }
+      }
+    }
+  }
+}

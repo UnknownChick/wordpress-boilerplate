@@ -1,0 +1,64 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: progress;
+
+$progress: (
+	bg-color: map.get(c.$semantic, greyscale),
+	border: none,
+	border-radius: map.get(v.$global, border-radius),
+	heigh: 1rem,
+	track-bg-color: green,
+	value-bg-color: red,
+) !default;
+
+@mixin progress-variant($value-bg-color, $track-bg-color: map.get($progress, bg-color)) {
+	background-color: $track-bg-color;
+
+	&::-webkit-progress-bar {
+		background-color: $track-bg-color;
+	}
+
+	&::-webkit-progress-value, &::-moz-progress-bar  {
+		background-color: $value-bg-color;
+	}
+}
+
+@layer components {
+	progress {
+		appearance: none;
+		display: block;
+		height: map.get($progress, height);
+		border: map.get($progress, border);
+		border-radius: map.get($progress, border-radius);
+		background-color: map.get($progress, bg-color);
+
+		&.#{$_cn} {
+			@each $color-name, $color-values in c.$semantic {
+				&--#{$color-name} {
+					@include progress-variant(
+						$color-values,
+					);
+				}
+			}
+
+			@each $color-name, $color-values in c.$palette {
+				&--#{$color-name} {
+					@include progress-variant(
+						$color-values,
+					);
+				}
+			}
+
+			@each $color-name, $color-values in c.$accents {
+				&--#{$color-name} {
+					@include progress-variant(
+						map.get($color-values, high),
+						map.get($color-values, soft)
+					);
+				}
+			}
+		}
+	}
+}

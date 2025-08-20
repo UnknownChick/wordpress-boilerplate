@@ -1,0 +1,117 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: alert;
+
+$alert: (
+  config: (
+    border-color: black,
+    border-radius: map.get(v.$global, border-radius),
+    border-size: 2px,
+    font-weight: 600,
+  ),
+  sizes: (
+    xs: (
+      padding: 0.5rem 0.75rem,
+      font-size: 0.75rem
+    ),
+    sm: (
+      padding: 0.75rem 1rem,
+      font-size: 0.875rem
+    ),
+    md: (
+      padding: 0.825rem 1.25rem,
+      font-size: 1rem
+    ),
+    lg: (
+      padding: 1.25rem 1.5rem,
+      font-size: 1.25rem
+    ),
+    xl: (
+      padding: 1.5rem 1.75rem,
+      font-size: 1.5rem
+    )
+  )
+) !default;
+
+@mixin alert-variant($background, $border, $color) {
+  background-color: $background;
+  border: map.get($alert, 'config', 'border-size') solid $border;
+  color: $color;
+}
+
+@layer components {
+	.#{$_cn} {
+		display: flex;
+		padding: map.get($alert, 'sizes', 'md', 'padding');
+		background-color: transparent;
+		color: inherit;
+		border: solid 1px black;
+		border-radius: map.get(v.$global, border-radius);
+		position: relative;
+		line-height: 1;
+		font-weight: 600;
+		font-size: map.get($alert, 'sizes', 'md', 'font-size');
+		width: 100%;
+
+    &__icon {
+      margin-right: 1rem;
+    }
+
+    &__content {
+      ul {
+        list-style: none
+      }
+    }
+
+    &--success {
+      @include alert-variant(
+        c.$success-500,
+        map.get(c.$semantic, 700),
+        c.$white
+      );
+    }
+
+    &--warning {
+      @include alert-variant(
+        c.$warning-500,
+        c.$warning-700,
+        c.$white
+      );
+    }
+
+    &--danger {
+      @include alert-variant(
+        c.$danger-500,
+        c.$danger-600,
+        c.$white
+      );
+    }
+
+		@each $size, $values in map.get($alert, 'sizes') {
+			&--#{$size} {
+				padding: map.get($values, 'padding');
+				font-size: map.get($values, 'font-size');
+			}
+		}
+
+		@each $color-name, $color-values in c.$accents {
+			&--soft-#{$color-name} {
+				@include alert-variant(
+					map.get($color-values, 'soft'),
+					map.get($color-values, 'high'),
+					map.get($color-values, 'high')
+				);
+			}
+
+			&--high-#{$color-name} {
+				@include alert-variant(
+					map.get($color-values, 'high'),
+					map.get($color-values, 'high'),
+					map.get($color-values, 'soft')
+				);
+			}
+		}
+	}
+}
