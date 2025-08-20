@@ -1,38 +1,187 @@
+@use 'sass:color';
+@use 'sass:map';
 @use '../abstracts/colors' as c;
-@use '../abstracts/mixins' as m;
+@use '../abstracts/variables' as v;
 
-$btn-border: none;
-$btn-border-radius: 0.5rem;
-$btn-font-size: inherit;
-$btn-padding: 0.75rem 1.5rem;
+$_cn: btn;
 
-.btn {
-	display: block;
-	width: fit-content;
-	color: c.$white-color;
-	padding: $btn-padding;
-	border-radius: $btn-border-radius;
-	border: $btn-border;
-	font-size: $btn-font-size;
-	font-weight: 700;
-	line-height: 1;
-	cursor: pointer;
-	outline: none;
-	box-shadow: none;
-	@include m.transition(250ms);
+$btn: (
+	config: (
+		border-radius: map.get(v.$global, border-radius),
+		border-width: 2px,
+		font-weight: 500,
+		transition: all map.get(v.$global, animation-duration) ease-in-out
+	),
+	sizes: (
+		xs: (
+			padding: 0.5rem 0.75rem,
+			font-size: 0.75rem
+		),
+		sm: (
+			padding: 0.5rem 1rem,
+			font-size: 0.875rem
+		),
+		md: (
+			padding: 0.5rem 1.5rem,
+			font-size: 1rem
+		),
+		lg: (
+			padding: 0.75rem 1.75rem,
+			font-size: 1.125rem
+		),
+		xl: (
+			padding: 0.75rem 2rem,
+			font-size: 1.25rem
+		),
+		xxl: (
+			padding: 0.75rem 2.5rem,
+			font-size: 1.375rem
+		)
+	),
+	colors: (
+		primary: (
+			default: c.$primary-500,
+			hover: c.$primary-700
+		),
+		secondary: (
+			default: c.$secondary-500,
+			hover: c.$secondary-700
+		),
+		success: (
+			default: c.$success-500,
+			hover: c.$success-700
+		),
+		danger: (
+			default: c.$danger-500,
+			hover: c.$danger-700
+		),
+		warning: (
+			default: c.$warning-500,
+			hover: c.$warning-700
+		),
+		info: (
+			default: c.$info-500,
+			hover: c.$info-700
+		),
+    white: (
+      default: c.$white,
+      hover: c.$white
+    ),
+    black: (
+      default: c.$black,
+      hover: c.$black
+    )
+	)
+) !default;
 
-	background-color: c.$accent-color;
+@mixin button-solid($color, $hover-color) {
+	background-color: $color;
+	border-color: $color;
+	color: map.get(c.$semantic, 'black');
 
-	&:hover {
-		background-color: c.$secondary-color;
-		color: c.$accent-color;
+	&:not(:disabled):is(:hover, :active, :focus) {
+		background-color: $hover-color;
+		border-color: $hover-color;
+	}
+}
+
+@mixin button-outline($color) {
+	background-color: transparent;
+	border-color: $color;
+	color: $color;
+
+	&:not(:disabled):is(:hover, :active, :focus) {
+		background-color: $color;
+		color: map.get(c.$semantic, 'white');
+	}
+}
+
+@mixin button-accent($bc-color, $color) {
+	background-color: $bc-color;
+	border-color: $bc-color;
+	color: $color;
+
+	&:not(:disabled):is(:hover, :active, :focus) {
+		background-color: $color;
+		border-color: $color;
+		color: $bc-color;
+	}
+}
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+		width: fit-content;
+		border-radius: map.get($btn, config, border-radius);
+		font-weight: map.get($btn, config, font-weight);
+		padding: map.get($btn, sizes, md, padding);
+		font-size: map.get($btn, sizes, md, font-size);
+		line-height: 1;
+		cursor: pointer;
+		outline: none;
+		transition: map.get($btn, config, transition);
+		border-width: map.get($btn, config, border-width);
+		border-style: solid;
+
+		@each $size, $values in map.get($btn, sizes) {
+			&--#{$size} {
+				padding: map.get($values, padding);
+				font-size: map.get($values, font-size);
+			}
+		}
+
+		@each $color-name, $color-values in map.get($btn, colors) {
+			&--#{"" + $color-name} {
+				@include button-solid(
+					map.get($color-values, default),
+					map.get($color-values, hover)
+				);
+			}
+
+			&--#{"" + $color-name}-outline {
+				@include button-outline(map.get($color-values, default));
+			}
+		}
+
+		@each $color-name, $color-values in c.$accents {
+			&--soft-#{$color-name} {
+				@include button-accent(
+					map.get($color-values, soft),
+					map.get($color-values, high),
+				);
+			}
+
+			&--high-#{$color-name} {
+				@include button-accent(
+					map.get($color-values, high),
+					map.get($color-values, soft),
+				);
+			}
+		}
+
+		&--fluid {
+			width: 100%;
+		}
+
+		&--center {
+			margin: auto;
+		}
+
+		&--icon {
+			padding: 0.5rem;
+		}
+
+		&:disabled {
+			opacity: 0.65;
+			cursor: not-allowed;
+		}
 	}
 
-	&.btn-full {
-		width: 100%;
-	}
-
-	&.btn-center {
-		margin: auto;
+	.#{$_cn}--link {
+		appearance: none;
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		cursor: pointer;
 	}
 }

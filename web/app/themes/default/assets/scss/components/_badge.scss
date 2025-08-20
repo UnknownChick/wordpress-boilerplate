@@ -1,0 +1,80 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: badge;
+
+$badge: (
+	config: (
+		border-radius: map.get(v.$global, border-radius),
+		border-size: 1px,
+		font-weight: 600,
+	),
+	sizes: (
+		xs: (
+			padding: 0.125rem,
+			font-size: 0.5rem,
+		),
+		sm: (
+			padding: 0.25rem,
+			font-size: 0.5rem
+		),
+		md: (
+			padding: 0.375rem,
+			font-size: 0.75rem
+		),
+		lg: (
+			padding: 0.5rem,
+			font-size: 1rem
+		)
+	)
+) !default;
+
+@mixin badge-variant($background, $border, $color) {
+	background-color: $background;
+	border: map.get($badge, 'config', 'border-size') solid $border;
+	color: $color;
+}
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+		border-radius: map.get($badge, 'config', 'border-radius');
+		padding: map.get($badge, 'sizes', 'md', 'padding');
+		text-transform: uppercase;
+		font-weight: map.get($badge, 'config', 'font-weight');
+		font-size: map.get($badge, 'sizes', 'md', 'font-size');
+		width: max-content;
+		line-height: 1;
+		align-content: center;
+	
+		@each $size, $values in map.get($badge, 'sizes') {
+			&--#{$size} {
+				padding: map.get($values, 'padding');
+				font-size: map.get($values, 'font-size');
+	
+				@if map.has-key($values, 'line-height') {
+					line-height: map.get($values, 'line-height');
+				}
+			}
+		}
+	
+		@each $color-name, $color-values in c.$accents {
+			&--soft-#{$color-name} {
+				@include badge-variant(
+					map.get($color-values, 'soft'),
+					map.get($color-values, 'high'),
+					map.get($color-values, 'high')
+				);
+			}
+	
+			&--high-#{$color-name} {
+				@include badge-variant(
+					map.get($color-values, 'high'),
+					map.get($color-values, 'high'),
+					map.get($color-values, 'soft')
+				);
+			}
+		}
+	}
+}

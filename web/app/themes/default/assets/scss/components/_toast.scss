@@ -1,0 +1,110 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: toast;
+
+$toast: (
+	border: 1px solid map.get(c.$semantic, greyscale),
+	border-radius: map.get(v.$global, border-radius),
+	box-shadow: map.get(v.$global, box-shadow),
+	max-width: 400px,
+	padding: 1.5rem,
+	progress-color: map.get(c.$palette, primary),
+	progress-height: 0.25rem,
+	transition-duration: 0.3s,
+	positions: (
+		tl: (
+			top: 2rem,
+			left: 2rem,
+		),
+		tr: (
+			top: 2rem,
+			right: 2rem,
+		),
+		bl: (
+			bottom: 2rem,
+			left: 2rem,
+		),
+		br: (
+			bottom: 2rem,
+			right: 2rem,
+		),
+	)
+) !default;
+
+@keyframes toast-progress-decrease {
+	from { width: 100%; }
+	to { width: 0%; }
+}
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+		position: fixed;
+		background-color: white;
+		border: map.get($toast, border);
+		border-radius: map.get($toast, border-radius);
+		max-width: map.get($toast, max-width);
+		box-shadow: map.get($toast, box-shadow);
+		overflow: hidden;
+		opacity: 0;
+		visibility: hidden;
+		transition: transform map.get($toast, transition-duration) ease-in-out,
+					opacity map.get($toast, transition-duration) ease-in-out,
+					visibility map.get($toast, transition-duration) ease-in-out;
+
+		@each $pos, $val in map.get($toast, positions) {
+			&--#{$pos} {
+				top: map.get($val, top);
+				right: map.get($val, right);
+				bottom: map.get($val, bottom);
+				left: map.get($val, left);
+
+				@if $pos == tl or $pos == tr {
+					transform: translateY(-150%);
+				} @else {
+					transform: translateY(150%);
+				}
+			}
+		}
+
+		&__progress {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: map.get($toast, progress-height);
+			width: 100%;
+			background-color: map.get($toast, progress-color);
+			animation: none;
+		}
+
+		&__content {
+			padding: map.get($toast, padding);
+		}
+
+		&--active {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+
+			.#{$_cn}__progress {
+				animation-name: toast-progress-decrease;
+				animation-timing-function: linear;
+				animation-fill-mode: forwards;
+			}
+		}
+
+		&--closing-left {
+			transform: translateX(-150%);
+			opacity: 0;
+			visibility: hidden;
+		}
+
+		&--closing-right {
+			transform: translateX(150%);
+			opacity: 0;
+			visibility: hidden;
+		}
+	}
+}

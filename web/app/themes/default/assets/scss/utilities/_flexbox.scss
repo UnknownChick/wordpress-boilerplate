@@ -1,0 +1,88 @@
+@use '../abstracts/mixins' as mix;
+
+@layer utilities {
+  .flex {
+    display: flex;
+  }
+
+  .flex-row {
+    @include mix.flex-row;
+  }
+
+  .flex-column {
+    @include mix.flex-column;
+  }
+
+  .flex-wrap {
+    @include mix.flex-wrap;
+  }
+
+  .flex-row-center {
+    @include mix.flex-row-center;
+  }
+
+  .flex-row-center-center {
+    @include mix.flex-row-center-center;
+  }
+
+  .flex-row-space-between {
+    @include mix.flex-row-space-between;
+  }
+
+  .flex-row-space-around {
+    @include mix.flex-row-space-around;
+  }
+
+  .flex-row-end {
+    @include mix.flex-row-end;
+  }
+
+  .flex-row-center-start {
+    @include mix.flex-row-center-start;
+  }
+
+  .flex-row-center-end {
+    @include mix.flex-row-center-end;
+  }
+
+  .flex-row-align-start {
+    @include mix.flex-row-align-start;
+  }
+
+  .flex-row-align-center {
+    @include mix.flex-row-align-center;
+  }
+
+  .flex-row-align-end {
+    @include mix.flex-row-align-end;
+  }
+
+
+  .flex-column-center {
+    @include mix.flex-column-center;
+  }
+
+  .flex-column-center-center {
+    @include mix.flex-column-center-center;
+  }
+
+  .flex-column-start {
+    @include mix.flex-column-start;
+  }
+
+  .flex-column-end {
+    @include mix.flex-column-end;
+  }
+
+  .flex-column-space-between {
+    @include mix.flex-column-space-between;
+  }
+
+  .flex-column-space-around {
+    @include mix.flex-column-space-around;
+  }
+
+  .flex-column-center-end {
+    @include mix.flex-column-center-end;
+  }
+}

@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_pn: list-services-miniatures;
+
+@layer partials {
+  .#{$_pn} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+
+    &__item {
+      position: relative;
+      height: 350px;
+      @include mix.backdrop(5, linear-gradient(0deg,rgba(162, 198, 23, 1) 0%, rgba(255, 255, 255, 0) 50%), 0.5);
+
+      &__image {
+        @include mix.image-cover-center;
+      }
+
+      &__title {
+        color: map.get(c.$semantic, 'white');
+        font-weight: 700;
+        font-size: map.get(var.$fs, lg);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 1rem 1.5rem;
+        z-index: 10;
+      }
+    }
+  }
+}

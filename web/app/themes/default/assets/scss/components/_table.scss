@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+
+$_cn: table;
+
+$table: (
+  border-spacing: 0.375rem,
+);
+
+@layer components {
+  .#{$_cn} {
+    width: 100%;
+    text-align: left;
+
+    &--spaced {
+      border-collapse: separate;
+      border-spacing: map.get($table, border-spacing);
+
+      tr {
+
+        td {
+          background-color: c.$grayscale-100;
+        }
+      }
+    }
+
+    tr {
+
+      td {
+        padding: 1rem 1.5rem;
+        line-height: 1;
+
+        ul {
+          list-style: none;
+        }
+      }
+    }
+  }
+}

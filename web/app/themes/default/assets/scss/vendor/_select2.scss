@@ -1,0 +1,113 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+@use '../layouts/form' as f;
+
+@import 'select2/src/scss/core.scss';
+
+.select2-container--default {
+  .select2-selection--single {
+    @include f.input-core-styles;
+    height: unset;
+
+    .select2-selection__rendered {
+      line-height: 1.5;
+    }
+
+    .select2-selection__arrow {
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: auto;
+      align-content: center;
+      padding: 0.25rem;
+      will-change: transform;
+      transition: transform map.get(var.$global, animation-duration) ease-in-out;
+    }
+
+    .select2-selection__clear {
+      float: none;
+      height: 100%;
+      font-size: 1.5rem;
+      position: absolute;
+      right: 0.75rem;
+      top: 0;
+      padding: 0.25rem;
+    }
+  }
+
+  .select2-selection--multiple {
+    @include f.input-core-styles;
+
+    .select2-selection__choice {
+      margin: 0 0.25rem 0.25rem 0;
+      border-radius: calc(map.get(f.$form, border-radius) / 2);
+      border: map.get(f.$form, border);
+      background-color: c.$primary-500;
+      padding: 0 0 0 1.75rem;
+      color: c.$black;
+    }
+
+    .select2-selection__choice__remove {
+      border-right: map.get(f.$form, border);
+      padding: 0 0.5rem;
+      color: c.$black;
+      border-radius: 0;
+      transition: background-color map.get(var.$global, animation-duration) ease-in-out;
+    }
+
+    .select2-selection__clear {
+      height: 100%;
+      top: 0;
+      padding: 0.25rem;
+      margin: 0;
+      width: 2rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: c.$primary-500;
+  }
+
+  .select2-results__option--selected {
+    background-color: c.$primary-300;
+    color: c.$white;
+  }
+
+  .select2-search--dropdown {
+    .select2-search__field {
+      border: map.get(f.$form, border);
+    }
+  }
+}
+
+.select2-container {
+  .select2-selection--single {
+    .select2-selection__rendered {
+      padding-left: 0;
+    }
+  }
+
+  .select2-search--inline {
+    .select2-search__field {
+      margin: 0;
+      height: 1.25rem;
+      line-height: 1;
+    }
+  }
+}
+
+.select2-dropdown {
+  border-bottom-left-radius: map.get(f.$form, border-radius);
+  border-bottom-right-radius: map.get(f.$form, border-radius);
+  border: map.get(f.$form, border);
+  background-color: map.get(f.$form, background-color);
+}
+
+.select2-container--open {
+  .select2-selection__arrow {
+    transform: rotate(180deg);
+  }
+}

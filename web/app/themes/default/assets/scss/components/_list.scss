@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+
+$_cn: list;
+
+$list: (
+	border: 1px solid c.$grayscale-200,
+	padding: 1rem
+) !default;
+
+@layer components {
+	.#{$_cn} {
+
+		&__item {
+			padding: map.get($list, padding) 0;
+
+			&:not(:last-child) {
+				border-bottom: map.get($list, border);
+			}
+		}
+	}
+}

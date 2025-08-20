@@ -1,0 +1,29 @@
+@use 'sass:string';
+
+$aspect-ratio: (
+	1x1: '1/1',
+	2x3: '2/3',
+	3x2: '3/2',
+	4x3: '4/3',
+	5x4: '5/4',
+	9x16: '9/16',
+	16x9: '16/9',
+	21x9: '21/9',
+	185x100: '185/100',
+	239x100: '239/100',
+) !default;
+
+
+@layer utilities {
+	.ratio {
+		display: block;
+		width: 100%;
+		object-fit: cover;
+	}
+
+	@each $key, $value in $aspect-ratio {
+		.ratio--#{$key} {
+			aspect-ratio: string.unquote($value);
+		}
+	}
+}

@@ -1,0 +1,50 @@
+@use 'sass:map';
+
+$_cn: accordion;
+
+$accordion: (
+	icon-size: 0.5rem,
+	padding: 1rem,
+	title-font-weight: 700,
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		border-bottom: 1px solid #e0e0e6;
+
+		&__title {
+			list-style: none;
+			font-weight: map.get($accordion, title-font-weight);
+			cursor: pointer;
+			padding: map.get($accordion, padding) 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			position: relative;
+
+			&::after {
+				content: '';
+				display: block;
+				width: map.get($accordion, icon-size);
+				height: map.get($accordion, icon-size);
+				margin-left: 0.5rem;
+				margin-right: 0.5rem;
+				border-right: 2px solid #888;
+				border-bottom: 2px solid #888;
+				transform: rotate(45deg);
+				transition: transform 0.3s;
+			}
+		}
+
+		&[open] &__title {
+			&::after {
+				transform: rotate(135deg);
+			}
+		}
+
+		&__content {
+			padding-bottom: map.get($accordion, padding);
+			background: #fff;
+		}
+	}
+}

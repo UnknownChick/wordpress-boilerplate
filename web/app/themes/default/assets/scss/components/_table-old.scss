@@ -1,0 +1,134 @@
+@use "../abstracts/colors" as *;
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+@use '../components/buttons' as *;
+
+table {
+	width: 100%;
+	text-align: left;
+	line-height: 1;
+
+	thead {
+		color: $white-color;
+		border-top-left-radius: $border-radius;
+
+		th {
+			font-weight: 500;
+			padding: 1rem;
+			background-color: $primary-color;
+		}
+	}
+
+	tbody {
+		tr {
+			td {
+				&:has(select) {
+					padding:0.5rem 1rem;
+				}
+				padding:1rem;
+
+				& a {
+					color: $primary-color;
+					text-decoration: underline;
+				}
+
+				&:last-child:not(.dt-empty) {
+					display: flex;
+					gap: 0.5rem;
+
+					svg {
+						cursor: pointer;
+					}
+				}
+			}
+
+			&:nth-child(odd) {
+				background-color: $off-color;
+			}
+
+			&:last-child {
+				td:first-child {
+					border-bottom-left-radius: $border-radius;
+				}
+
+				td:last-child {
+					border-bottom-right-radius: $border-radius;
+				}
+			}
+
+		}
+	}
+
+	select {
+		padding: 0.5rem;
+		width: 100px;
+	}
+}
+
+.dt-layout-row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.dt-layout-cell {
+	width: 100%;
+}
+
+.dt-layout-cell:not(:has(table)) {
+	width: max-content;
+}
+
+div.dt-container div.dt-layout-cell.dt-end {
+	text-align: right;
+}
+
+.dt-info {
+	font-family: $primary-font;
+}
+
+.dt-length {
+	& > label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+}
+
+.dt-search {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+
+	label {
+		margin-bottom: 0 !important;
+	}
+
+	input[type="search"] {
+		padding: 0.5rem
+	}
+}
+
+.dt-paging {
+	display: flex;
+	border-radius: $border-radius;
+	border: 2px solid $primary-color;
+	width: max-content;
+
+	&-button {
+		appearance: none;
+		display: block;
+		border: none;
+		padding: 0.75rem;
+		line-height: 1;
+		font-size: $btn-font-size;
+		font-weight: 500;
+
+		background-color: $white-color;
+		color: $primary-color;
+
+		&:is(.current, .previous:not(.disabled), .next:not(.disabled)) {
+			background-color: $primary-color;
+			color: $white-color;
+		}
+	}
+}

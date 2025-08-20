@@ -1,35 +1,30 @@
 @use 'sass:map';
+@use 'variables' as v;
 
-$breakpoints: (
-	xxs: 375px,
-	xs: 576px,
-	sm: 768px,
-	md: 1024px,
-	lg: 1280px,
-	xl: 1440px,
-	xxl: 1600px,
-);
-
-@mixin min-device($breakpoint: map.get($breakpoints)) {
-	@if map.has-key($breakpoints, $breakpoint) {
-		@media screen and (min-width: map.get($breakpoints, $breakpoint)) {
-			@content;
-		}
-	}
+@mixin min-device($breakpoint) {
+  @if map.has-key(v.$breakpoints, $breakpoint) {
+    @media screen and (min-width: map.get(v.$breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in $breakpoints map. Please check the name.";
+  }
 }
 
-@mixin max-device($breakpoint: map.get($breakpoints)) {
-	@if map.has-key($breakpoints, $breakpoint) {
-		@media screen and (max-width: (map.get($breakpoints, $breakpoint) - 1)) {
+@mixin max-device($breakpoint) {
+	@if map.has-key(v.$breakpoints, $breakpoint) {
+		@media screen and (max-width: (map.get(v.$breakpoints, $breakpoint) - 1)) {
 			@content;
 		}
-	}
+	} @else {
+    @warn "Breakpoint '#{$breakpoint}' not found in $breakpoints map. Please check the name.";
+  }
 }
 
-@mixin only-device($breakpoint: map.get($breakpoints)) {
-	@if map.has-key($breakpoints, $breakpoint) {
-		$breakpoints-length: length($breakpoints);
-		$map-list: map-keys($breakpoints);
+@mixin only-device($breakpoint) {
+	@if map.has-key(v.$breakpoints, $breakpoint) {
+		$breakpoints-length: length(v.$breakpoints);
+		$map-list: map.keys(v.$breakpoints);
 
 		@if index($map-list, $breakpoint) == $breakpoints-length {
 			@include min-device($breakpoint) {
@@ -45,15 +40,19 @@ $breakpoints: (
 				}
 			}
 		}
+	} @else {
+		@warn "Breakpoint '#{$breakpoint}' not found in $breakpoints map. Please check the name.";
 	}
 }
 
-@mixin between-devices($min-device: map.get($breakpoints), $max-device: map.get($breakpoints)) {
-	@if map.has-key($breakpoints, $min-device) and map.has-key($breakpoints, $max-device) {
+@mixin between-devices($min-device, $max-device) {
+	@if map.has-key(v.$breakpoints, $min-device) and map.has-key(v.$breakpoints, $max-device) {
 		@include min-device($min-device) {
 			@include max-device($max-device) {
 				@content;
 			}
 		}
+	} @else {
+		@warn "Breakpoints '#{$min-device}' and '#{$max-device}' not found in $breakpoints map. Please check the names.";
 	}
 }

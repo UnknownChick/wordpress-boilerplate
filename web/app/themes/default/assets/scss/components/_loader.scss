@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: loader;
+
+$loader: (
+	animation-duration: 1.5s,
+	border-size: 3px,
+	color: map.get(c.$palette, primary),
+	size: 2rem,
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		width: map.get($loader, size);
+		height: map.get($loader, size);
+		border: map.get($loader, border-size) solid map.get($loader, color);
+		border-bottom-color: transparent !important;
+		border-radius: 100%;
+		display: block;
+		animation: rotation map.get($loader, animation-duration) linear infinite;
+	
+		@each $color-name, $color-value in c.$semantic {
+			&--#{$color-name} {
+				border: map.get($loader, border-size) solid $color-value;
+			}
+		}
+
+		@each $color-name, $color-value in c.$palette {
+			&--#{$color-name} {
+				border: map.get($loader, border-size) solid $color-value;
+			}
+		}
+		
+		@keyframes rotation {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+	}
+}

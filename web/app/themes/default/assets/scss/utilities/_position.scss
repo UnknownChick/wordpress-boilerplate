@@ -1,0 +1,23 @@
+@layer utilities {
+  .pos {
+    &-absolute {
+      position: absolute;
+    }
+
+    &-relative {
+      position: relative;
+    }
+
+    &-fixed {
+      position: fixed;
+    }
+
+    &-static {
+      position: static;
+    }
+
+    &-sticky {
+      position: sticky;
+    }
+  }
+}

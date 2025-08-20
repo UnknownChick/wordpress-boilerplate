@@ -1,0 +1,92 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use "../abstracts/media-queries" as mq;
+
+$_pn: list-values;
+
+$list-values: (
+  column-gap: 6rem,
+  row-gap: 4rem,
+) !default;
+
+@layer partials {
+  .#{$_pn} {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: map.get($list-values, row-gap) map.get($list-values, column-gap);
+
+    @include mq.min-device(md) {
+      &__item {
+        &:not(:nth-child(3n)) {
+          &::after {
+            content: '';
+          }
+        }
+      }
+    }
+
+    @include mq.min-device(sm) {
+      &__item {
+        &::after {
+          height: 100%;
+          width: 0.125rem;
+          top: 0;
+          right: calc(-1 * (map.get($list-values, column-gap) / 2));
+        }
+      }
+    }
+
+    @include mq.between-devices(sm, md) {
+      grid-template-columns: 1fr 1fr;
+
+      &__item {
+        &:nth-child(odd) {
+          &::after {
+            content: '';
+          }
+        }
+      }
+    }
+
+    @include mq.max-device(sm) {
+      grid-template-columns: 1fr;
+
+      &__item {
+        &::after {
+          content: '';
+          left: 0;
+          bottom: calc(-1 * (map.get($list-values, row-gap) / 2));
+          width: 75%;
+          height: 0.125rem;
+        }
+      }
+    }
+
+    &__item {
+      position: relative;
+
+      &::after {
+        display: block;
+        position: absolute;
+        background-color: c.$primary-500;
+      }
+
+      &__title {
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+
+        p {
+          font-style: italic;
+        }
+
+        h3 {
+          letter-spacing: 1.5px;
+        }
+      }
+
+      &__content {
+        font-weight: 300;
+      }
+    }
+  }
+}

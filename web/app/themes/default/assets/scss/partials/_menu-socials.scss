@@ -1,0 +1,30 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_pn: menu-socials;
+
+@layer partials {
+  .#{$_pn} {
+    menu {
+      list-style: none;
+      color: map.get(c.$semantic, 'white');
+      @include mix.flex-row;
+
+      li {
+
+        a {
+          display: block;
+          padding: 0.25rem;
+          transition: color map.get(var.$global, animation-duration) ease-in-out;
+          color: map.get(c.$semantic, 'white');
+
+          &:hover {
+            color: c.$primary-500;
+          }
+        }
+      }
+    }
+  }
+}

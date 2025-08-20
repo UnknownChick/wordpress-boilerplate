@@ -1,91 +1,211 @@
-*, *::before, *::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: calc(0.25rem + 1em + 0.25rem);
+  }
 
-html:focus-within {
-	scroll-behavior: smooth;
-} 
+  *:where(:not(fieldset, progress, meter)) {
+    border-width: 0;
+    border-style: solid;
+    background-origin: border-box;
+    background-repeat: no-repeat;
+  }
 
-body {
-	min-height: 100vh;
-	overflow-x: clip;
-	text-rendering: optimizeSpeed;
-	-webkit-font-smoothing: antialiased;
-	position: relative;
-	scroll-behavior: smooth;
-	line-height: calc(1em + 0.5rem);
-}
+  html {
+    text-size-adjust: none;
+    block-size: 100%;
 
-h1, h2, h3, h4, h5, h6 {
-	text-wrap: balance;
-}
+    &:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
 
-p {
-	text-wrap: pretty;
-}
+  body {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: clip;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+    min-block-size: 100%;
+    line-height: calc(1em + 0.5rem);
+  }
 
-p, h1, h2, h3, h4, h5, h6 {
-	overflow-wrap: break-word;
-}
+  body, h1, h2, h3, h4, p, figure, blockquote, dl, dd {
+    margin-block-end: 0;
+  }
 
-ul[role='list'], ol[role='list'] {
-	list-style: none;
-}
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
 
-a:not([class]) {
-	text-decoration-skip-ink: auto;
-}
+  p {
+    text-wrap: pretty;
+  }
 
-a {
-	text-decoration: none;
-	background-color: transparent;
-}
+  :where(p, h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: break-word;
+  }
 
-b, strong {
-	font-weight: bolder;
-}
+  :where(ul, ol) {
+    list-style-position: inside;
 
-img, picture, video, canvas, svg {
-	display: block;
-	height: auto;
-	max-width: 100%;
-}
+    &[role="list"] {
+      list-style: none;
+    }
+  }
 
-input, button, textarea, select, optgroup, input::placeholder {
-	font: inherit;
-	outline: none;
-}
+  a {
+    background-color: transparent;
+    text-decoration: none;
+    text-decoration-thickness: max(0.08em, 1px);
+    text-underline-offset: 0.15em;
 
-button, [type='button'], [type='reset'], [type='submit'] {
-	cursor: pointer;
-}
+    &:not([class]) {
+      text-decoration-skip-ink: auto;
+      color: currentColor;
+    }
+  }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+  b, strong {
+    font-weight: bolder;
+  }
 
-code, kbd, samp {
-	font-family: sans-serif;
-	font-size: 1em;
-}
+  :where(img, picture, svg, video, canvas, audio, iframe, embed, object) {
+    display: block;
+    height: auto;
+    max-width: 100%;
+  }
 
-summary {
-	cursor: pointer;
-}
+  :where(img, svg, video) {
+    block-size: auto;
+    max-inline-size: 100%;
+  }
 
-[id] {
-	scroll-margin-top: 2rem;
-}
+  // :where(svg) {
+  //   stroke: none;
+  //   fill: currentColor;
 
-/* If the user don't want motion */
-@media (prefers-reduced-motion: reduce) {
-	*, *::before, *::after {
-		animation-duration: 0.01ms !important;
-		animation-iteration-count: 1 !important;
-		transition-duration: 0.01ms !important;
-		scroll-behavior: auto !important;
-	}
+  //   &:where(:not([width])) {
+  //     inline-size: 5rem;
+  //   }
+
+  //   :where(:not([fill])) {
+  //     stroke: currentColor;
+  //     fill: none;
+  //     stroke-linecap: round;
+  //     stroke-linejoin: round;
+  //   }
+  // }
+
+  :where(input, button, textarea, select),
+  :where(input[type="file"])::-webkit-file-upload-button {
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+  }
+
+  input, button, textarea, select, optgroup, input::placeholder {
+    font: inherit;
+    outline: none;
+  }
+
+  button, [type='button'], [type='reset'], [type='submit'] {
+    appearance: none;
+    cursor: pointer;
+  }
+
+  input, button, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  :where(textarea) {
+    resize: vertical;
+
+    // &:not([rows]) {
+    //   min-height: 10em;
+    // }
+  }
+
+  @supports (resize: block) {
+    :where(textarea) {
+      resize: block;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  code, kbd, samp {
+    font-family: monospace, monospace;
+    font-size: 1em;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  :target {
+    scroll-margin-block: 5ex;
+  }
+
+  [id] {
+    scroll-margin-top: 2rem;
+  }
+
+  :where(:not(:active)):focus-visible {
+    outline-offset: 5px;
+  }
+
+  :where(
+      button,
+      button[type],
+      input[type="button"],
+      input[type="submit"],
+      input[type="reset"]
+    ),
+  :where(input[type="file"])::-webkit-file-upload-button,
+  :where(input[type="file"])::file-selector-button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    text-align: center;
+  }
+
+  :where(
+      button,
+      button[type],
+      input[type="button"],
+      input[type="submit"],
+      input[type="reset"]
+    )[disabled] {
+    cursor: not-allowed;
+  }
+
+  /* If the user don't want motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+
+    :focus-visible {
+      transition: outline-offset 145ms cubic-bezier(0.25, 0, 0.4, 1);
+    }
+    :where(:not(:active)):focus-visible {
+      transition-duration: 0.25s;
+    }
+  }
 }

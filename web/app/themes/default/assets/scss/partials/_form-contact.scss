@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/media-queries' as mq;
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$_pn: form-contact;
+
+@layer partials {
+  .#{$_pn} {
+    display: flex;
+
+    & > * {
+      width: 50%;
+    }
+
+    &__content {
+      padding: 10% 4rem;
+      background-color: c.$grayscale-100;
+
+      @include mq.max-device(md) {
+        padding: 2rem;
+      }
+    }
+
+    &__title {
+      font-size: map.get(var.$fs, xl);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    &__image {
+      height: auto;
+
+      img {
+        @include mix.image-cover-center;
+      }
+    }
+
+    @include mq.max-device(md) {
+      flex-direction: column;
+
+      & > * {
+        width: 100%;
+      }
+    }
+  }
+}

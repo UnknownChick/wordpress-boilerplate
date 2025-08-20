@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: card;
+
+$card: (
+  background-color: c.$white,
+  border: 1px solid c.$grayscale-100,
+  border-radius: map.get(v.$global, border-radius),
+  padding: 2rem,
+  title-font-size: 1.5rem,
+) !default;
+
+@layer components {
+  .#{$_cn} {
+    background-color: map.get($card, background-color);
+    border-radius: map.get($card, border-radius);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border: map.get($card, border);
+
+    &__body + &__body {
+      border-top: 2px solid c.$grayscale-100;
+    }
+
+    &__header {
+      padding: map.get($card, padding);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid c.$grayscale-100;
+
+      p {
+        font-size: map.get($card, title-font-size);
+        color: map.get(c.$semantic, text);
+      }
+    }
+
+    &__body {
+      padding: map.get($card, padding);
+    }
+
+    &__footer {
+      padding: map.get($card, padding);
+    }
+  }
+}

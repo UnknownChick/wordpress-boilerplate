@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@import 'toastr/toastr.scss';
+
+.toast-success {
+  background-color: c.$success-500;
+  color: c.$white !important;
+}
+
+.toast-error {
+  background-color: c.$danger-500;
+  color: c.$white !important;
+}
+
+#toast-container > div {
+  color: c.$white;
+}

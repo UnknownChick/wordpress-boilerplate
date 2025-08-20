@@ -1,0 +1,15 @@
+$_pn: slider-products;
+
+@layer partials {
+  .#{$_pn} {
+    .swiper-wrapper {
+      .swiper-slide {
+        width: auto !important;
+
+        .product-miniature {
+          width: 300px;
+        }
+      }
+    }
+  }
+}

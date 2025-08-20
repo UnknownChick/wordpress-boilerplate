@@ -1,0 +1,59 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/variables' as v;
+
+$_cn: square;
+
+$square: (
+  config: (
+    border-radius: map.get(v.$global, border-radius),
+  ),
+  sizes: (
+    xs: (
+      height: 1rem,
+      width: 1.5rem,
+    ),
+    sm: (
+      height: 1.25rem,
+      width: 1.75rem,
+    ),
+    md: (
+      height: 1.5rem,
+      width: 2rem,
+    ),
+    lg: (
+      height: 1.75rem,
+      width: 2.26rem,
+    ),
+    xl: (
+      height: 2rem,
+      width: 2.5rem,
+    ),
+  ),
+) !default;
+
+@layer components {
+	.#{$_cn} {
+		display: block;
+		border-radius: map.get($square, config, border-radius);
+		width: map.get($square, sizes, md, width);
+		height: map.get($square, sizes, md, height);
+	
+		@each $size, $values in map.get($square, sizes) {
+			&--#{$size} {
+				width: map.get($values, width);
+				height: map.get($values, height);
+			}
+		}
+	
+		@each $color-name, $color-values in c.$accents {
+			&--soft-#{$color-name} {
+				background-color: map.get($color-values, soft);
+			}
+	
+			&--high-#{$color-name} {
+				background-color: map.get($color-values, high);
+			}
+		}
+	}
+}

@@ -1,0 +1,79 @@
+@use 'sass:map';
+@use '../abstracts/colors' as c;
+@use '../abstracts/mixins' as mix;
+
+@layer utilities {
+  @include mix.generate-color-classes('primary', c.$primary-map);
+  @include mix.generate-color-classes('secondary', c.$secondary-map);
+  @include mix.generate-color-classes('success', c.$success-map);
+  @include mix.generate-color-classes('danger', c.$danger-map);
+  @include mix.generate-color-classes('warning', c.$warning-map);
+  @include mix.generate-color-classes('info', c.$info-map);
+  @include mix.generate-color-classes('greyscale', c.$grayscale-map);
+  @include mix.generate-color-classes('text', c.$text-map);
+  @include mix.generate-color-classes('white', c.$white-map);
+  @include mix.generate-color-classes('black', c.$black-map);
+
+  .hidden {
+    display: none;
+  }
+
+  .visible {
+    display: block;
+  }
+
+  .invisible {
+    visibility: hidden;
+  }
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+
+    &-focusable:is(:active, :focus) {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+    }
+  }
+
+  .subtitle {
+    text-transform: uppercase;
+    font-size: clamp(1.25rem, 0.9375rem + 1vw, 1.5rem);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .icon-link {
+    gap: 0.5rem;
+    @include mix.flex-row-align-center;
+  }
+}
