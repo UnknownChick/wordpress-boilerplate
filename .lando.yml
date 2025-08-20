@@ -1,0 +1,36 @@
+name: wp-boilerplate
+excludes:
+  - .git
+  - web/app/themes/default/node_modules
+  - vendor
+
+recipe: symfony
+
+proxy:
+  appserver:
+    - wp-boilerplate.lndo.site
+  pma:
+    - pma-wp-boilerplate.lndo.site
+
+config:
+  webroot: web
+  php: '8.4'
+  via: apache
+  xdebug: false
+
+keys: false
+
+services:
+  appserver:
+    ports:
+      - '9080:80'
+
+  database:
+    type: mysql:8.0
+    creds:
+      user: wp_boilerplate
+      password: wp_boilerplate
+      database: wp_boilerplate
+
+  pma:
+    type: phpmyadmin

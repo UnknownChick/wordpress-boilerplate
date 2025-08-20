@@ -20,52 +20,51 @@ export default defineConfig(({ mode }) => ({
     base: mode === 'production' ? `/app/themes/default/dist/` : '/',
     publicDir: '',
     plugins: [refreshPlugin],
-    resolve: {
-        alias: {
-            '~': path.resolve(__dirname, 'node_modules'),
-        }
-    },
     css: {
-        transformer: 'postcss',
+        preprocessorOptions: {
+            scss: {
+                quietDeps: true,
+                silenceDeprecations: ['import'],
+            }
+        },
+        transformer: 'lightningcss',
         lightningcss: {
-            targets: browserslistToTargets(browserslist('>= 0.25%'))
+            targets: browserslistToTargets(
+                browserslist('>= 0.25%')
+            ),
         },
         postcss: {
             plugins: [
-                autoprefixer({}),
-                // purgeCSSPlugin({
-                //     content: [
-                //         './**/*.php',
-                //         './**/*.twig',
-                //     ],
-                //     safelist: {
-                //         standard: [
-                //             ':is',
-                //             ':has',
-                //             ':where',
-                //             /^btn/,
-                //             /^list/,
-                //             'active',
-                //             'hidden'
-                //         ]
-                //     },
-                // })
-            ],
-        },
-        preprocessorOptions: {
-            scss: {
-                api: 'modern-compiler'
-            }
+                autoprefixer(),
+                purgeCSSPlugin({
+                    content: [
+                        path.resolve(__dirname, 'assets/js/**/*.js'),
+                        path.resolve(__dirname, 'templates/**/*.twig'),
+                    ],
+                    defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+                })
+            ]
+        }
+    },
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, 'node_modules'),
+            '@img': path.resolve(__dirname, 'assets/img'),
+            '@js': path.resolve(__dirname, 'assets/js'),
+            '@scss': path.resolve(__dirname, 'assets/scss'),
         }
     },
     server: {
         port: 1337,
-        host: '0.0.0.0',
+        host: 'localhost',
         watch: {
             disableGlobbing: false,
-            usePolling: true
+            usePolling: false,
+            ignored: [
+                '**/node_modules/**',
+                '**/vendor/**',
+            ]
         },
-        allowedHosts: true,
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
