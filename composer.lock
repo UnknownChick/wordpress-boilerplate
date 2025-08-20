@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f94c3e8befdd4a6181afaa05e30662d7",
+    "content-hash": "1daf6bbece3004d1f5144a589a11010d",
     "packages": [
         {
             "name": "composer/installers",
@@ -539,6 +539,46 @@
                 }
             ],
             "time": "2024-07-20T21:41:07+00:00"
+        },
+        {
+            "name": "roots/allow-svg",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roots/allow-svg.git",
+                "reference": "036f724c7dd5493f9a63a71d87d90757b5cbb55b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roots/allow-svg/zipball/036f724c7dd5493f9a63a71d87d90757b5cbb55b",
+                "reference": "036f724c7dd5493f9a63a71d87d90757b5cbb55b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.24",
+                "phpunit/phpunit": "^11.0",
+                "yoast/phpunit-polyfills": "^4.0"
+            },
+            "type": "wordpress-plugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "WordPress plugin to enable SVG uploads",
+            "support": {
+                "issues": "https://github.com/roots/allow-svg/issues",
+                "source": "https://github.com/roots/allow-svg/tree/v1.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/roots",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-12T23:22:00+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
