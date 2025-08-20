@@ -3,6 +3,7 @@ web/app/plugins/*
 !web/app/plugins/.gitkeep
 !web/app/plugins/custom-dashboard/
 web/app/mu-plugins/bedrock-disallow-indexing/
+web/app/mu-plugins/headache/
 web/app/themes/twentytwentyfour/
 web/app/upgrade
 web/app/cache/*

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acc8359961f44998ee6cb4cdc37354e9",
+    "content-hash": "f94c3e8befdd4a6181afaa05e30662d7",
     "packages": [
         {
             "name": "composer/installers",
@@ -1400,6 +1400,48 @@
                 }
             ],
             "time": "2025-05-03T07:21:55+00:00"
+        },
+        {
+            "name": "vinkla/headache",
+            "version": "3.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vinkla/headache.git",
+                "reference": "510df5a96f927b555e4acb3a2af95ebb973069d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vinkla/headache/zipball/510df5a96f927b555e4acb3a2af95ebb973069d5",
+                "reference": "510df5a96f927b555e4acb3a2af95ebb973069d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.2"
+            },
+            "type": "wordpress-muplugin",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vincent Klaiber",
+                    "homepage": "https://github.com/vinkla"
+                }
+            ],
+            "description": "An easy-to-swallow painkiller plugin for WordPress",
+            "keywords": [
+                "head",
+                "headache",
+                "plugin",
+                "wordplate",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/vinkla/headache/issues",
+                "source": "https://github.com/vinkla/headache/tree/3.5.3"
+            },
+            "time": "2025-07-03T09:30:02+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
