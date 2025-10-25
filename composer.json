@@ -60,8 +60,7 @@
     "preferred-install": "dist",
     "allow-plugins": {
       "composer/installers": true,
-      "roots/wordpress-core-installer": true,
-      "mnsami/composer-custom-directory-installer": true
+      "roots/wordpress-core-installer": true
     }
   },
   "autoload": {
@@ -75,8 +74,7 @@
     "installer-paths": {
       "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"],
-      "web/app/vendor/{$vendor}/{$name}": ["htmlburger/carbon-fields"]
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },
     "wordpress-install-dir": "web/wp"
   },
