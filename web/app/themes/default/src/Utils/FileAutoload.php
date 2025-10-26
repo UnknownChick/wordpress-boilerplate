@@ -39,9 +39,9 @@ class FileAutoload
 
         foreach ($files as $file) {
             if (!empty($subdir)) {
-                $this->files[] = '/inc/' . $subdir . '/' . $file;
+                $this->files[] = '/src/' . $subdir . '/' . $file;
             } else {
-                $this->files[] = '/inc/' . $file;
+                $this->files[] = '/src/' . $file;
             }
         }
     }

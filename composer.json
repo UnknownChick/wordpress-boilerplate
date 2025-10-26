@@ -65,7 +65,7 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "web/app/themes/default/inc"
+      "App\\": "web/app/themes/default/src"
     }
   },
   "minimum-stability": "dev",
