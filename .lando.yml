@@ -4,7 +4,7 @@ excludes:
   - web/app/themes/default/node_modules
   - vendor
 
-recipe: symfony
+recipe: wordpress
 
 proxy:
   appserver:
