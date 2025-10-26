@@ -1,47 +1,111 @@
 <?php defined('ABSPATH') || die();
 
-use Carbon_Fields\Container;
-use Carbon_Fields\Field;
+add_action('acf/init', function () {
+	if (function_exists('acf_add_options_page')) {
+		acf_add_options_page([
+			'page_title'    => __('Options du site', 'justeuncroc'),
+			'menu_title'    => __('Options du site', 'justeuncroc'),
+			'menu_slug'     => 'options',
+			'capability'    => 'edit_posts',
+			'redirect'      => false,
+			'icon_url'      => 'dashicons-admin-generic',
+			'position'      => 2
+		]);
+	}
 
-add_action('carbon_fields_register_fields', function () {
-    Container::make('theme_options', __('Options du site'))
-        ->set_page_file('options')
-        ->set_icon('dashicons-admin-generic')
-        ->set_page_menu_title('Options du site')
-        ->add_tab('Informations de contact', [
-            Field::make('complex', 'global_contact_info', __('Contacts'))
-                ->add_fields([
-                    Field::make('text', 'global_phone', __('Téléphone'))
-                        ->set_attribute('type', 'tel'),
-                    Field::make('text', 'global_email', __('Email'))
-                        ->set_attribute('type', 'email'),
-                    Field::make('textarea', 'global_address', __('Adresse')),
-                ])
-                ->set_layout('tabbed-horizontal')
-                ->set_header_template('Contact <%- $_index + 1 %>')
-                ->setup_labels([
-                    'plural_name' => 'Informations de contact',
-                    'singular_name' => 'Information de contact',
-                ]),
-            Field::make('text', 'global_facebook', __('Facebook'))
-                ->set_attribute('type', 'url'),
-            Field::make('text', 'global_instagram', __('Instagram'))
-                ->set_attribute('type', 'url'),
-            Field::make('text', 'global_linkedin', __('LinkedIn'))
-                ->set_attribute('type', 'url'),
-        ])
-        ->add_tab('Emails', [
-            Field::make('complex', 'global_emails', __('Emails'))
-                ->add_fields([
-                    Field::make('text', 'global_receiver_email', __('Reception des emails'))
-                        ->set_attribute('placeholder', 'contact@exemple.fr')
-                        ->set_attribute('type', 'email')
-                ])
-                ->set_layout('tabbed-horizontal')
-                ->set_header_template('<%- global_receiver_email %>')
-                ->setup_labels([
-                    'plural_name' => 'Emails',
-                    'singular_name' => 'Email',
-                ]),
-        ]);
+	if (function_exists('acf_add_local_field_group')) {
+		acf_add_local_field_group([
+			'key' => 'contact_info',
+			'title' => __('Informations de contact', 'justeuncroc'),
+			'fields' => [
+				[
+					'key' => 'field_phone',
+					'label' => __('Téléphone', 'justeuncroc'),
+					'name' => 'phone',
+					'type' => 'text',
+					'instructions' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+				],
+				[
+					'key' => 'field_email',
+					'label' => __('Email', 'justeuncroc'),
+					'name' => 'email',
+					'type' => 'email',
+					'instructions' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+				],
+				[
+					'key' => 'field_address',
+					'label' => __('Adresse', 'justeuncroc'),
+					'name' => 'address',
+					'type' => 'textarea',
+					'instructions' => '',
+					'placeholder' => '',
+				],
+				[
+					'key' => 'field_facebook',
+					'label' => __('Facebook', 'justeuncroc'),
+					'name' => 'facebook',
+					'type' => 'url',
+				],
+				[
+					'key' => 'field_instagram',
+					'label' => __('Instagram', 'justeuncroc'),
+					'name' => 'instagram',
+					'type' => 'url',
+				],
+				[
+					'key' => 'field_tiktok',
+					'label' => __('TikTok', 'justeuncroc'),
+					'name' => 'tiktok',
+					'type' => 'url',
+				],
+			],
+			'location' => [
+				[
+					[
+						'param' => 'options_page',
+						'operator' => '==',
+						'value' => 'options',
+					],
+				],
+			],
+		]);
+
+		acf_add_local_field_group([
+			'key' => 'group_global_emails',
+			'title' => __('Réglages des emails', 'justeuncroc'),
+			'fields' => [
+				[
+					'key' => 'field_emails_receivers',
+					'label' => __('Réception des emails', 'justeuncroc'),
+					'name' => 'emails_receivers',
+					'type' => 'repeater',
+					'layout' => 'row',
+					'sub_fields' => [
+						[
+							'key' => 'field_receiver_email',
+							'label' => __('Email', 'justeuncroc'),
+							'name' => 'receiver_email',
+							'type' => 'email',
+							'placeholder' => 'contact@exemple.fr',
+						],
+					],
+				],
+			],
+			'location' => [
+				[
+					[
+						'param' => 'options_page',
+						'operator' => '==',
+						'value' => 'options',
+					],
+				],
+			],
+		]);
+	}
 });
