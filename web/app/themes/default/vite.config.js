@@ -6,12 +6,13 @@ import { purgeCSSPlugin } from '@fullhuman/postcss-purgecss';
 import path from 'path';
 
 const refreshPlugin = {
-    name: 'php',
+    name: 'refresh-plugin',
     handleHotUpdate({ file, server }) {
         if (file.endsWith('.php') || file.endsWith('.twig')) {
             server.hot.send({
                 type: 'full-reload'
             });
+            console.log(`[vite] ${path.basename(file)} changed, reloading...`);
         }
     },
 }
@@ -39,7 +40,7 @@ export default defineConfig(({ mode }) => ({
                 purgeCSSPlugin({
                     content: [
                         path.resolve(__dirname, 'assets/js/**/*.js'),
-                        path.resolve(__dirname, 'templates/**/*.twig'),
+                        path.resolve(__dirname, 'views/**/*.twig'),
                     ],
                     defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
                 })

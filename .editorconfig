@@ -10,21 +10,12 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{compose.yaml,compose.*.yaml}]
-indent_size = 2
-
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,yaml}]
+[*.{yml,yaml, scss}]
 indent_size = 2
 
-[*.scss]
-indent_size = 2
-
-[*.php]
-indent_size = 4
-
-[*.html.twig, *.twig]
+[*.{html.twig,twig,php}]
 indent_size = 4
 indent_style = tab
