@@ -4,14 +4,21 @@ namespace Theme;
 
 defined('ABSPATH') || die();
 
+use Timber\Timber;
+use Theme\Core\Theme;
+use Theme\Core\Container;
 use Theme\Helpers\SmtpHelper;
 use Theme\Utils\FileAutoload;
-use Timber\Timber;
 
 add_action('after_setup_theme', function () {
-    SmtpHelper::init();
-    Timber::init();
+	SmtpHelper::init();
+	Timber::init();
 });
+
+$container = Container::getInstance();
+
+$theme = new Theme($container);
+$theme->init();
 
 $fileAutoload = FileAutoload::getInstance();
 $fileAutoload->addFiles('admin', [
