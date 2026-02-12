@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Utils;
+namespace Theme\Utils;
 
 /**
  * Class FileAutoload

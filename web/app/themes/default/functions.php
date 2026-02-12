@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Theme;
 
 defined('ABSPATH') || die();
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shortcodes;
+namespace Theme\Shortcodes;
 
 use WP_Post_Type;
 
