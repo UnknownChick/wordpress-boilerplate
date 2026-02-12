@@ -21,9 +21,6 @@ $theme = new Theme($container);
 $theme->init();
 
 $fileAutoload = FileAutoload::getInstance();
-$fileAutoload->addFiles('admin', [
-    'pages/page-options.php',
-]);
 $fileAutoload->addFiles('', [
     'optimizations.php',
     'scripts.php',
