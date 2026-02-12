@@ -4,8 +4,8 @@ namespace Theme;
 
 defined('ABSPATH') || die();
 
-use App\Helpers\SmtpHelper;
-use App\Utils\FileAutoload;
+use Theme\Helpers\SmtpHelper;
+use Theme\Utils\FileAutoload;
 use Timber\Timber;
 
 add_action('after_setup_theme', function () {
