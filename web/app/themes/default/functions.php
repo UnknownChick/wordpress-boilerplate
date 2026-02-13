@@ -25,5 +25,6 @@ $fileAutoload->addFiles('', [
     'optimizations.php',
     'scripts.php',
     'security.php',
+	'twig.php',
 ]);
 $fileAutoload->load();
