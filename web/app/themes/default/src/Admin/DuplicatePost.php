@@ -4,8 +4,10 @@ namespace Theme\Admin;
 
 defined('ABSPATH') || die();
 
+use Theme\Attributes\Condition;
 use Theme\Contracts\Registerable;
 
+#[Condition('is_admin')]
 class DuplicatePost implements Registerable
 {
 	private const NONCE_ACTION  = 'duplicate_post_nonce';

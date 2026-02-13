@@ -2,10 +2,12 @@
 
 namespace Theme\Admin;
 
-use Theme\Contracts\Registerable;
-
 defined('ABSPATH') || die();
 
+use Theme\Attributes\Condition;
+use Theme\Contracts\Registerable;
+
+#[Condition('is_admin')]
 class Admin implements Registerable
 {
 	public function register(): void
