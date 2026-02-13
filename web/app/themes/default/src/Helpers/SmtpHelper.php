@@ -1,58 +1,43 @@
 <?php
-namespace App\Helpers;
+
+namespace Theme\Helpers;
+
+defined('ABSPATH') || die();
 
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use const SMTP_DEBUG;
-use const SMTP_FROM;
-use const SMTP_FROM_NAME;
-use const SMTP_HOST;
-use const SMTP_PASSWORD;
-use const SMTP_PORT;
-use const SMTP_USERNAME;
+use Theme\Contracts\Registerable;
 
-class SmtpHelper {
+class SmtpHelper implements Registerable
+{
+	public function register(): void
+	{
+		add_action('phpmailer_init', [$this, 'configureSMTP']);
+	}
 
-    /**
-     * Initialize the SMTP configuration
-     */
-    public static function init(): void
-    {
-        if (!defined('ABSPATH')) {
-            die();
-        }
+	/**
+	 * @param PHPMailer $phpmailer
+	 * @throws Exception
+	 */
+	public function configureSMTP(PHPMailer $phpmailer): void
+	{
+		$phpmailer->isSMTP();
+		$phpmailer->Host       = SMTP_HOST;
+		$phpmailer->SMTPAuth   = true;
+		$phpmailer->Port       = SMTP_PORT;
+		$phpmailer->Username   = SMTP_USERNAME;
+		$phpmailer->Password   = SMTP_PASSWORD;
+		$phpmailer->SMTPSecure = 'tls';
 
-        add_action('phpmailer_init', [self::class, 'configureSMTP']);
-    }
+		$phpmailer->From     = SMTP_FROM;
+		$phpmailer->FromName = SMTP_FROM_NAME;
+		$phpmailer->addReplyTo(SMTP_FROM, SMTP_FROM_NAME);
 
-    /**
-     * Configure the SMTP settings
-     *
-     * @param PHPMailer $phpmailer The PHPMailer instance
-     * @throws Exception
-     */
-    public static function configureSMTP(PHPMailer $phpmailer): void
-    {
-        // SMTP
-        $phpmailer->isSMTP();
-        $phpmailer->Host = SMTP_HOST;
-        $phpmailer->SMTPAuth = true;
-        $phpmailer->Port = SMTP_PORT;
-        $phpmailer->Username = SMTP_USERNAME;
-        $phpmailer->Password = SMTP_PASSWORD;
-        $phpmailer->SMTPSecure = 'tls';
-
-        // From
-        $phpmailer->From = SMTP_FROM;
-        $phpmailer->FromName = SMTP_FROM_NAME;
-        $phpmailer->addReplyTo(SMTP_FROM, SMTP_FROM_NAME);
-
-        // Debug
-        if (SMTP_DEBUG != 0) {
-            $phpmailer->SMTPDebug  = SMTP_DEBUG;
-            $phpmailer->Debugoutput = function ($str, $level) {
-                echo "PHPMailer debug level $level: $str\n";
-            };
-        }
-    }
+		if (defined('SMTP_DEBUG') && SMTP_DEBUG != 0) {
+			$phpmailer->SMTPDebug   = SMTP_DEBUG;
+			$phpmailer->Debugoutput = function (string $str, int $level): void {
+				error_log("PHPMailer debug level $level: $str");
+			};
+		}
+	}
 }

@@ -9,27 +9,8 @@
 $_ln: header;
 
 $header: (
-  border-top-width: 0.25rem,
-  breakpoint: lg
+  breakpoint: md
 ) !default;
-
-@mixin header-default {
-  background-color: c.$secondary-500;
-
-  .#{$_ln}__menu {
-    &__wrapper {
-      li {
-        .#{$_ln}__menu__links {
-          padding: 2rem 1rem;
-
-          @include mq.max-device(map.get($header, breakpoint)) {
-            padding: 2rem;
-          }
-        }
-      }
-    }
-  }
-}
 
 @layer layouts {
   .#{$_ln} {
@@ -39,14 +20,15 @@ $header: (
     font-size: 1.25rem;
     z-index: 100;
     width: 100%;
+    overflow-x: clip;
     transition: all map.get(var.$global, animation-duration) ease-in-out;
-    @include header-default;
+    background-color: c.$primary-500;
 
     .#{$_ln}__container {
       position: relative;
 
       @include mq.min-device(map.get($header, breakpoint)) {
-        max-width: map.get(var.$breakpoints, xl);
+        max-width: map.get(var.$breakpoints, xxl);
         width: r.$wrapper-width;
         margin-inline: auto;
         @include mix.flex-row-align-center;
@@ -64,10 +46,15 @@ $header: (
       margin-right: 2rem;
       position: relative;
       z-index: 10;
+      width: 250px;
+
+      @include mq.max-device(map.get($header, breakpoint)) {
+        width: 150px;
+      }
     }
 
     .#{$_ln}__menu {
-      flex-grow: 1;
+      margin-left: auto;
 
       @include mq.min-device(map.get($header, breakpoint)) {
         @include mix.flex-row-align-center;
@@ -75,13 +62,12 @@ $header: (
 
       @include mq.max-device(map.get($header, breakpoint)) {
         position: absolute;
-        background-color: c.$secondary-500;
+        background-color: c.$primary-500;
         padding: 5rem 0 2rem;
         width: 300px;
         height: 100dvh;
         right: 0;
-        top: calc(-1 * map.get($header, border-top-width));
-        border-top: map.get($header, border-top-width) solid c.$primary-500;
+        top: 0;
         transform: translateX(100%);
         will-change: transform;
         transition: transform map.get(var.$global, animation-duration) ease-in-out;
@@ -97,61 +83,62 @@ $header: (
 
         @include mq.max-device(map.get($header, breakpoint)) {
           @include mix.flex-column;
+          width: 100%;
         }
 
         li {
           position: relative;
 
+          @include mq.max-device(map.get($header, breakpoint)) {
+            width: 100%;
+          }
+
           .#{$_ln}__menu__links {
             display: block;
             position: relative;
             z-index: 1;
-            color: map.get(c.$semantic, 'white');
+            color: c.$white;
+            padding: 2rem 1rem;
             transition:
               background-color map.get(var.$global, animation-duration) ease-in-out,
               padding map.get(var.$global, animation-duration) ease-in-out
             ;
 
             @include mq.max-device(map.get($header, breakpoint)) {
+              padding: 1.5rem 2rem;
+            }
+
+            @include mq.max-device(map.get($header, breakpoint)) {
               &:is(.active, :hover, :focus) {
-                background-color: c.$primary-500;
+                background-color: c.$secondary-500;
               }
             }
           }
         }
       }
-
-      &__active {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        height: 0.25rem;
-        background: c.$primary-500;
-        transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), width 0.3s cubic-bezier(0.4,0,0.2,1);
-        will-change: transform, width;
-        pointer-events: none;
-
-        @include mq.max-device(map.get($header, breakpoint)) {
-          display: none;
-        }
-      }
     }
 
     .#{$_ln}__socials {
-      @include mq.min-device(map.get($header, breakpoint)) {
-        margin-right: 1rem;
-      }
+      menu {
+        list-style: none;
 
-      @include mq.max-device(map.get($header, breakpoint)) {
-        padding: 0 2rem;
-        order: 3;
-        margin-top: 2rem;
+        li {
+          @include mq.max-device(map.get($header, breakpoint)) {
+            padding: 0 2rem;
+          }
 
-        a {
-          padding: 0.5rem;
+          a {
+            display: block;
+            background-color: c.$primary-300;
+            padding: 0.75rem;
+            color: c.$white;
+            border-radius: 100rem;
+            transition: background-color var.$animation-duration ease-in-out;
+            width: max-content;
 
-          svg {
-            width: 2rem;
+            &:hover {
+              background-color: c.$primary-600;
+            }
           }
         }
       }

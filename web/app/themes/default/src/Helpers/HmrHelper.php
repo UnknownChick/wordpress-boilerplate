@@ -1,5 +1,5 @@
 <?php
-namespace App\Helpers;
+namespace Theme\Helpers;
 
 defined('ABSPATH') || die();
 
@@ -7,7 +7,7 @@ use function Env\env;
 
 /**
  * Class HMR
- * 
+ *
  * Handles Hot Module Replacement (HMR) functionality for Vite integration.
  */
 class HmrHelper {

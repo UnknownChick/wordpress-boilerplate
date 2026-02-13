@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'sass:math';
 @use '../abstracts/media-queries' as mq;
 @use '../abstracts/variables' as var;
@@ -5,34 +6,76 @@
 $grid-columns: 12;
 $gutter-width: 2rem;
 $wrapper-width: 90%;
+$responsive-breakpoints: map.remove(var.$breakpoints, 'fluid');
 
-// Row
+/*
+* Calculate column width with gap adjustment
+* @param {Number} $cols - Number of columns to span
+* @return {Calc} - Calculated width with gap adjustment
+*/
+@function col-width($cols) {
+  $percentage: math.percentage(math.div($cols, $grid-columns));
+  $ratio: math.div($cols, $grid-columns);
+  @return calc(#{$percentage} - var(--gap-size) + #{$ratio} * var(--gap-size));
+}
+
+/*
+* Get breakpoint infix for class names
+* @param {String} $breakpoint - Breakpoint name
+* @return {String} - Infix for class names
+*/
+@function breakpoint-infix($breakpoint) {
+  @if $breakpoint == 'xxs' {
+    @return '';
+  }
+  @return '-#{$breakpoint}';
+}
+
+@mixin responsive-wrapper($breakpoint) {
+  @if $breakpoint == 'xxs' {
+    @content;
+  } @else {
+    @include mq.min-device($breakpoint) {
+      @content;
+    }
+  }
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
   position: relative;
   margin-inline: auto;
   z-index: 2;
-  gap: $gutter-width;
+  gap: 1rem 2rem;
   width: 100%;
   --gap-size: #{$gutter-width};
 
-  // Row sizes based on breakpoints
+  &--reverse {
+    flex-direction: row-reverse;
+  }
+
+  &--nowrap {
+    flex-wrap: nowrap;
+  }
+
   @each $size, $width in var.$breakpoints {
     &--#{$size} {
       max-width: $width;
-      width: 90%;
+      width: $wrapper-width;
     }
 
     &--left-#{$size},
     &--right-#{$size} {
-      width: calc((100% - ((100% - #{$width}) / 2)));
+      width: calc(100% - ((100% - #{$width}) / 2));
       max-width: $wrapper-width;
     }
+
     &--left-#{$size} {
       margin-right: auto;
       margin-left: 0;
     }
+
     &--right-#{$size} {
       margin-right: 0;
       margin-left: auto;
@@ -40,113 +83,59 @@ $wrapper-width: 90%;
   }
 }
 
-// Gap variations
 @for $i from 0 through 5 {
   .gap-#{$i} {
     gap: #{$i}rem !important;
     --gap-size: #{$i}rem;
   }
+  .gap-x-#{$i} {
+    column-gap: #{$i}rem !important;
+    --gap-size: #{$i}rem;
+  }
+  .gap-y-#{$i} {
+    row-gap: #{$i}rem !important;
+  }
 }
-
-// Base column
 .col {
-  flex-basis: 0;
-  flex-grow: 1;
+  flex: 1;
   max-width: 100%;
   min-width: 0;
 }
 
-// Generate column classes for each breakpoint
-@each $breakpoint, $width in var.$breakpoints {
-  @if $breakpoint != 'fluid' {
-    $infix: if($breakpoint == 'xxs', '', '-#{$breakpoint}');
+@each $breakpoint, $width in $responsive-breakpoints {
+  $infix: breakpoint-infix($breakpoint);
 
-    @if $breakpoint == 'xxs' {
-      // Base columns (without breakpoint prefix)
-      @for $i from 1 through $grid-columns {
-        .col-#{$i} {
-          flex: 0 0 calc(#{math.percentage(math.div($i, $grid-columns))} - var(--gap-size) + #{math.div($i, $grid-columns)} * var(--gap-size));
-          max-width: calc(#{math.percentage(math.div($i, $grid-columns))} - var(--gap-size) + #{math.div($i, $grid-columns)} * var(--gap-size));
-          min-width: 0;
-        }
-      }
+  @include responsive-wrapper($breakpoint) {
+    .col#{$infix} {
+      flex: 1;
+      max-width: 100%;
+      min-width: 0;
+    }
 
-      .col-auto {
-        flex: 0 0 auto;
-        width: auto;
-        max-width: 100%;
+    @for $i from 1 through $grid-columns {
+      .col#{$infix}-#{$i} {
+        flex: 0 0 col-width($i);
+        max-width: col-width($i);
         min-width: 0;
       }
-    } @else {
-      // Responsive columns
-      @include mq.min-device($breakpoint) {
-        .col#{$infix} {
-          flex-basis: 0;
-          flex-grow: 1;
-          max-width: 100%;
-          min-width: 0;
-        }
+    }
 
-        @for $i from 1 through $grid-columns {
-          .col#{$infix}-#{$i} {
-            flex: 0 0 calc(#{math.percentage(math.div($i, $grid-columns))} - var(--gap-size) + #{math.div($i, $grid-columns)} * var(--gap-size));
-            max-width: calc(#{math.percentage(math.div($i, $grid-columns))} - var(--gap-size) + #{math.div($i, $grid-columns)} * var(--gap-size));
-            min-width: 0;
-          }
-        }
+    .col#{$infix}-auto {
+      flex: 0 0 auto;
+      width: auto;
+      max-width: 100%;
+      min-width: 0;
+    }
 
-        .col#{$infix}-auto {
-          flex: 0 0 auto;
-          width: auto;
-          max-width: 100%;
-          min-width: 0;
-        }
+    @for $i from 0 through $grid-columns {
+      .order#{$infix}-#{$i} {
+        order: $i;
       }
     }
-  }
-}
 
-// Order classes
-@each $breakpoint, $width in var.$breakpoints {
-  @if $breakpoint != 'fluid' {
-    $infix: if($breakpoint == 'xxs', '', '-#{$breakpoint}');
-
-    @if $breakpoint == 'xxs' {
-      @for $i from 0 through 12 {
-        .order-#{$i} {
-          order: $i;
-        }
-      }
-    } @else {
-      @include mq.min-device($breakpoint) {
-        @for $i from 0 through 12 {
-          .order#{$infix}-#{$i} {
-            order: $i;
-          }
-        }
-      }
-    }
-  }
-}
-
-// Offset classes
-@each $breakpoint, $width in var.$breakpoints {
-  @if $breakpoint != 'fluid' {
-    $infix: if($breakpoint == 'xxs', '', '-#{$breakpoint}');
-
-    @if $breakpoint == 'xxs' {
-      @for $i from 0 through ($grid-columns - 1) {
-        .offset-#{$i} {
-          margin-left: math.percentage(math.div($i, $grid-columns));
-        }
-      }
-    } @else {
-      @include mq.min-device($breakpoint) {
-        @for $i from 0 through ($grid-columns - 1) {
-          .offset#{$infix}-#{$i} {
-            margin-left: math.percentage(math.div($i, $grid-columns));
-          }
-        }
+    @for $i from 0 through ($grid-columns - 1) {
+      .offset#{$infix}-#{$i} {
+        margin-left: math.percentage(math.div($i, $grid-columns));
       }
     }
   }

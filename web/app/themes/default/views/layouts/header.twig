@@ -1,42 +1,51 @@
-{% set menuLinks = [
-{
-	label: 'Accueil',
-	route: 'home'
-},
-{
-	label: 'La menuiserie',
-	route: 'site_about'
-},
-{
-	label: 'Services',
-	route: 'site_services'
-},
-{
-	label: 'Réalisations',
-	route: 'site_achievements'
-},
-{
-	label: 'Contact',
-	route: 'site_contact'
-}
-] %}
-
 <header class="header">
 	<div class="header__container">
-        <p>LOGO</p>
+		<a class="header__logo" href="{{ site.home_url }}">
+			<img src="{{ asset('imgs/') }}" alt="Logo">
+		</a>
 
 		<nav class="header__menu">
 			<menu class="header__menu__wrapper">
-				{% for link in menuLinks %}
-				<li>
-					<a href="#" class="header__menu__links">{{ link.label }}</a>
-				</li>
+				{% for item in menu.items %}
+					<li>
+						{% if item.link != '' %}
+							<a class="header__menu__links" href="{{ item.link }}"{{ item.is_target_blank ? 'target="_blank"' }}>{{ item.title }}</a>
+						{% else %}
+							<div class="dropdown dropdown--br">
+								<span class="header__menu__links dropdown__toggle flex-row-align-center">
+									{{ item.title }}
+
+									<div class="dropdown__toggle__icon ml-0p5">
+										<i data-lucide="chevron-down"></i>
+									</div>
+								</span>
+
+								{% if item.children %}
+									<menu class=" dropdown__content">
+										{% for child in item.children %}
+											<li>
+												<a
+													href="{{ child.link }}"
+													{{ item.is_target_blank ? 'target="_blank"' }}
+												>{{ child.title }}</a>
+											</li>
+										{% endfor %}
+									</menu>
+								{% endif %}
+							</div>
+						{% endif %}
+					</li>
 				{% endfor %}
-				<div class="header__menu__active"></div>
 			</menu>
 
 			<nav class="header__socials">
-				
+				<menu>
+					<li>
+						<a href="#" target="_blank">
+							<i data-lucide=""></i>
+						</a>
+					</li>
+				</menu>
 			</nav>
 		</nav>
 

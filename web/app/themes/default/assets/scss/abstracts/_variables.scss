@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $breakpoints: (
 	xxs: 320px,
 	xs: 576px,
@@ -8,11 +10,22 @@ $breakpoints: (
 	xxl: 1920px,
 	fluid: 100%,
 ) !default;
+$breakpoint-xxs: map.get($breakpoints, xxs) !default;
+$breakpoint-xs: map.get($breakpoints, xs) !default;
+$breakpoint-sm: map.get($breakpoints, sm) !default;
+$breakpoint-md: map.get($breakpoints, md) !default;
+$breakpoint-lg: map.get($breakpoints, lg) !default;
+$breakpoint-xl: map.get($breakpoints, xl) !default;
+$breakpoint-xxl: map.get($breakpoints, xxl) !default;
+$breakpoint-fluid: map.get($breakpoints, fluid) !default;
 
 $font: (
-	primary: sans-serif,
-	secondary: sans-serif,
+  primary: 'Inter',
+  secondary: 'Roboto',
 ) !default;
+$font-primary: map.get($font, primary) !default;
+$font-secondary: map.get($font, secondary) !default;
+$font-tertiary: map.get($font, tertiary) !default;
 
 $fs: (
 	xs: clamp(0.5rem, 0.1875rem + 1vw, 0.75rem),
@@ -23,6 +36,13 @@ $fs: (
 	xxl: clamp(2rem, 1.375rem + 2vw, 2.5rem),
 	xxxl: clamp(2rem, 0.75rem + 4vw, 3rem),
 ) !default;
+$fs-xs: map.get($fs, xs) !default;
+$fs-sm: map.get($fs, sm) !default;
+$fs-md: map.get($fs, md) !default;
+$fs-lg: map.get($fs, lg) !default;
+$fs-xl: map.get($fs, xl) !default;
+$fs-xxl: map.get($fs, xxl) !default;
+$fs-xxxl: map.get($fs, xxxl) !default;
 
 $fs-title: (
 	h6: clamp(1rem, 0.6875rem + 1vw, 1.25rem),
@@ -32,15 +52,27 @@ $fs-title: (
 	h2: clamp(2rem, 0.75rem + 4vw, 3rem),
 	h1: clamp(2rem, -0.5rem + 8vw, 4rem),
 ) !default;
+$fs-title-h6: map.get($fs-title, h6) !default;
+$fs-title-h5: map.get($fs-title, h5) !default;
+$fs-title-h4: map.get($fs-title, h4) !default;
+$fs-title-h3: map.get($fs-title, h3) !default;
+$fs-title-h2: map.get($fs-title, h2) !default;
+$fs-title-h1: map.get($fs-title, h1) !default;
 
 $global: (
-	animation-duration: 250ms,
+	animation-duration: 0.3s,
 	border-radius: 0,
-	box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1),
+	box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.10),
 	box-shadow-hover: 0px 10px 15px -3px rgba(0,0,0,0.1),
 ) !default;
+$animation-duration: map.get($global, animation-duration) !default;
+$border-radius: map.get($global, border-radius) !default;
+$box-shadow: map.get($global, box-shadow) !default;
+$box-shadow-hover: map.get($global, box-shadow-hover) !default;
 
 $line-height: (
 	text: 1.5,
 	title: 1.25,
 ) !default;
+$line-height-text: map.get($line-height, text) !default;
+$line-height-title: map.get($line-height, title) !default;

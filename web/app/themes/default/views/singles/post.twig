@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<section class="py-5">
+		<div class="row row--lg">
+			<div class="col prose">
+				<h1>{{ post.title }}</h1>
+
+				{{ post.content }}
+
+				{{ post.date }} - {{ post.author.name }}
+			</div>
+		</div>
+	</section>
+{% endblock %}
