@@ -8,10 +8,14 @@ use Extended\ACF\Fields\Text;
 use Extended\ACF\Fields\Textarea;
 use Extended\ACF\Fields\URL;
 use Extended\ACF\Location;
+use Theme\Attributes\Condition;
+use Theme\Attributes\OnHook;
 use Theme\Contracts\Registerable;
 
 defined('ABSPATH') || die();
 
+#[Condition('is_admin')]
+#[OnHook('after_setup_theme')]
 class AdminPageOptionsFields implements Registerable
 {
 	public function register(): void
