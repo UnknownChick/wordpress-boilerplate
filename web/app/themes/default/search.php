@@ -1,8 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\SearchController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-$context['searchQuery'] = get_search_query();
-
-Timber::render('components/search.twig', $context);
+AbstractController::dispatch(SearchController::class);

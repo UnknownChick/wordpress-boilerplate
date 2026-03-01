@@ -24,7 +24,7 @@
 	],
 	"devDependencies": {
 		"@fullhuman/postcss-purgecss": "^7.0.2",
-		"autoprefixer": "^10.4.24",
+		"autoprefixer": "^10.4.27",
 		"browserslist": "^4.28.1",
 		"lightningcss": "^1.31.1",
 		"postcss": "^8.5.6",
@@ -33,6 +33,6 @@
 	},
 	"dependencies": {
 		"lucide": "^0.540.0",
-		"motion": "^12.34.0"
+		"motion": "^12.34.3"
 	}
 }

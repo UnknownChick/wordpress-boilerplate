@@ -9,8 +9,7 @@ $aspect-ratio: (
 	9x16: '9/16',
 	16x9: '16/9',
 	21x9: '21/9',
-	185x100: '185/100',
-	239x100: '239/100',
+  32x9: '32/9',
 ) !default;
 
 
@@ -18,7 +17,6 @@ $aspect-ratio: (
 	.ratio {
 		display: block;
 		width: 100%;
-		object-fit: cover;
 	}
 
 	@each $key, $value in $aspect-ratio {

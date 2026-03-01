@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Theme\Services;
 
 defined('ABSPATH') || die();
@@ -12,19 +14,17 @@ class ThemeSetup implements Registerable
 {
 	public function register(): void
 	{
-		$this->addThemeSupport();
+		$this->themeSupport();
 		$this->registerMenus();
 	}
 
-	private function addThemeSupport(): void
+	private function themeSupport(): void
 	{
 		add_theme_support('title-tag');
 		add_theme_support('post-thumbnails');
 		add_theme_support('menus');
 		add_theme_support('html5', [
 			'search-form',
-			'comment-form',
-			'comment-list',
 			'gallery',
 			'caption',
 		]);
@@ -35,8 +35,8 @@ class ThemeSetup implements Registerable
 	private function registerMenus(): void
 	{
 		register_nav_menus([
-			'main'   => __('Main Menu', 'theme'),
-			'legals' => __('Legals Menu', 'theme'),
+			'main'   => __('Main', 'default'),
+			'legals' => __('Legals', 'default'),
 		]);
 	}
 }

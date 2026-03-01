@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\SingleController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('base/attachment.twig', $context);
+AbstractController::dispatch(SingleController::class);

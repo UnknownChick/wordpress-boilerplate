@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Theme\Admin;
 
 defined('ABSPATH') || die();
@@ -30,10 +32,44 @@ class Admin implements Registerable
 
 	private function cleanup(): void
 	{
-		add_filter('should_load_remote_block_patterns', '__return_false');
-		add_filter('use_block_editor_for_post', '__return_false', 10);
-		add_filter('use_block_editor_for_post_type', '__return_false', 10);
-		add_filter('acf/settings/show_admin', '__return_false');
+		add_filter('acf/settings/show_admin', '__return_false', 999);
+
+		add_action('admin_bar_menu', function ($wp_admin_bar): void {
+			$wp_admin_bar->remove_node('contribute');
+			$wp_admin_bar->remove_node('customize');
+			$wp_admin_bar->remove_node('search');
+			$wp_admin_bar->remove_node('wp-logo');
+		}, 999);
+
+		add_action('admin_init', function (): void {
+			remove_meta_box('postcustom', 'post', 'normal');
+			remove_meta_box('postcustom', 'page', 'normal');
+			//remove_meta_box('slugdiv', 'post', 'normal');
+			//remove_meta_box('slugdiv', 'page', 'normal');
+
+			remove_post_type_support('post', 'trackbacks');
+			remove_post_type_support('page', 'trackbacks');
+			remove_post_type_support('page', 'author');
+
+			remove_action('plugins_loaded', '_wp_customize_include');
+			remove_action('admin_menu', 'customize_register', 999);
+			remove_action('admin_enqueue_scripts', '_wp_customize_loader_settings', 11);
+		}, 999);
+
+		add_action('admin_head', function (): void {
+			$screen = get_current_screen();
+			$screen->remove_help_tabs();
+		}, 999);
+
+		add_action('admin_menu', function (): void {
+			remove_submenu_page('themes.php', 'site-editor.php?p=/pattern');
+		}, 999);
+
+		add_filter('use_block_editor_for_post', '__return_false', 999);
+
+		add_filter('use_block_editor_for_post_type', '__return_false', 999);
+
+		add_filter('should_load_remote_block_patterns', '__return_false', 999);
 
 		add_action('wp_dashboard_setup', function (): void {
 			remove_meta_box('dashboard_primary', 'dashboard', 'side');
@@ -52,29 +88,6 @@ class Admin implements Registerable
 			remove_meta_box('dashboard_site_health', 'dashboard', 'normal');
 
 			remove_action('welcome_panel', 'wp_welcome_panel');
-		}, 20);
-
-		add_action('admin_init', function (): void {
-			remove_meta_box('postcustom', 'post', 'normal');
-			remove_meta_box('postcustom', 'page', 'normal');
-			//remove_meta_box('slugdiv', 'post', 'normal');
-			//remove_meta_box('slugdiv', 'page', 'normal');
-
-			remove_post_type_support('post', 'trackbacks');
-			remove_post_type_support('page', 'trackbacks');
-			remove_post_type_support('page', 'author');
-		}, 20);
-
-		add_action('admin_head', function (): void {
-			$screen = get_current_screen();
-			$screen->remove_help_tabs();
-		});
-
-		add_action('admin_bar_menu', function ($wp_admin_bar): void {
-			$wp_admin_bar->remove_node('contribute');
-			$wp_admin_bar->remove_node('customize');
-			$wp_admin_bar->remove_node('search');
-			$wp_admin_bar->remove_node('wp-logo');
 		}, 999);
 
 		// add_filter('mce_buttons', function ($buttons) {

@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\ErrorController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('views/404.twig', $context);
+AbstractController::dispatch(ErrorController::class);

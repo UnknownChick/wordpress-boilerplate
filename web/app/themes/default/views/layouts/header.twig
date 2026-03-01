@@ -1,32 +1,46 @@
-<header class="header">
+<header class="header" id="site-header">
 	<div class="header__container">
 		<a class="header__logo" href="{{ site.home_url }}">
 			<img src="{{ asset('imgs/') }}" alt="Logo">
 		</a>
 
-		<nav class="header__menu">
+		<nav
+			class="header__menu"
+			id="header-nav"
+			aria-label="Navigation principale"
+			inert
+		>
 			<menu class="header__menu__wrapper">
 				{% for item in menu.items %}
 					<li>
 						{% if item.link != '' %}
-							<a class="header__menu__links" href="{{ item.link }}"{{ item.is_target_blank ? 'target="_blank"' }}>{{ item.title }}</a>
+							<a
+								class="header__menu__links"
+								href="{{ item.link }}"
+								{{ item.is_target_blank ? 'target="_blank" rel="noopener noreferrer"' }}
+							>{{ item.title }}</a>
 						{% else %}
 							<div class="dropdown dropdown--br">
-								<span class="header__menu__links dropdown__toggle flex-row-align-center">
+								<button
+									class="header__menu__links dropdown__toggle flex-row-align-center"
+									aria-expanded="false"
+									aria-haspopup="true"
+								>
 									{{ item.title }}
 
-									<div class="dropdown__toggle__icon ml-0p5">
+									<div class="dropdown__toggle__icon ml-0p5" aria-hidden="true">
 										<i data-lucide="chevron-down"></i>
 									</div>
-								</span>
+								</button>
 
 								{% if item.children %}
-									<menu class=" dropdown__content">
+									<menu class="dropdown__content" role="menu">
 										{% for child in item.children %}
-											<li>
+											<li role="none">
 												<a
 													href="{{ child.link }}"
-													{{ item.is_target_blank ? 'target="_blank"' }}
+													{{ item.is_target_blank ? 'target="_blank" rel="noopener noreferrer"' }}
+													role="menuitem"
 												>{{ child.title }}</a>
 											</li>
 										{% endfor %}
@@ -37,22 +51,20 @@
 					</li>
 				{% endfor %}
 			</menu>
-
-			<nav class="header__socials">
-				<menu>
-					<li>
-						<a href="#" target="_blank">
-							<i data-lucide=""></i>
-						</a>
-					</li>
-				</menu>
-			</nav>
 		</nav>
 
-		<div class="header__toggle" aria-label="Ouvrir le menu" tabindex="0">
-			<span></span>
-			<span></span>
-			<span></span>
-		</div>
+		<div class="header__overlay" aria-hidden="true"></div>
+
+		<button
+			class="header__toggle"
+			aria-label="Ouvrir le menu"
+			aria-expanded="false"
+			aria-controls="header-nav"
+			tabindex="0"
+		>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+			<span aria-hidden="true"></span>
+		</button>
 	</div>
 </header>

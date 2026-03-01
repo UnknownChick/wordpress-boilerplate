@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\ContactController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('pages/contact.twig', $context);
+AbstractController::dispatch(ContactController::class);

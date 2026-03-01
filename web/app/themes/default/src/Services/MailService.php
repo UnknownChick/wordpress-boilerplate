@@ -1,6 +1,8 @@
 <?php
 
-namespace Theme\Helpers;
+declare(strict_types=1);
+
+namespace Theme\Services;
 
 defined('ABSPATH') || die();
 
@@ -8,7 +10,13 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use Theme\Contracts\Registerable;
 
-class SmtpHelper implements Registerable
+/**
+ * Configures WordPress to use SMTP for outgoing emails.
+ *
+ * Formerly SmtpHelper — renamed because it implements Registerable
+ * and acts as a service, not a stateless helper.
+ */
+class MailService implements Registerable
 {
 	public function register(): void
 	{
