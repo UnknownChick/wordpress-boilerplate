@@ -118,32 +118,6 @@ $header: (
       }
     }
 
-    .#{$_ln}__socials {
-      menu {
-        list-style: none;
-
-        li {
-          @include mq.max-device(map.get($header, breakpoint)) {
-            padding: 0 2rem;
-          }
-
-          a {
-            display: block;
-            background-color: c.$primary-300;
-            padding: 0.75rem;
-            color: c.$white;
-            border-radius: 100rem;
-            transition: background-color var.$animation-duration ease-in-out;
-            width: max-content;
-
-            &:hover {
-              background-color: c.$primary-600;
-            }
-          }
-        }
-      }
-    }
-
     .#{$_ln}__toggle {
       color: map.get(c.$semantic, 'white');
       cursor: pointer;
