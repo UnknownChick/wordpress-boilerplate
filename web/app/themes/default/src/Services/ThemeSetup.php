@@ -14,11 +14,11 @@ class ThemeSetup implements Registerable
 {
 	public function register(): void
 	{
-		$this->addThemeSupport();
+		$this->themeSupport();
 		$this->registerMenus();
 	}
 
-	private function addThemeSupport(): void
+	private function themeSupport(): void
 	{
 		add_theme_support('title-tag');
 		add_theme_support('post-thumbnails');
