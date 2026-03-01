@@ -16,10 +16,6 @@
  * License: MIT License
  */
 
-use WP_Admin_Bar;
-
-if (!class_exists('WP_Admin_Bar')) return;
-
 // Remove support for comments and trackbacks from all post types
 add_action('init', function (): void {
 	foreach (get_post_types() as $post_type) {
@@ -87,7 +83,7 @@ add_action('wp_enqueue_scripts', function (): void {
 }, 100);
 
 // Remove comment nodes from admin bar
-add_action('admin_bar_menu', function (WP_Admin_Bar $wp_admin_bar): void {
+add_action('admin_bar_menu', function (\WP_Admin_Bar $wp_admin_bar): void {
 	$wp_admin_bar->remove_node('comments');
 }, 999);
 
