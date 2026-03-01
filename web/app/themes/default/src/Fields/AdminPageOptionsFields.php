@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Theme\Fields;
+
+defined('ABSPATH') || die();
 
 use Extended\ACF\Fields\Email;
 use Extended\ACF\Fields\Repeater;
@@ -12,8 +16,6 @@ use Extended\ACF\Location;
 use Theme\Attributes\Condition;
 use Theme\Attributes\OnHook;
 use Theme\Contracts\Registerable;
-
-defined('ABSPATH') || die();
 
 #[Condition('is_admin')]
 #[OnHook('after_setup_theme')]
