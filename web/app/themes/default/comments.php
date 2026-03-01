@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\ErrorController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('base/comments.twig', $context);
+AbstractController::dispatch(ErrorController::class);
