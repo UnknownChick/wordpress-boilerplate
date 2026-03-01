@@ -7,41 +7,23 @@
  * @wordpress-plugin
  * Plugin Name: Remove Version
  * Plugin URI: https://alexandre-ferreira.fr
- * Description: Removes WordPress version, CSS, and JS version strings
- * Version: 1.0
+ * Description: Removes WordPress version number and version query strings from CSS/JS assets
+ * Version: 1.1
  * Author: Alexandre Ferreira
  * Author URI: https://alexandre-ferreira.fr
  * Text Domain: alexandre
  * License: MIT License
  */
 
-
-
-/**
- * Removes the WordPress version number from the website.
- *
- * @return string
- */
-function wp_version_remove(): string
-{
-	return '';
-}
-add_filter('the_generator', 'wp_version_remove');
-
-
-/**
- * Removes the WordPress version strings from the given source.
- *
- * @param string $src The source code or URL.
- * @return string The modified source code or URL without the WordPress version strings.
- */
-function remove_css_js_version(string $src): string
-{
-	if(strpos($src, '?ver='))
-		$src = remove_query_arg('ver', $src);
-	return $src;
-}
-add_filter('style_loader_src', 'remove_css_js_version', 10, 2);
-add_filter('script_loader_src', 'remove_css_js_version', 10, 2);
-
+// Remove the WordPress version meta tag
+add_filter('the_generator', '__return_empty_string');
 remove_action('wp_head', 'wp_generator');
+
+// Remove version query strings from CSS and JS assets
+add_filter('style_loader_src', function (string $src): string {
+	return str_contains($src, '?ver=') ? remove_query_arg('ver', $src) : $src;
+});
+
+add_filter('script_loader_src', function (string $src): string {
+	return str_contains($src, '?ver=') ? remove_query_arg('ver', $src) : $src;
+});
