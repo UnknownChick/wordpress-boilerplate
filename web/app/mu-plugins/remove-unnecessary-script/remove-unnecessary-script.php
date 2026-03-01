@@ -24,6 +24,10 @@ add_action('wp_enqueue_scripts', function (): void {
 	wp_dequeue_style('wp-block-library-theme');
 	wp_dequeue_style('global-styles');
 	wp_dequeue_style('classic-theme-styles');
+	wp_dequeue_style('wc-blocks-style');
+	wp_dequeue_style('storefront-gutenberg-blocks');
+	wp_dequeue_style('twentytwenty-block-style');
+	wp_dequeue_style('core-block-supports-duotone');
 });
 
 /**
@@ -37,6 +41,7 @@ add_action('init', function (): void {
 	remove_filter('comment_text_rss', 'wp_staticize_emoji');
 	remove_filter('the_content_feed', 'wp_staticize_emoji');
 	remove_filter('wp_mail', 'wp_staticize_emoji_for_email');
+	remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 });
 
 add_filter('emoji_svg_url', '__return_false');
