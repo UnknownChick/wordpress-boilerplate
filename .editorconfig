@@ -1,7 +1,7 @@
 # editorconfig.org
-
 root = true
 
+# Defaults for all files
 [*]
 charset = utf-8
 end_of_line = lf
@@ -10,12 +10,16 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# Markdown — preserve trailing spaces (line breaks)
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,yaml, scss}]
-indent_size = 2
-
-[*.{html.twig,twig,php}]
+# HTML, CSS, JS, TS, PHP, Twig
+[*.{html,css,js,ts,php,twig,html.twig}]
 indent_size = 4
-indent_style = tab
+indent_style = space
+
+# SCSS & YAML
+[*.{scss,yml,yaml}]
+indent_size = 2
+indent_style = space
