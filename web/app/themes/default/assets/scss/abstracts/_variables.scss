@@ -20,8 +20,8 @@ $breakpoint-xxl: map.get($breakpoints, xxl) !default;
 $breakpoint-fluid: map.get($breakpoints, fluid) !default;
 
 $font: (
-  primary: 'Inter',
-  secondary: 'Roboto',
+  primary: sans-serif,
+  secondary: sans-serif,
 ) !default;
 $font-primary: map.get($font, primary) !default;
 $font-secondary: map.get($font, secondary) !default;
