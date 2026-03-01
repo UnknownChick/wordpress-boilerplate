@@ -1,0 +1,24 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<section class="py-5">
+		<div class="row row--lg">
+			<div class="col prose">
+				<h1>{{ __('Résultats de recherche pour', 'default') }} : "{{ query }}"</h1>
+
+				{% if posts is not empty %}
+					<ul>
+						{% for post in posts %}
+							<li>
+								<a href="{{ post.link }}">{{ post.title }}</a>
+								<p>{{ post.summary(120) }}</p>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<p>{{ __('Aucun résultat trouvé.', 'default') }}</p>
+				{% endif %}
+			</div>
+		</div>
+	</section>
+{% endblock %}
