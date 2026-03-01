@@ -17,7 +17,7 @@ trim_trailing_whitespace = false
 # HTML, CSS, JS, TS, PHP, Twig
 [*.{html,css,js,ts,php,twig,html.twig}]
 indent_size = 4
-indent_style = space
+indent_style = tab
 
 # SCSS & YAML
 [*.{scss,yml,yaml}]
