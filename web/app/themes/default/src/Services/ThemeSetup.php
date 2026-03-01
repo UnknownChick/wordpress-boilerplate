@@ -25,8 +25,6 @@ class ThemeSetup implements Registerable
 		add_theme_support('menus');
 		add_theme_support('html5', [
 			'search-form',
-			'comment-form',
-			'comment-list',
 			'gallery',
 			'caption',
 		]);
@@ -37,8 +35,8 @@ class ThemeSetup implements Registerable
 	private function registerMenus(): void
 	{
 		register_nav_menus([
-			'main'   => __('Main Menu', 'theme'),
-			'legals' => __('Legals Menu', 'theme'),
+			'main'   => __('Main', 'default'),
+			'legals' => __('Legals', 'default'),
 		]);
 	}
 }
