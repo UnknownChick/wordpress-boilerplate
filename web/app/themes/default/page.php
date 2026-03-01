@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\PageController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('base/page.twig', $context);
+AbstractController::dispatch(PageController::class);

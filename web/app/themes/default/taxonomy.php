@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\ArchiveController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('base/taxonomy.twig', $context);
+AbstractController::dispatch(ArchiveController::class);

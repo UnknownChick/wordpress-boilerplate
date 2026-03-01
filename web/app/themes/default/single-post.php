@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\SinglePostController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('single/post.twig', $context);
+AbstractController::dispatch(SinglePostController::class);

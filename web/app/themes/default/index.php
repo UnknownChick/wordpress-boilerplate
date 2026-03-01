@@ -1,7 +1,6 @@
 <?php
 
-use Timber\Timber;
+use Theme\Controllers\IndexController;
+use Theme\Core\AbstractController;
 
-$context = Timber::context();
-
-Timber::render('base/index.twig', $context);
+AbstractController::dispatch(IndexController::class);
