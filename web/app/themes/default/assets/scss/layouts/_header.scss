@@ -126,6 +126,7 @@ $header: (
       width: 3rem;
       height: 3rem;
       gap: 0.5rem;
+      background: none;
       @include mix.flex-column-center-center;
 
       @include mq.min-device(map.get($header, breakpoint)) {
