@@ -3,17 +3,16 @@
 @use '../abstracts/mixins' as mix;
 @use '../abstracts/variables' as var;
 
-$_pn: menu-socials;
+$_pn: socials;
 
 @layer partials {
-  .#{$_pn} {
+  nav.#{$_pn} {
     menu {
       list-style: none;
       color: map.get(c.$semantic, 'white');
       @include mix.flex-row;
 
       li {
-
         a {
           display: block;
           padding: 0.25rem;
