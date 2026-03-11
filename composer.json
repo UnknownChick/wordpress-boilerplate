@@ -61,7 +61,8 @@
     "allow-plugins": {
       "composer/installers": true,
       "roots/wordpress-core-installer": true
-    }
+    },
+    "sort-packages": true
   },
   "autoload": {
     "psr-4": {
