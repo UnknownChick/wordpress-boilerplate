@@ -33,7 +33,6 @@
   "require": {
     "php": ">=8.0",
     "composer/installers": "^2.2",
-    "hellonico/timber-dump-extension": "^2.0",
     "johnbillion/args": "^2.2",
     "johnbillion/extended-cpts": "^5.1",
     "johnbillion/extended-template-parts": "^2.2",
@@ -53,7 +52,7 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
     "roave/security-advisories": "dev-latest",
-    "symfony/var-dumper": "^7.1"
+    "symfony/var-dumper": "^8.0"
   },
   "config": {
     "optimize-autoloader": true,
