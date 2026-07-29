@@ -1,5 +1,23 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <p>Hello world !</p>
+	<section class="py-5">
+		<div class="row row--lg">
+			<div class="col prose">
+				<p>{{ __('Hello world !', 'default') }}</p>
+
+				{% if latest_posts is not empty %}
+					<h2>{{ __('Derniers articles', 'default') }}</h2>
+
+					<ul class="home__latest-posts">
+						{% for post in latest_posts %}
+							<li>
+								<a href="{{ post.link }}">{{ post.title }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</section>
 {% endblock %}
