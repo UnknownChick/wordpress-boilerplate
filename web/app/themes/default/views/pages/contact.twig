@@ -1,5 +1,62 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <p>Contact</p>
+	<section class="py-5">
+		<div class="row row--lg">
+			<div class="col prose">
+				<h1>{{ __('Contact', 'default') }}</h1>
+
+				{% if site_options.phone or site_options.email or site_options.address %}
+					<ul class="contact__infos">
+						{% if site_options.phone %}
+							<li><i data-lucide="phone" aria-hidden="true"></i> {{ site_options.phone }}</li>
+						{% endif %}
+						{% if site_options.email %}
+							<li><i data-lucide="mail" aria-hidden="true"></i> {{ site_options.email }}</li>
+						{% endif %}
+						{% if site_options.address %}
+							<li><i data-lucide="map-pin" aria-hidden="true"></i> {{ site_options.address }}</li>
+						{% endif %}
+					</ul>
+				{% endif %}
+
+				{#
+					Submitted via fetch() to admin-ajax.php (action=contact_form),
+					handled by Theme\Ajax\ContactFormAjax.
+					See assets/js/features/contact-form.js.
+				#}
+				<form class="form" data-contact-form novalidate>
+					<div class="form__group">
+						<label class="form__label" for="contact-name">{{ __('Nom', 'default') }}</label>
+						<input class="form__input" type="text" id="contact-name" name="name" autocomplete="name" required>
+					</div>
+
+					<div class="form__group">
+						<label class="form__label" for="contact-email">{{ __('Email', 'default') }}</label>
+						<input class="form__input" type="email" id="contact-email" name="email" autocomplete="email" required>
+					</div>
+
+					<div class="form__group">
+						<label class="form__label" for="contact-phone">{{ __('T\u00e9l\u00e9phone', 'default') }}</label>
+						<input class="form__input" type="tel" id="contact-phone" name="phone" autocomplete="tel">
+					</div>
+
+					<div class="form__group">
+						<label class="form__label" for="contact-message">{{ __('Message', 'default') }}</label>
+						<textarea class="form__input" id="contact-message" name="message" rows="5" required></textarea>
+					</div>
+
+					{# Honeypot: hidden from real visitors via CSS, bots tend to fill every field. #}
+					<div class="form__honeypot" aria-hidden="true">
+						<label for="contact-website">{{ __('Laissez ce champ vide', 'default') }}</label>
+						<input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off">
+					</div>
+
+					<button class="btn btn--primary" type="submit">{{ __('Envoyer', 'default') }}</button>
+
+					<p class="form__feedback" data-contact-form-feedback role="status" aria-live="polite"></p>
+				</form>
+			</div>
+		</div>
+	</section>
 {% endblock %}
