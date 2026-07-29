@@ -1,0 +1,25 @@
+{#
+	Rendered by comments.php (via WordPress' comments_template()).
+	Keeps using core comment_form()/wp_list_comments() so plugins that
+	hook into them (anti-spam, threaded replies, etc.) keep working.
+#}
+<div class="comments" id="comments">
+	{% if post.comment_count %}
+		<h2 class="comments__title">
+			{{ post.comment_count }}
+			{{ post.comment_count > 1 ? __('commentaires', 'default') : __('commentaire', 'default') }}
+		</h2>
+
+		<ol class="comments__list">
+			{{ function('wp_list_comments', {'style': 'ol', 'short_ping': true}) }}
+		</ol>
+
+		{{ function('the_comments_navigation') }}
+	{% endif %}
+
+	{% if post.comment_status == 'open' %}
+		{{ function('comment_form') }}
+	{% elseif post.comment_count %}
+		<p class="comments__closed">{{ __('Les commentaires sont fermés.', 'default') }}</p>
+	{% endif %}
+</div>
