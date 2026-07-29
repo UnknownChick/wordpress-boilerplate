@@ -42,8 +42,8 @@ class DuplicatePost implements Registerable
 		$actions['duplicate'] = sprintf(
 			'<a href="%s" title="%s">%s</a>',
 			esc_url($url),
-			esc_attr__('Dupliquer cet article', 'theme'),
-			esc_html__('Dupliquer', 'theme')
+			esc_attr__('Dupliquer cet article', 'default'),
+			esc_html__('Dupliquer', 'default')
 		);
 
 		return $actions;
@@ -52,22 +52,22 @@ class DuplicatePost implements Registerable
 	public function handle(): void
 	{
 		if (empty($_GET['post'])) {
-			wp_die(__("Aucun article à dupliquer n'a été fourni.", 'theme'));
+			wp_die(__("Aucun article à dupliquer n'a été fourni.", 'default'));
 		}
 
 		if (!current_user_can('edit_posts')) {
-			wp_die(__("Vous n'êtes pas autorisé à dupliquer cet article.", 'theme'));
+			wp_die(__("Vous n'êtes pas autorisé à dupliquer cet article.", 'default'));
 		}
 
 		if (!isset($_GET[self::NONCE_KEY]) || !wp_verify_nonce($_GET[self::NONCE_KEY], self::NONCE_ACTION)) {
-			wp_die(__('Nonce invalide.', 'theme'));
+			wp_die(__('Nonce invalide.', 'default'));
 		}
 
 		$postId = absint($_GET['post']);
 		$post   = get_post($postId);
 
 		if (!$post) {
-			wp_die(__("Impossible de trouver l'article original.", 'theme'));
+			wp_die(__("Impossible de trouver l'article original.", 'default'));
 		}
 
 		$newPostId = wp_insert_post([
@@ -87,7 +87,7 @@ class DuplicatePost implements Registerable
 		]);
 
 		if (is_wp_error($newPostId)) {
-			wp_die(__("La création de l'article a échoué.", 'theme'));
+			wp_die(__("La création de l'article a échoué.", 'default'));
 		}
 
 		$this->copyTaxonomies($postId, $newPostId, $post);
@@ -109,7 +109,7 @@ class DuplicatePost implements Registerable
 
 		if (isset($_GET['saved']) && $_GET['saved'] === self::SUCCESS_PARAM) {
 			echo '<div class="notice notice-success is-dismissible"><p>'
-				. esc_html__("Copie de l'article créée.", 'theme')
+				. esc_html__("Copie de l'article créée.", 'default')
 				. '</p></div>';
 		}
 	}

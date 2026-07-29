@@ -11,5 +11,11 @@
 				{{ post.date }} - {{ post.author.name }}
 			</div>
 		</div>
+
+		<div class="row row--lg">
+			<div class="col prose">
+				{{ function('comments_template') }}
+			</div>
+		</div>
 	</section>
 {% endblock %}

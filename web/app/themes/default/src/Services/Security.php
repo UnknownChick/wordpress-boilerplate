@@ -21,7 +21,7 @@ class Security implements Registerable
 
 	private function hideLoginErrors(): void
 	{
-		add_filter('login_errors', fn() => __('Une erreur est survenue lors de la connexion.', 'theme'));
+		add_filter('login_errors', fn() => __('Une erreur est survenue lors de la connexion.', 'default'));
 	}
 
 	private function disableRestUsers(): void

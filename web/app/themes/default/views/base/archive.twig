@@ -1,5 +1,29 @@
 {% extends 'base.twig' %}
 
 {% block content %}
-    <p>Archive</p>
+	<section class="py-5">
+		<div class="row row--lg">
+			<div class="col prose">
+				<h1>{{ title }}</h1>
+
+				{% if term and term.description %}
+					<p class="archive__description">{{ term.description }}</p>
+				{% endif %}
+
+				{% if posts is not empty %}
+					<ul class="archive__list">
+						{% for post in posts %}
+							<li>
+								<a href="{{ post.link }}">{{ post.title }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+
+					{{ function('the_posts_pagination') }}
+				{% else %}
+					<p>{{ __('Aucun contenu à afficher.', 'default') }}</p>
+				{% endif %}
+			</div>
+		</div>
+	</section>
 {% endblock %}

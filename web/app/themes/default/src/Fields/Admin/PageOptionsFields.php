@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Theme\Fields;
-
-defined('ABSPATH') || die();
+namespace Theme\Fields\Admin;
 
 use Extended\ACF\Fields\Email;
 use Extended\ACF\Fields\Repeater;
@@ -19,7 +17,7 @@ use Theme\Contracts\Registerable;
 
 #[Condition('is_admin')]
 #[OnHook('after_setup_theme')]
-class AdminPageOptionsFields implements Registerable
+class PageOptionsFields implements Registerable
 {
 	public function register(): void
 	{
