@@ -11,15 +11,21 @@ use Theme\Attributes\OnHook;
 use Theme\Contracts\Registerable;
 use Theme\Models\Page;
 use Theme\Models\Post;
+use Theme\Repositories\SiteOptionsRepository;
 
 #[OnHook('after_setup_theme')]
 class TimberSetup implements Registerable
 {
+	public function __construct(private SiteOptionsRepository $siteOptions)
+	{
+	}
+
 	public function register(): void
 	{
 		Timber::init();
 
 		$this->registerClassMap();
+		$this->registerGlobalContext();
 	}
 
 	/**
@@ -36,6 +42,19 @@ class TimberSetup implements Registerable
 			$classmap['page'] = Page::class;
 
 			return $classmap;
+		});
+	}
+
+	/**
+	 * Make the (cached) site options DTO available in every Twig view
+	 * as `site_options`, e.g. {{ site_options.phone }}.
+	 */
+	private function registerGlobalContext(): void
+	{
+		add_filter('timber/context', function (array $context): array {
+			$context['site_options'] = $this->siteOptions->get();
+
+			return $context;
 		});
 	}
 }
